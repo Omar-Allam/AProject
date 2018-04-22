@@ -14,7 +14,7 @@ class UpdateSoldierExemptionsTable extends Migration
     public function up()
     {
         Schema::table('soldier_exemptions', function (Blueprint $table) {
-            $table->string('notes')->nullable();
+//            $table->string('notes')->nullable();
         });
     }
 
