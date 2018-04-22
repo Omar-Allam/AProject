@@ -21,7 +21,9 @@ class SoldierIdentityController extends Controller
      */
     public function index()
     {
-        //
+        $soldiers = SoldierIdentity::paginate(15);
+
+        return view('soldier_identity.index',compact('soldiers'));
     }
 
     /**
@@ -180,7 +182,8 @@ class SoldierIdentityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $soldier = SoldierIdentity::find($id);
+        return view('soldier_identity.edit',compact('soldier'));
     }
 
     /**
@@ -203,6 +206,16 @@ class SoldierIdentityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $soldierIdentity = SoldierIdentity::find($id);
+        $soldierIdentity->sons()->delete();
+        $soldierIdentity->courses()->delete();
+        $soldierIdentity->jobs()->delete();
+        $soldierIdentity->relatives()->delete();
+        $soldierIdentity->qualifications()->delete();
+        $soldierIdentity->vacations()->delete();
+
+        $soldierIdentity->delete();
+
+        return redirect()->route('identity.index');
     }
 }

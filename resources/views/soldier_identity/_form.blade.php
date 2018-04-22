@@ -1,8 +1,11 @@
 @include('soldier_identity._partials.basic')
+<hr>
 @include('soldier_identity._partials.relatives')
+<hr>
 @include('soldier_identity._partials.qualifications')
+<hr>
 @include('soldier_identity._partials.sons')
-
+<hr>
 <div class="row">
     <div class="form-group col-md-2">
         <p><b>اللغات التي يجيدها</b></p>
@@ -41,9 +44,11 @@
         @endif
     </div>
 </div>
-
+<hr>
 @include('soldier_identity._partials.courses')
+<hr>
 @include('soldier_identity._partials.jobs')
+<hr>
 @include('soldier_identity._partials.vacations')
 
 

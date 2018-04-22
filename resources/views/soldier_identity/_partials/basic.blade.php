@@ -2,7 +2,7 @@
     {{csrf_field()}}
     <div class="form-group col-md-2 {{$errors->has('first_name')? 'has-error' : ''}}">
         {{Form::label('first_name', ' الاسم الأول', ['class' => 'control-label'])}}
-        {{Form::text('first_name', null, ['class' => 'form-control'])}}
+        {{Form::text('first_name', null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('first_name'))
             <div class="error-message">{{$errors->first('first_name')}}</div>
         @endif
@@ -10,7 +10,7 @@
 
     <div class="form-group col-md-2 {{$errors->has('father_name')? 'has-error' : ''}}">
         {{Form::label('father_name', 'إسم الأب', ['class' => 'control-label'])}}
-        {{Form::text('father_name', null, ['class' => 'form-control'])}}
+        {{Form::text('father_name', null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('father_name'))
             <div class="error-message">{{$errors->first('father_name')}}</div>
         @endif
@@ -18,7 +18,7 @@
 
     <div class="form-group col-md-2 {{$errors->has('grandfather_name')? 'has-error' : ''}}">
         {{Form::label('grandfather_name', 'إسم الجد', ['class' => 'control-label'])}}
-        {{Form::text('grandfather_name', null, ['class' => 'form-control'])}}
+        {{Form::text('grandfather_name', null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('grandfather_name'))
             <div class="error-message">{{$errors->first('grandfather_name')}}</div>
         @endif
@@ -26,7 +26,7 @@
 
     <div class="form-group  col-md-2 {{$errors->has('family_name')? 'has-error' : ''}}">
         {{Form::label('family_name', 'إسم العائلة / القبيلة', ['class' => 'control-label'])}}
-        {{Form::text('family_name', null, ['class' => 'form-control'])}}
+        {{Form::text('family_name', null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('family_name'))
             <div class="error-message">{{$errors->first('family_name')}}</div>
         @endif
@@ -34,14 +34,14 @@
 
     <div class="form-group  col-md-2 {{$errors->has('rank_id')? 'has-error' : ''}}">
         {{Form::label('rank_id', 'الرتبة', ['class' => 'control-label'])}}
-        {{Form::select('rank_id', \App\SoldierRate::all()->pluck('name'),null,['class' => 'form-control'])}}
+        {{Form::select('rank_id', \App\SoldierRate::all()->pluck('name'),null,['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('rank_id'))
             <div class="error-message">{{$errors->first('rank_id')}}</div>
         @endif
     </div>
 
     <div class="form-group  col-md-2 {{$errors->has('general_number')? 'has-error' : ''}}">
-        {{Form::label('general_number', 'الرقم العام', ['class' => 'control-label'])}}
+        {{Form::label('general_number', 'الرقم العام', ['class' => 'control-label','required'=>'required'])}}
         {{Form::text('general_number', null, ['class' => 'form-control'])}}
         @if ($errors->has('general_number'))
             <div class="error-message">{{$errors->first('general_number')}}</div>
@@ -78,7 +78,7 @@
 
     <div class="form-group  col-md-4 {{$errors->has('unit')? 'has-error' : ''}}">
         {{Form::label('unit', 'الوحدة', ['class' => 'control-label'])}}
-        {{Form::text('unit', null, ['class' => 'form-control'])}}
+        {{Form::text('unit', null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('unit'))
             <div class="error-message">{{$errors->first('unit')}}</div>
         @endif
@@ -131,7 +131,7 @@
 
     <div class="form-group  col-md-2 {{$errors->has('specialization')? 'has-error' : ''}}">
         {{Form::label('specialization', ' التخصص', ['class' => 'control-label'])}}
-        {{Form::text('specialization',null, ['class' => 'form-control'])}}
+        {{Form::text('specialization',null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('specialization'))
             <div class="error-message">{{$errors->first('specialization')}}</div>
         @endif
@@ -139,7 +139,7 @@
 
     <div class="form-group  col-md-2 {{$errors->has('weapon')? 'has-error' : ''}}">
         {{Form::label('weapon', ' السلاح', ['class' => 'control-label'])}}
-        {{Form::text('weapon',null, ['class' => 'form-control'])}}
+        {{Form::text('weapon',null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('weapon'))
             <div class="error-message">{{$errors->first('weapon')}}</div>
         @endif
@@ -147,7 +147,7 @@
 
     <div class="form-group  col-md-4 {{$errors->has('enroll_date')? 'has-error' : ''}}">
         {{Form::label('enroll_date', 'تاريخ الإلتحاق بالخدمة', ['class' => 'control-label'])}}
-        {{Form::date('enroll_date',null, ['class' => 'form-control'])}}
+        {{Form::date('enroll_date',null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('enroll_date'))
             <div class="error-message">{{$errors->first('enroll_date')}}</div>
         @endif
@@ -186,14 +186,14 @@
 <div class="row">
     <div class="form-group  col-md-3 {{$errors->has('id_number')? 'has-error' : ''}}">
         {{Form::label('id_number', 'رقم بطاقة الهوية الوطنية', ['class' => 'control-label'])}}
-        {{Form::text('id_number',null, ['class' => 'form-control'])}}
+        {{Form::text('id_number',null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('id_number'))
             <div class="error-message">{{$errors->first('id_number')}}</div>
         @endif
     </div>
     <div class="form-group  col-md-3 {{$errors->has('id_source')? 'has-error' : ''}}">
         {{Form::label('id_source', 'مصدرها', ['class' => 'control-label'])}}
-        {{Form::text('id_source',null, ['class' => 'form-control'])}}
+        {{Form::text('id_source',null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('id_source'))
             <div class="error-message">{{$errors->first('id_source')}}</div>
         @endif
@@ -209,7 +209,7 @@
 
     <div class="form-group  col-md-3 {{$errors->has('graduate_side')? 'has-error' : ''}}">
         {{Form::label('graduate_side', 'جهة التخرج', ['class' => 'control-label'])}}
-        {{Form::text('graduate_side',null, ['class' => 'form-control'])}}
+        {{Form::text('graduate_side',null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('graduate_side'))
             <div class="error-message">{{$errors->first('graduate_side')}}</div>
         @endif
@@ -220,7 +220,7 @@
 <div class="row">
     <div class="form-group  col-md-3 {{$errors->has('place_of_birth')? 'has-error' : ''}}">
         {{Form::label('place_of_birth', 'مكان الميلاد ( المدينة )', ['class' => 'control-label'])}}
-        {{Form::text('place_of_birth',null, ['class' => 'form-control'])}}
+        {{Form::text('place_of_birth',null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('place_of_birth'))
             <div class="error-message">{{$errors->first('place_of_birth')}}</div>
         @endif
@@ -228,7 +228,7 @@
 
     <div class="form-group  col-md-3 {{$errors->has('external_city')? 'has-error' : ''}}">
         {{Form::label('external_city', 'الدولة إذا كان خارج المملكة', ['class' => 'control-label'])}}
-        {{Form::text('external_city',null, ['class' => 'form-control'])}}
+        {{Form::text('external_city',null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('external_city'))
             <div class="error-message">{{$errors->first('external_city')}}</div>
         @endif

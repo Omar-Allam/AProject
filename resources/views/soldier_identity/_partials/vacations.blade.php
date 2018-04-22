@@ -1,102 +1,152 @@
-<div id="row-vacations">
-    <div class="row">
-        <br>
-        <p><b>الإجازات التي حصل عليها وأماكن قضائها</b></p>
-        <div class="form-group  col-xs-1 {{$errors->has('name')? 'has-error' : ''}}">
-            {{Form::label('name', 'العدد', ['class' => 'control-label'])}}
-            <p>١</p>
-        </div>
-        <div class="form-group  col-md-2 {{$errors->has('vacation_type')? 'has-error' : ''}}">
-            {{Form::label('vacation_type', 'نوعها', ['class' => 'control-label'])}}
-            {{Form::text('vacations[0][vacation_type]',null, ['class' => 'form-control'])}}
-            @if ($errors->has('vacation_type'))
-                <div class="error-message">{{$errors->first('vacation_type')}}</div>
-            @endif
-        </div>
-        <div class="form-group  col-md-3 {{$errors->has('vacation_period')? 'has-error' : ''}}">
-            {{Form::label('vacation_period', 'مدتها', ['class' => 'control-label'])}}
-            {{Form::text('vacations[0][vacation_period]',null, ['class' => 'form-control'])}}
-            @if ($errors->has('vacation_period'))
-                <div class="error-message">{{$errors->first('vacation_period')}}</div>
-            @endif
-        </div>
+@if(isset($soldier) && $soldier->vacations)
+    <br>
+    <p><b>الإجازات التي حصل عليها وأماكن قضائها</b></p>
+    <table class="table table-striped" id="vactions-table">
+        <thead>
+        <tr class="text-center">
+            <td>
+                {{Form::label('name', 'العدد', ['class' => 'control-label'])}}
+            </td>
+            <td>
+                {{Form::label('vacation_type', 'نوعها', ['class' => 'control-label'])}}
+            </td>
 
-        <div class="form-group  col-md-3 {{$errors->has('vacation_place')? 'has-error' : ''}}">
-            {{Form::label('vacation_place', 'مكان قضائها', ['class' => 'control-label'])}}
-            {{Form::text('vacations[0][vacation_place]',null, ['class' => 'form-control'])}}
-            @if ($errors->has('vacation_place'))
-                <div class="error-message">{{$errors->first('vacation_place')}}</div>
-            @endif
-        </div>
-        <div class="form-group  col-md-3 {{$errors->has('vacation_end_date')? 'has-error' : ''}}">
-            {{Form::label('vacation_end_date', 'تاريخ الإنفكاك', ['class' => 'control-label'])}}
-            {{Form::date('vacations[0][vacation_end_date]',null, ['class' => 'form-control'])}}
-            @if ($errors->has('vacation_end_date'))
-                <div class="error-message">{{$errors->first('vacation_end_date')}}</div>
-            @endif
-        </div>
+            <td>
+                {{Form::label('vacation_period', 'مدتها', ['class' => 'control-label'])}}
 
+            </td>
+            <td>
+                {{Form::label('vacation_place', 'مكان قضائها', ['class' => 'control-label'])}}
+            </td>
+
+            <td>
+                {{Form::label('vacation_end_date', 'تاريخ الإنفكاك', ['class' => 'control-label'])}}
+            </td>
+        </tr>
+
+        </thead>
+        <tbody>
+        @foreach($soldier->vacations as $key=>$vacation)
+            <tr>
+                <td>
+                    {{$key+1}}
+                </td>
+                <td>
+                    {{Form::text('vacations['.$key.'][vacation_type]',$vacation->vacation_type ?? '', ['class' => 'form-control'])}}
+                </td>
+                <td>
+                    {{Form::text('vacations['.$key.'][vacation_period]',$vacation->vacation_period ?? '', ['class' => 'form-control'])}}
+                </td>
+
+                <td>
+                    {{Form::text('vacations['.$key.'][vacation_place]',$vacation->vacation_period ?? '', ['class' => 'form-control'])}}
+                </td>
+                <td>
+                    {{Form::date('vacations['.$key.'][vacation_end_date]',$vacation->vacation_end_date ?? '', ['class' => 'form-control'])}}
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <div class="btn-group">
+        <button id="vacations" type="button" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
     </div>
-</div>
 
-<div class="btn-group">
-    <button id="vacations" type="button" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
-</div>
+    <div class="btn-group">
+        <button id="remove-job" type="button" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
+    </div>
+@else
+    <p><b>الإجازات التي حصل عليها وأماكن قضائها</b></p>
+    <table class="table table-striped" id="vactions-table">
+        <thead>
+        <tr class="text-center">
+            <td>
+                {{Form::label('name', 'العدد', ['class' => 'control-label'])}}
+            </td>
+            <td>
+                {{Form::label('vacation_type', 'نوعها', ['class' => 'control-label'])}}
+            </td>
 
-<div class="btn-group">
-    <button id="remove-vacations" type="button" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
-</div>
+            <td>
+                {{Form::label('vacation_period', 'مدتها', ['class' => 'control-label'])}}
+
+            </td>
+            <td>
+                {{Form::label('vacation_place', 'مكان قضائها', ['class' => 'control-label'])}}
+            </td>
+
+            <td>
+                {{Form::label('vacation_end_date', 'تاريخ الإنفكاك', ['class' => 'control-label'])}}
+            </td>
+        </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    1
+                </td>
+                <td>
+                    {{Form::text('vacations[0][vacation_type]',null, ['class' => 'form-control'])}}
+                </td>
+                <td>
+                    {{Form::text('vacations[0][vacation_period]',null, ['class' => 'form-control'])}}
+                </td>
+
+                <td>
+                    {{Form::text('vacations[0][vacation_place]',null, ['class' => 'form-control'])}}
+                </td>
+                <td>
+                    {{Form::date('vacations[0][vacation_end_date]',null, ['class' => 'form-control'])}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="btn-group">
+        <button id="vacations" type="button" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
+    </div>
+
+    <div class="btn-group">
+        <button id="remove-vacations" type="button" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
+    </div>
+@endif
+
 
 
 @section('scripts')
     <script>
-        var counter = 1
-        var count = 0
+        var vaca_counter = 1
+        var vaca_count = 0
         $('button#vacations').click(function () {
-            counter++
-            count++
-            $('div#row-vacations').append(`
-            <div class="row">
-        <div class="form-group  col-xs-1 {{$errors->has('name')? 'has-error' : ''}}">
-                <p>` + ((counter.toLocaleString('ar-EG'))) + `</p>
-            </div>
-            <div class="form-group  col-md-2 {{$errors->has('vacation_type')? 'has-error' : ''}}">
-                <input type="text" name="vacations[` + count + `][vacation_type]"  class="form-control">
+            vaca_counter++
+            vaca_count++
+            $('table#vactions-table tr:last').after(`
+<tr>
+<td>
+                <p>` + ((vaca_counter)) + `</p>
+</td>
+<td>
+                <input type="text" name="vacations[` + vaca_count + `][vacation_type]"  class="form-control">
 
-                    @if ($errors->has('vacation_type'))
-                <div class="error-message">{{$errors->first('vacation_type')}}</div>
-            @endif
-                </div>
-                <div class="form-group  col-md-3 {{$errors->has('vacation_period')? 'has-error' : ''}}">
-                <input type="text" name="vacations[` + count + `][vacation_period]"  class="form-control">
+</td>
+<td>
+                <input type="text" name="vacations[` + vaca_count + `][vacation_period]"  class="form-control">
+</td>
 
-                    @if ($errors->has('vacation_period'))
-                <div class="error-message">{{$errors->first('vacation_period')}}</div>
-            @endif
-                </div>
-
-                <div class="form-group  col-md-3 {{$errors->has('vacation_place')? 'has-error' : ''}}">
-                <input type="text" name="vacations[` + count + `][vacation_place]"  class="form-control">
-                    @if ($errors->has('vacation_place'))
-                <div class="error-message">{{$errors->first('vacation_place')}}</div>
-            @endif
-                </div>
-                <div class="form-group  col-md-3 {{$errors->has('vacation_end_date')? 'has-error' : ''}}">
-                <input type="date" name="vacations[` + count + `][vacation_end_date]"  class="form-control">
-                    @if ($errors->has('vacation_end_date'))
-                <div class="error-message">{{$errors->first('vacation_end_date')}}</div>
-            @endif
-                </div>
-
-            </div>
-`)
+<td>
+                <input type="text" name="vacations[` + vaca_count + `][vacation_place]"  class="form-control">
+</td>
+<td>
+                <input type="date" name="vacations[` + vaca_count + `][vacation_end_date]"  class="form-control">
+                </td>
+   </tr>  `)
         });
 
         $('button#remove-vacations').click(function () {
-            if ($("div#row-vacations").children().length > 1) {
-                $('div#row-vacations').children().last().remove()
-                counter--
-                count--
+            if ($("table#vactions-table tbody tr").length > 1) {
+                $('table#vactions-table tr:last').remove()
+                vaca_counter--
+                vaca_count--
             }
         });
     </script>

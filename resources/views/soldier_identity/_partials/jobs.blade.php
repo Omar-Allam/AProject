@@ -1,82 +1,127 @@
-<div id="row-jobs">
-    <div class="row">
-        <br>
-        <p><b>الوظائف والأماكن التي عمل بها</b></p>
-        <div class="form-group  col-xs-1 {{$errors->has('name')? 'has-error' : ''}}">
-            {{Form::label('name', 'العدد', ['class' => 'control-label'])}}
-            <p>١</p>
-        </div>
-        <div class="form-group  col-md-4 {{$errors->has('job_name')? 'has-error' : ''}}">
-            {{Form::label('job_name', 'اسم الوظيفة', ['class' => 'control-label'])}}
-            {{Form::text('jobs[0][job_name]',null, ['class' => 'form-control'])}}
-            @if ($errors->has('job_name'))
-                <div class="error-message">{{$errors->first('job_name')}}</div>
-            @endif
-        </div>
-        <div class="form-group  col-md-4 {{$errors->has('soldier_job_unit')? 'has-error' : ''}}">
-            {{Form::label('soldier_job_unit', 'الوحدة', ['class' => 'control-label'])}}
-            {{Form::text('jobs[0][soldier_job_unit]',null, ['class' => 'form-control'])}}
-            @if ($errors->has('soldier_job_unit'))
-                <div class="error-message">{{$errors->first('soldier_job_unit')}}</div>
-            @endif
-        </div>
-        <div class="form-group  col-md-3 {{$errors->has('consider_from')? 'has-error' : ''}}">
-            {{Form::label('consider_from', 'إعتبارا من', ['class' => 'control-label'])}}
-            {{Form::date('jobs[0][consider_from]',null, ['class' => 'form-control'])}}
-            @if ($errors->has('consider_from'))
-                <div class="error-message">{{$errors->first('consider_from')}}</div>
-            @endif
-        </div>
+@if(isset($soldier) && $soldier->jobs)
+    <br>
+    <p><b>الوظائف والأماكن التي عمل بها</b></p>
+    <table class="table table-striped" id="jobs-table">
+        <thead>
+        <tr class="text-center">
+            <td>
+                {{Form::label('name', 'العدد', ['class' => 'control-label'])}}
+            </td>
+            <td>
+                {{Form::label('job_name', 'اسم الوظيفة', ['class' => 'control-label'])}}
+            </td>
 
+            <td>
+                {{Form::label('soldier_job_unit', 'الوحدة', ['class' => 'control-label'])}}
+
+            </td>
+            <td>
+                {{Form::label('consider_from', 'إعتبارا من', ['class' => 'control-label'])}}
+            </td>
+        </tr>
+
+        </thead>
+        <tbody>
+        @foreach($soldier->jobs as $key=>$job)
+            <tr>
+                <td>
+                    {{$key+1}}
+                </td>
+                <td>
+                    {{Form::text('jobs['.$key.'][job_name]',$job->job_name ?? '', ['class' => 'form-control'])}}
+                </td>
+                <td>
+                    {{Form::text('jobs['.$key.'][soldier_job_unit]',$job->soldier_job_unit ?? '', ['class' => 'form-control'])}}
+                </td>
+                <td>
+                    {{Form::date('jobs['.$key.'][consider_from]',$job->consider_from ?? '', ['class' => 'form-control'])}}
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <div class="btn-group">
+        <button id="jobs" type="button" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
     </div>
-</div>
-<div class="btn-group">
-    <button id="jobs" type="button" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
-</div>
 
-<div class="btn-group">
-    <button id="remove-job" type="button" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
-</div>
+    <div class="btn-group">
+        <button id="remove-job" type="button" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
+    </div>
+@else
+    <table class="table table-striped" id="jobs-table">
+        <thead>
+        <tr class="text-center">
+            <td>
+                {{Form::label('name', 'العدد', ['class' => 'control-label'])}}
+            </td>
+            <td>
+                {{Form::label('job_name', 'اسم الوظيفة', ['class' => 'control-label'])}}
+            </td>
+
+            <td>
+                {{Form::label('soldier_job_unit', 'الوحدة', ['class' => 'control-label'])}}
+
+            </td>
+            <td>
+                {{Form::label('consider_from', 'إعتبارا من', ['class' => 'control-label'])}}
+            </td>
+        </tr>
+
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    1
+                </td>
+                <td>
+                    {{Form::text('jobs[0][job_name]',null, ['class' => 'form-control'])}}
+                </td>
+                <td>
+                    {{Form::text('jobs[0][soldier_job_unit]',null, ['class' => 'form-control'])}}
+                </td>
+                <td>
+                    {{Form::date('jobs[0][consider_from]',null, ['class' => 'form-control'])}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="btn-group">
+        <button id="jobs" type="button" class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
+    </div>
+
+    <div class="btn-group">
+        <button id="remove-job" type="button" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
+    </div>
+@endif
+
 @section('scripts')
     <script>
-        var counter = 1
-        var count = 0
-        $('button#jobs').click(function(){
-            counter++
-            count++
-            $('div#row-jobs').append(`<div class="row">
-        <div class="form-group  col-xs-1 {{$errors->has('name')? 'has-error' : ''}}">
-                <p>`+((counter.toLocaleString('ar-EG')))+`</p>
-            </div>
-            <div class="form-group  col-md-4 {{$errors->has('job_name')? 'has-error' : ''}}">
-                <input type="text" name="jobs[` + count + `][job_name]"  class="form-control">
-
-                    @if ($errors->has('job_name'))
-                <div class="error-message">{{$errors->first('job_name')}}</div>
-            @endif
-                </div>
-                <div class="form-group  col-md-4 {{$errors->has('soldier_job_unit')? 'has-error' : ''}}">
-                <input type="text" name="jobs[` + count + `][soldier_job_unit]"  class="form-control">
-
-                    @if ($errors->has('soldier_job_unit'))
-                <div class="error-message">{{$errors->first('soldier_job_unit')}}</div>
-            @endif
-                </div>
-                <div class="form-group  col-md-3 {{$errors->has('consider_from')? 'has-error' : ''}}">
-                <input type="date" name="jobs[` + count + `][consider_from]"  class="form-control">
-
-                    @if ($errors->has('consider_from'))
-                <div class="error-message">{{$errors->first('consider_from')}}</div>
-            @endif
-                </div>
-
-            </div>`)
+        var jobs_counter = 1
+        var jobs_count = 0
+        $('button#jobs').click(function () {
+            jobs_counter++
+            jobs_count++
+            $('table#jobs-table tr:last').after(`
+            <tr>
+            <td><p>` + ((jobs_counter)) + `</p></td>
+            <td>
+             <input type="text" name="jobs[` + jobs_count + `][job_name]"  class="form-control">
+            </td>
+            <td>
+                <input type="text" name="jobs[` + jobs_count + `][soldier_job_unit]"  class="form-control">
+            </td>
+            <td>
+              <input type="date" name="jobs[` + jobs_count + `][consider_from]"  class="form-control">
+            </td>
+            </tr>
+            `)
         });
 
-        $('button#remove-job').click(function(){
-            if($("div#row-jobs").children().length > 1 ){
-                $('div#row-jobs').children().last().remove()
-                counter--
+        $('button#remove-job').click(function () {
+            if ($("table#jobs-table tbody tr").length > 1) {
+                $('table#jobs-table tr:last').remove()
+                jobs_counter--
+                jobs_count--
             }
         });
     </script>
