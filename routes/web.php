@@ -11,7 +11,7 @@
 |
 */
 Auth::routes();
-\Illuminate\Support\Facades\Auth::loginUsingId(8);
+//\Illuminate\Support\Facades\Auth::loginUsingId(8);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', function () {
