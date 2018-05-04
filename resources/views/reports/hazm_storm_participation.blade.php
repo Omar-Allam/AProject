@@ -34,7 +34,7 @@
             </table>
 
         @else
-            <div class="alert alert-info"><i class="fa fa-exclamation-circle"></i> <strong>لا توجد إعفاءات</strong>
+            <div class="alert alert-info"><i class="fa fa-exclamation-circle"></i> <strong>لا توجد بيانات</strong>
             </div>
         @endif
     </section>

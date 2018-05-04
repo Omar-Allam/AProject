@@ -6,6 +6,7 @@ use App\Formation;
 use App\FormationSoldiers;
 use App\SoldierIdentity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FormationController extends Controller
 {

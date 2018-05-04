@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-flipped.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
@@ -18,58 +19,117 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-left" href="#">
-                <img class="img-circle" src="{{asset('images/logo.png')}}" style="height: 50px;width: 50px;padding: 3px;">
+            <a class="navbar-left" href="{{url('/')}}">
+                <img class="img-circle" src="{{asset('images/logo.png')}}"
+                     style="height: 50px;width: 50px;padding: 3px;">
             </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        @if(Auth::check())
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
+                        <li><a href="{{route('identity.index')}}">هوية فرد <span class="sr-only">(current)</span></a>
+                        </li>
+                    @endif
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
+                        <li><a href="{{route('formation.index')}}">التشكيل</a></li>
+                    @endif
+                </ul>
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">الاجازات المرضية والإعفاءات <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(8))
+                                <li><a href="{{route('sick-leave.index')}}">الإجازات</a></li>
+                            @endif
+                            @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(11))
+                                <li><a href="{{route('exemption.index')}}">الإعفاءات</a></li>
+                            @endif
+                        </ul>
+                    </li>
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(14))
+                        <li><a href="{{route('user.index')}}">إدارة المستخدمين</a></li>
+                    @endif
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    تسجيل الخروج </a></li>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </ul>
+
+                    </li>
+                </ul>
+                @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(17))
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">التقارير <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{route('hazm.participate')}}">المشاركين في عاصفة الحزم</a></li>
+                                <li><a href="{{route('human.energy')}}">الطاقة البشرية</a></li>
+                                <li><a href="{{route('eng.weapon')}}">سلاح المهندسين</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                @endif
+
+            </div>
+        @else
             <ul class="nav navbar-nav">
-                <li ><a href="{{route('identity.index')}}">هوية فرد <span class="sr-only">(current)</span></a></li>
-                <li><a href="{{route('formation.index')}}">التشكيل</a></li>
-            </ul>
+                <!-- Authentication Links -->
+                @guest
+                    <li><a class="nav-link" href="{{ route('login') }}">تسجيل الدخول</a></li>
+                @else
 
-            <ul class="nav navbar-nav navbar-left">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">الاجازات المرضية والإعفاءات <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('sick-leave.index')}}">الإجازات</a></li>
-                        <li><a href="{{route('exemption.index')}}">الإعفاءات</a></li>
-                    </ul>
-                </li>
-            </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">التقارير <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('hazm.participate')}}">المشاركين في عاصفة الحزم</a></li>
-                        <li><a href="{{route('human.energy')}}">الطاقة البشرية</a></li>
-                        <li><a href="{{route('eng.weapon')}}">سلاح المهندسين</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
 
-        <!-- /.navbar-collapse -->
+                @endguest
+            </ul>
+    @endif
+    <!-- /.navbar-collapse -->
     </div>
 
     <!-- /.container-fluid -->
 </nav>
 
 
-<div class="container-fluid" >
+<div class="container-fluid">
     @yield('header')
 
-    <div id="app" >
+    <div id="app">
         @yield('body')
+    </div>
+
+
+    <div class="footer">
+        <img class="img-rounded" src="{{asset('images/ro2ya.jpg')}}"
+             style="height: 80px;width: 200px;padding: 10px; float: right;">
+
+        <img class="img-rounded" src="{{asset('images/min-def.jpg')}}"
+             style="height: 80px;width: 200px;padding: 10px; float: left;">
     </div>
 </div>
 <script src="{{asset('js/app.js')}}"></script>
