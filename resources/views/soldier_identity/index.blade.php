@@ -27,10 +27,10 @@
             <tbody>
             @foreach($soldiers as $soldier)
                 <tr>
-                    <td><a href="{{route('identity.edit', $soldier)}}">{{$soldier->name}}</a></td>
-                    <td><a href="{{route('identity.edit', $soldier)}}">{{$soldier->general_number}}</a></td>
-                    <td>{{$soldier->unit}}</td>
-                    <td>{{$soldier->rank->name}}</td>
+                    <td><a href="{{route('identity.edit', $soldier)}}">{{$soldier->name ?? ''}}</a></td>
+                    <td><a href="{{route('identity.edit', $soldier)}}">{{$soldier->general_number ?? ''}}</a></td>
+                    <td>{{$soldier->unit ?? ''}}</td>
+                    <td>{{$soldier->rank->name ?? ''}}</td>
                     <td>
                         <form action="{{route('identity.destroy',$soldier)}}" method="POST">
                             {{csrf_field()}} {{method_field('DELETE')}}

@@ -7,7 +7,7 @@
             </div>
 
 
-            <table class="table table-striped" id="formations-table">
+            <table class="table table-striped" id="formations">
                 <thead>
                 <tr class="text-center">
                     <td>
@@ -118,7 +118,7 @@
                     <input type="text" class="form-control" name="formation_name" value="{{$formation->name ?? ''}}"
                            required>
 
-                    <table class="table table-striped" id="formations-table">
+                    <table class="table table-striped" id="formations">
                         <thead>
                         <tr class="text-center">
                             <td>
@@ -257,7 +257,7 @@
             $('button#formations').click(function () {
                 counter++
                 count++
-                $('table#formations-table tr:last').after(`
+                $('table#formations tr:last').after(`
            <tr class="text-center">
            <td>
            ` + ((counter.toLocaleString('en'))) + `
@@ -314,8 +314,8 @@
             });
 
             $('button#formations-remove').click(function () {
-                if ($("table#formations-table tbody tr").length > 1) {
-                    $('div.row-formation tr:last').remove()
+                if ($("#formations tr:last").index() > 1) {
+                    $('table#formations tr:last').remove()
                     counter--;
                     count--;
                 }
