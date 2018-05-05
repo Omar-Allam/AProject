@@ -42,7 +42,7 @@
 
     <div class="form-group  col-md-2 {{$errors->has('general_number')? 'has-error' : ''}}">
         {{Form::label('general_number', 'الرقم العام', ['class' => 'control-label'])}}
-        {{Form::text('general_number', null, ['class' => 'form-control','required'=>'required'])}}
+        {{Form::text('general_number', null, ['class' => 'form-control','required'=>'required','id'=>'general_number'])}}
         @if ($errors->has('general_number'))
             <div class="error-message">{{$errors->first('general_number')}}</div>
         @endif
@@ -96,7 +96,8 @@
 
     <div class="form-group  col-md-4 {{$errors->has('hiring_date')? 'has-error' : ''}}">
         {{Form::label('hiring_date', 'تاريخ التخرج / التعيين', ['class' => 'control-label'])}}
-        <input type="text" name="hiring_date" class="form-control datetimepicker2" id='datetimepicker2' value="{{$soldier->hiring_date ?? ''}}"/>
+        <input type="text" name="hiring_date" class="form-control datetimepicker2" id='datetimepicker2'
+               value="{{$soldier->hiring_date ?? ''}}"/>
         @if ($errors->has('hiring_date'))
             <div class="error-message">{{$errors->first('hiring_date')}}</div>
         @endif
@@ -112,7 +113,8 @@
 
     <div class="form-group  col-md-4 {{$errors->has('decision_date')? 'has-error' : ''}}">
         {{Form::label('decision_date', 'تاريخه', ['class' => 'control-label'])}}
-        <input type="text" name="decision_date" class="form-control datetimepicker2" id='datetimepicker2'  value="{{$soldier->decision_date ?? ''}}"/>
+        <input type="text" name="decision_date" class="form-control datetimepicker2" id='datetimepicker2'
+               value="{{$soldier->decision_date ?? ''}}"/>
         @if ($errors->has('decision_date'))
             <div class="error-message">{{$errors->first('decision_date')}}</div>
         @endif
@@ -147,7 +149,8 @@
 
     <div class="form-group  col-md-4 {{$errors->has('enroll_date')? 'has-error' : ''}}">
         {{Form::label('enroll_date', 'تاريخ الإلتحاق بالخدمة', ['class' => 'control-label'])}}
-        <input type="text" name="enroll_date" class="form-control datetimepicker2" id='datetimepicker2'  value="{{$soldier->enroll_date ?? ''}}" required/>
+        <input type="text" name="enroll_date" class="form-control datetimepicker2" id='datetimepicker2'
+               value="{{$soldier->enroll_date ?? ''}}" required/>
         @if ($errors->has('enroll_date'))
             <div class="error-message">{{$errors->first('enroll_date')}}</div>
         @endif
@@ -155,7 +158,8 @@
 
     <div class="form-group  col-md-4 {{$errors->has('promotion_date')? 'has-error' : ''}}">
         {{Form::label('promotion_date', 'تاريخ الترقية', ['class' => 'control-label'])}}
-        <input type="text" name="promotion_date" class="form-control datetimepicker2" id='datetimepicker2'  value="{{$soldier->promotion_date ?? ''}}" required/>
+        <input type="text" name="promotion_date" class="form-control datetimepicker2" id='datetimepicker2'
+               value="{{$soldier->promotion_date ?? ''}}" />
         @if ($errors->has('promotion_date'))
             <div class="error-message">{{$errors->first('promotion_date')}}</div>
         @endif
@@ -201,7 +205,8 @@
 
     <div class="form-group  col-md-3 {{$errors->has('id_date')? 'has-error' : ''}}">
         {{Form::label('id_date', 'تاريخها', ['class' => 'control-label'])}}
-        <input type="text" name="id_date" class="form-control datetimepicker2" id='datetimepicker2'  value="{{$soldier->id_date ?? ''}}" required/>
+        <input type="text" name="id_date" class="form-control datetimepicker2" id='datetimepicker2'
+               value="{{$soldier->id_date ?? ''}}" required/>
         @if ($errors->has('id_date'))
             <div class="error-message">{{$errors->first('id_date')}}</div>
         @endif
@@ -236,7 +241,8 @@
 
     <div class="form-group  col-md-3 {{$errors->has('date_of_birth')? 'has-error' : ''}}">
         {{Form::label('date_of_birth', 'تاريخ الميلاد', ['class' => 'control-label'])}}
-        <input type="text" name="date_of_birth" class="form-control datetimepicker2" id='datetimepicker2'  value="{{$soldier->date_of_birth ?? ''}}" required/>
+        <input type="text" name="date_of_birth" class="form-control datetimepicker2" id='datetimepicker2'
+               value="{{$soldier->date_of_birth ?? ''}}" required/>
         @if ($errors->has('date_of_birth'))
             <div class="error-message">{{$errors->first('date_of_birth')}}</div>
         @endif
@@ -292,3 +298,19 @@
     </div>
 </div>
 
+
+@section('scripts')
+    <script>
+        $('#general_number').focusout(function(){
+            let id = $(this).val()
+            $.ajax({
+                type: "GET",
+                url: '/check_general_number',
+                data: {general_number: id},
+                success: function( msg ) {
+                    console.log(msg)
+                }
+            });
+        })
+    </script>
+@endsection
