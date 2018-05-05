@@ -41,8 +41,8 @@
     </div>
 
     <div class="form-group  col-md-2 {{$errors->has('general_number')? 'has-error' : ''}}">
-        {{Form::label('general_number', 'الرقم العام', ['class' => 'control-label','required'=>'required'])}}
-        {{Form::text('general_number', null, ['class' => 'form-control'])}}
+        {{Form::label('general_number', 'الرقم العام', ['class' => 'control-label'])}}
+        {{Form::text('general_number', null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('general_number'))
             <div class="error-message">{{$errors->first('general_number')}}</div>
         @endif
@@ -96,7 +96,7 @@
 
     <div class="form-group  col-md-4 {{$errors->has('hiring_date')? 'has-error' : ''}}">
         {{Form::label('hiring_date', 'تاريخ التخرج / التعيين', ['class' => 'control-label'])}}
-        {{Form::date('hiring_date',null, ['class' => 'form-control'])}}
+        <input type='text' class="form-control" id='datetimepicker2' name="hiring_date"/>
         @if ($errors->has('hiring_date'))
             <div class="error-message">{{$errors->first('hiring_date')}}</div>
         @endif
@@ -228,7 +228,7 @@
 
     <div class="form-group  col-md-3 {{$errors->has('external_city')? 'has-error' : ''}}">
         {{Form::label('external_city', 'الدولة إذا كان خارج المملكة', ['class' => 'control-label'])}}
-        {{Form::text('external_city',null, ['class' => 'form-control','required'=>'required'])}}
+        {{Form::text('external_city',null, ['class' => 'form-control'])}}
         @if ($errors->has('external_city'))
             <div class="error-message">{{$errors->first('external_city')}}</div>
         @endif
@@ -291,3 +291,4 @@
         @endif
     </div>
 </div>
+
