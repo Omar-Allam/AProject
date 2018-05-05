@@ -27,13 +27,13 @@
                         {{Form::label('relative_date_of_birth', 'تاريخها', ['class' => 'control-label'])}}
                     </td>
                 </tr>
-
                 </thead>
                 <tbody>
                 @foreach($soldier->relatives as $key=>$relative)
                     <tr>
                     <td>
                         {{Form::text('relatives['.$key.'][relative_name]',null, ['class' => 'form-control'])}}
+                        {{Form::hidden('relatives['.$key.'][relative_id]', $relative->id , ['class' => 'form-control'])}}
                     </td>
                     <td>
                         {{Form::select('relatives['.$key.'][relative_type]',\App\RelativeType::all()->pluck('name'),null, ['class' => 'form-control'])}}
@@ -89,7 +89,6 @@
                         {{Form::label('relative_date_of_birth', 'تاريخها', ['class' => 'control-label'])}}
                     </td>
                 </tr>
-
                 </thead>
                 <tbody>
                     <tr>

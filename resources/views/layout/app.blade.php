@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-flipped.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    @yield('styles')
 </head>
 
 <body>
@@ -40,26 +40,43 @@
                         <li><a href="{{route('identity.index')}}">هوية فرد <span class="sr-only">(current)</span></a>
                         </li>
                     @endif
-                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(6))
                         <li><a href="{{route('formation.index')}}">التشكيل</a></li>
                     @endif
                 </ul>
 
                 <ul class="nav navbar-nav navbar-left">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                           aria-expanded="false">الاجازات المرضية والإعفاءات <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(8))
-                                <li><a href="{{route('sick-leave.index')}}">الإجازات</a></li>
-                            @endif
-                            @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(11))
-                                <li><a href="{{route('exemption.index')}}">الإعفاءات</a></li>
-                            @endif
-                        </ul>
-                    </li>
-                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(14))
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(10) || Auth::user()->hasRole(14))
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">الاجازات المرضية والإعفاءات <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(10))
+                                    <li><a href="{{route('sick-leave.index')}}">الإجازات</a></li>
+                                @endif
+                                @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(14))
+                                    <li><a href="{{route('exemption.index')}}">الإعفاءات</a></li>
+                                @endif
+                            </ul>
+                        </li>
+                    @endif
+
+
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(18))
                         <li><a href="{{route('user.index')}}">إدارة المستخدمين</a></li>
+                    @endif
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(22))
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">التقارير <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{route('hazm.participate')}}">المشاركين في عاصفة الحزم</a></li>
+                                <li><a href="{{route('human.energy')}}">الطاقة البشرية</a></li>
+                                <li><a href="{{route('eng.weapon')}}">سلاح المهندسين</a></li>
+                            </ul>
+                        </li>
                     @endif
                 </ul>
 
@@ -81,21 +98,6 @@
 
                     </li>
                 </ul>
-                @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(17))
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true"
-                               aria-expanded="false">التقارير <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{route('hazm.participate')}}">المشاركين في عاصفة الحزم</a></li>
-                                <li><a href="{{route('human.energy')}}">الطاقة البشرية</a></li>
-                                <li><a href="{{route('eng.weapon')}}">سلاح المهندسين</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                @endif
-
             </div>
         @else
             <ul class="nav navbar-nav">
@@ -125,14 +127,21 @@
 
 
     <div class="footer">
-        <img class="img-rounded" src="{{asset('images/ro2ya.jpg')}}"
-             style="height: 80px;width: 200px;padding: 10px; float: right;">
 
         <img class="img-rounded" src="{{asset('images/min-def.jpg')}}"
+             style="height: 80px;width: 200px;padding: 10px; float: right;">
+
+        <img class="img-rounded" src="{{asset('images/ro2ya.jpg')}}"
              style="height: 80px;width: 200px;padding: 10px; float: left;">
+
+
     </div>
+
 </div>
 <script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/sweet.js')}}"></script>
+@include('sweetalert::alert')
+
 {{--<script src="{{asset('js/bootstrap.js')}}"></script>--}}
 @yield('scripts')
 <script>

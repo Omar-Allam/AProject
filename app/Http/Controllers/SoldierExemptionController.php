@@ -5,23 +5,35 @@ namespace App\Http\Controllers;
 use App\SoldierExemption;
 use App\SoldierIdentity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SoldierExemptionController extends Controller
 {
     function index()
     {
-        $exemptions = SoldierExemption::all();
-        return view('medical-exemption.index', compact('exemptions'));
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(14)) {
+            $exemptions = SoldierExemption::all();
+            return view('medical-exemption.index', compact('exemptions'));
+        }
+        return view('not-authorize');
+
     }
 
     function create()
     {
-        return view('medical-exemption.create');
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(15)) {
+            return view('medical-exemption.create');
+        }
+        return view('not-authorize');
     }
 
     function show(SoldierExemption $exemption)
     {
-        return view('medical-exemption.show', compact('exemption'));
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(16)) {
+            return view('medical-exemption.show', compact('exemption'));
+        }
+        return view('not-authorize');
+
     }
 
     function update(SoldierExemption $exemption, Request $request)
@@ -62,7 +74,8 @@ class SoldierExemptionController extends Controller
         return redirect()->route('exemption.index');
     }
 
-    function destroy(SoldierExemption $exemption){
+    function destroy(SoldierExemption $exemption)
+    {
         $exemption->delete();
 
         return redirect()->route('exemption.index');

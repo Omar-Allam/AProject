@@ -12,8 +12,12 @@ class FormationController extends Controller
 {
     function index()
     {
-        $formations = Formation::all();
-        return view('formation.index', compact('formations'));
+        if(Auth::user()->hasRole(1) || Auth::user()->hasRole(6)){
+            $formations = Formation::all();
+            return view('formation.index', compact('formations'));
+        }
+        return view('not-authorize');
+
     }
 
     function create()
@@ -66,7 +70,10 @@ class FormationController extends Controller
 
     function show(Formation $formation)
     {
-        return view('formation.show', compact('formation'));
+        if(Auth::user()->hasRole(1) || Auth::user()->hasRole(8)){
+            return view('formation.show', compact('formation'));
+        }
+        return view('not-authorize');
     }
 
     function update(Formation $formation, Request $request)

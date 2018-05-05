@@ -67,11 +67,11 @@
             $('table#sons-table tr:last').after(`
 <tr>
 <td>
-                <input type="text" name="sons[` + son_count + `][soldier_son_name]"  class="form-control">
+                <input type="text" name="sons[` + son_count + `][soldier_son_name]"  class="form-control" required>
 
 </td>
 <td>
-                <input type="date" name="sons[` + son_count + `][soldier_son_date_of_birth]"  class="form-control">
+                <input type="date" name="sons[` + son_count + `][soldier_son_date_of_birth]"  class="form-control" required>
 
 </td>
 </tr>

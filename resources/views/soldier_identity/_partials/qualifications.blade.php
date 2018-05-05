@@ -137,7 +137,7 @@
 
                 </td>
                 <td>
-                <input type="text" name="qualifications[` + qua_count + `][soldier_graduation_date]" class="form-control" required>
+                <input type="date" name="qualifications[` + qua_count + `][soldier_graduation_date]" class="form-control" required>
                 </td>
             </tr>`)
         });

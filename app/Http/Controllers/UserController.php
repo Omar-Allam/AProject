@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,8 +15,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(15);
-        return view('user.index', compact('users'));
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(18)) {
+            $users = User::paginate(15);
+            return view('user.index', compact('users'));
+        }
+        return view('not-authorize');
     }
 
     /**
@@ -25,7 +29,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(19)) {
+            return view('user.create');
+        }
+        return view('not-authorize');
     }
 
     /**
@@ -38,7 +45,7 @@ class UserController extends Controller
     {
         $this->validate($request, ['name' => 'required', 'password' => 'required']);
 
-        $user = User::create(['name' => $request->name,'email' => $request->name,'password'=>bcrypt($request->password)]);
+        $user = User::create(['name' => $request->name, 'email' => $request->name, 'password' => bcrypt($request->password)]);
         $user->roles()->sync($request->roles);
 
         return redirect()->route('user.index');
@@ -52,9 +59,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('user.edit',compact('user'));
-
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(20)) {
+            $user = User::find($id);
+            return view('user.edit', compact('user'));
+        }
+        return view('not-authorize');
     }
 
     /**
@@ -65,8 +74,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
-        return view('user.edit',compact('user'));
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(20)) {
+            $user = User::find($id);
+            return view('user.edit', compact('user'));
+        }
+        return view('not-authorize');
     }
 
     /**
@@ -81,7 +93,7 @@ class UserController extends Controller
         $this->validate($request, ['name' => 'required']);
 
         $user = User::find($id);
-        $user->update(['name' => $request->name,'email' => $request->name,'password'=>bcrypt($request->password)]);
+        $user->update(['name' => $request->name, 'email' => $request->name, 'password' => bcrypt($request->password)]);
 
         $user->roles()->sync($request->roles);
 
@@ -96,6 +108,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('user.index');
     }
 }

@@ -105,13 +105,13 @@
             <tr>
             <td><p>` + ((jobs_counter)) + `</p></td>
             <td>
-             <input type="text" name="jobs[` + jobs_count + `][job_name]"  class="form-control">
+             <input type="text" name="jobs[` + jobs_count + `][job_name]"  class="form-control" required>
             </td>
             <td>
-                <input type="text" name="jobs[` + jobs_count + `][soldier_job_unit]"  class="form-control">
+                <input type="text" name="jobs[` + jobs_count + `][soldier_job_unit]"  class="form-control" required>
             </td>
             <td>
-              <input type="date" name="jobs[` + jobs_count + `][consider_from]"  class="form-control">
+              <input type="date" name="jobs[` + jobs_count + `][consider_from]"  class="form-control" required>
             </td>
             </tr>
             `)

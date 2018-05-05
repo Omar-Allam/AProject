@@ -9,22 +9,22 @@
 <div class="row">
     <div class="form-group col-md-2">
         <p><b>اللغات التي يجيدها</b></p>
-        {{Form::label('language_id', 'إنجليزي', ['class' => 'control-label'])}}
-        {{Form::checkbox('language_id[]', 'language_id', ['class' => 'form-control'])}}
-        @if ($errors->has('language_id'))
-            <div class="error-message">{{$errors->first('language_id')}}</div>
+        {{Form::label('languages', 'إنجليزي', ['class' => 'control-label'])}}
+        <input type="checkbox" name="languages[]" value="1" @if((isset($soldier) && $soldier->languages->where('language_id',1)->first())) checked @endif>
+        @if ($errors->has('languages'))
+            <div class="error-message">{{$errors->first('languages')}}</div>
         @endif
 
-        {{Form::label('language_id', 'فرنسي', ['class' => 'control-label'])}}
-        {{Form::checkbox('language_id[]', 'language_id', ['class' => 'form-control'])}}
-        @if ($errors->has('language_id'))
-            <div class="error-message">{{$errors->first('language_id')}}</div>
+        {{Form::label('languages', 'فرنسي', ['class' => 'control-label'])}}
+        <input type="checkbox" name="languages[]" value="2" @if((isset($soldier) && $soldier->languages->where('language_id',2)->first())) checked @endif>
+        @if ($errors->has('languages'))
+            <div class="error-message">{{$errors->first('languages')}}</div>
         @endif
 
-        {{Form::label('language_id', 'أخرى', ['class' => 'control-label'])}}
-        {{Form::checkbox('language_id[]', 'language_id', ['class' => 'form-control'])}}
-        @if ($errors->has('language_id'))
-            <div class="error-message">{{$errors->first('language_id')}}</div>
+        {{Form::label('languages', 'أخرى', ['class' => 'control-label'])}}
+        <input type="checkbox" name="languages[]" value="3" @if((isset($soldier) && $soldier->languages->where('language_id',3)->first())) checked @endif>
+        @if ($errors->has('languages'))
+            <div class="error-message">{{$errors->first('languages')}}</div>
         @endif
     </div>
 

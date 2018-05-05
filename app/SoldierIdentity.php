@@ -54,4 +54,8 @@ class SoldierIdentity extends Model
     function vacations(){
         return $this->hasMany(SoldierVacations::class, 'soldier_id');
     }
+
+    function languages(){
+        return $this->hasMany(SoldierLanguages::class, 'soldier_id');
+    }
 }

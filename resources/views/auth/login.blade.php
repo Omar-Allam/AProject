@@ -1,19 +1,24 @@
 @extends('layout.app')
-
+@section('styles')
+    <style>
+        body {
+            background-image: url('/background.png') !important;
+            padding-bottom:80px ;
+        }
+    </style>
+@endsection
 @section('header')
     <h4 class="panel-title">تسجيل الدخول</h4>
 @endsection
 @section('body')
-    <div class="col-sm-8 col-sm-offset-3" style="margin-right: 330px">
-        <img class="img-fluid " src="{{asset('images/bryah.png')}}"
-             style="height: 180px;width: 180px;padding: 10px;">
+    <div class="col-sm-6" style="margin-right: 330px">
+
         <img class="img-fluid " src="{{asset('images/main-logo.png')}}"
-             style="height: 200px;width: 200px;padding: 10px;">
-        <img class="img-fluid " src="{{asset('images/defence.png')}}"
-             style="height: 200px;width: 200px;padding: 10px;">
+             style="height: 200px;width: 200px;margin-right: 180px;margin-bottom: 10px">
+
     </div>
     <br><br>
-    <form class="col-sm-8 col-sm-offset-1 form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+    <form class="col-sm-6 col-sm-offset-2 form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
         {!! csrf_field() !!}
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
             <label for="login" class="col-sm-4 control-label">اسم المستخدم</label>

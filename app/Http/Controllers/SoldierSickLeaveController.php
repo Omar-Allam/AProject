@@ -5,24 +5,34 @@ namespace App\Http\Controllers;
 use App\SoldierIdentity;
 use App\SoldierSickLeave;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SoldierSickLeaveController extends Controller
 {
     function index()
     {
-        $sickLeaves = SoldierSickLeave::all();
-        return view('sick-leave.index', compact('sickLeaves'));
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(10)) {
+            $sickLeaves = SoldierSickLeave::all();
+            return view('sick-leave.index', compact('sickLeaves'));
+        }
+        return view('not-authorize');
+
     }
 
     function create()
     {
-        return view('sick-leave.create');
+        if(Auth::user()->hasRole(1) || Auth::user()->hasRole(11)){
+            return view('sick-leave.create');
+        }
+        return view('not-authorize');
     }
 
     function show(SoldierSickLeave $sickLeave)
     {
-
-        return view('sick-leave.show', compact('sickLeave'));
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(12)) {
+            return view('sick-leave.show', compact('sickLeave'));
+        }
+        return view('not-authorize');
     }
 
     function update(SoldierSickLeave $sickLeave, Request $request)
@@ -61,7 +71,8 @@ class SoldierSickLeaveController extends Controller
 
     }
 
-    function destroy(SoldierSickLeave $sickLeave){
+    function destroy(SoldierSickLeave $sickLeave)
+    {
         $sickLeave->delete();
         return redirect()->route('sick-leave.index');
     }

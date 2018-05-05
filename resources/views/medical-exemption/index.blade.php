@@ -3,11 +3,13 @@
 @section('header')
 
     <h4>الإعفاءات الطبية</h4>
-    <p>
-        <a class="btn btn-sm btn-success"  href="{{route('exemption.create')}}">
-            <i class="fa fa-plus"></i>
-        </a>
-    </p>
+    @if (Auth::user()->hasRole(1) || Auth::user()->hasRole(14))
+        <p>
+            <a class="btn btn-sm btn-success" href="{{route('exemption.create')}}">
+                <i class="fa fa-plus"></i>
+            </a>
+        </p>
+    @endif
 @stop
 
 @section('body')
@@ -23,25 +25,33 @@
                     <th>مدة الإعفاء</th>
                     <th>المهام التي يعفى منها</th>
                     <th>الرصيد السابق للإعفاءات</th>
-                    <th></th>
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(17))
+                        <th></th>
+                    @endif
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($exemptions as $exemption)
                     <tr>
-                        <td><a href="{{route('exemption.show',$exemption).'?edit='.str_random()}}">{{$exemption->soldier->general_number ?? ''}}</a></td>
+                        <td>
+                            <a href="{{route('exemption.show',$exemption).'?edit='.str_random()}}">{{$exemption->soldier->general_number ?? ''}}</a>
+                        </td>
                         <td>{{$exemption->soldier->name ?? ''}}</td>
                         <td>{{$exemption->soldier->rank->name ?? ''}}</td>
                         <td>{{$exemption->reason ?? ''}}</td>
                         <td>{{$exemption->end_at->diffInDays($exemption->start_from) ?? ''}}</td>
                         <td>{{$exemption->tasks ?? ''}}</td>
                         <td>{{$exemption->prev_balance ?? ''}}</td>
-                        <td>
-                            <form action="{{route('exemption.destroy',$exemption)}}" method="POST">
-                                {{csrf_field()}} {{method_field('DELETE')}}
-                                <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i></button>
-                            </form>
-                        </td>
+
+                        @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(17))
+                            <td>
+                                <form action="{{route('exemption.destroy',$exemption)}}" method="POST">
+                                    {{csrf_field()}} {{method_field('DELETE')}}
+                                    <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>

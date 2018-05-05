@@ -3,11 +3,13 @@
 @section('header')
 
     <h4>الإجازات المرضية</h4>
-    <p>
-        <a class="btn btn-sm btn-success" href="{{route('sick-leave.create')}}">
-            <i class="fa fa-plus"></i>
-        </a>
-    </p>
+    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(11))
+        <p>
+            <a class="btn btn-sm btn-success" href="{{route('sick-leave.create')}}">
+                <i class="fa fa-plus"></i>
+            </a>
+        </p>
+    @endif
 @stop
 
 @section('body')
@@ -22,7 +24,9 @@
                 <th>مدة الإجازة</th>
                 <th>تاريخ المباشرة</th>
                 <th>ملاحظات</th>
-                <th></th>
+                @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(13))
+                    <th></th>
+                @endif
             </tr>
             </thead>
             <tbody>
@@ -37,12 +41,15 @@
                     <td>{{$sickLeaf->leave_to->diffInDays($sickLeaf->leave_from) ?? ''}}</td>
                     <td>{{$sickLeaf->direct_date->toDateString() ?? ''}}</td>
                     <td>{{$sickLeaf->notes ?? ''}}</td>
-                    <td>
-                        <form action="{{route('sick-leave.destroy',$sickLeaf)}}" method="POST">
-                            {{csrf_field()}} {{method_field('DELETE')}}
-                            <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i></button>
-                        </form>
-                    </td>
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(13))
+                        <td>
+                            <form action="{{route('sick-leave.destroy',$sickLeaf)}}" method="POST">
+                                {{csrf_field()}} {{method_field('DELETE')}}
+                                <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
+                                </button>
+                            </form>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

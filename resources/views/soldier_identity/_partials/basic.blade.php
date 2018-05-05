@@ -131,7 +131,7 @@
 
     <div class="form-group  col-md-2 {{$errors->has('specialization')? 'has-error' : ''}}">
         {{Form::label('specialization', ' التخصص', ['class' => 'control-label'])}}
-        {{Form::text('specialization',null, ['class' => 'form-control','required'=>'required'])}}
+        {{Form::select('specialization',\App\Specialization::all()->pluck('name')->prepend('اختار التخصص'),null, ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('specialization'))
             <div class="error-message">{{$errors->first('specialization')}}</div>
         @endif

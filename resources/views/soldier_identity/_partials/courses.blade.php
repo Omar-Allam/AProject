@@ -131,19 +131,19 @@
                    <p>` + (course_counter) + `</p>
                 </td>
                 <td>
-                 <input type="text" name="course[` + course_count + `][course_name]"  class="form-control">
+                 <input type="text" name="course[` + course_count + `][course_name]"  class="form-control" required>
                 </td>
                 <td>
-                <input type="text" name="course[` + course_count + `][course_time_frame]"  class="form-control">
+                <input type="text" name="course[` + course_count + `][course_time_frame]"  class="form-control" required>
                 </td>
                 <td>
-                 <input type="text" name="course[` + course_count + `][course_place]"  class="form-control">
+                 <input type="text" name="course[` + course_count + `][course_place]"  class="form-control" required>
                 </td>
                 <td>
-                 <input type="date" name="course[` + course_count + `][graduation_date]"  class="form-control">
+                 <input type="date" name="course[` + course_count + `][graduation_date]"  class="form-control" required>
                 </td>
                 <td>
-                <input type="text" name="course[` + course_count + `][course_grade]"  class="form-control">
+                <input type="text" name="course[` + course_count + `][course_grade]"  class="form-control" required>
                 </td>
             </tr>`)
         });

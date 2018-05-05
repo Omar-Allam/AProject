@@ -2,12 +2,12 @@
 
 @section('header')
 
-    <h4>التشكيلات</h4>
-    <p>
-        <a class="btn btn-sm btn-success"  href="{{route('formation.create')}}">
-            <i class="fa fa-plus"></i>
-        </a>
-    </p>
+    {{--<h4>التشكيلات</h4>--}}
+    {{--<p>--}}
+    {{--<a class="btn btn-sm btn-success"  href="{{route('formation.create')}}">--}}
+    {{--<i class="fa fa-plus"></i>--}}
+    {{--</a>--}}
+    {{--</p>--}}
 @stop
 
 @section('body')
@@ -24,13 +24,18 @@
                 <tbody>
                 @foreach($formations as $formation)
                     <tr>
-                        <td class="col-md-9"><a href="{{route('formation.show',$formation)}}">{{$formation->name}}</a></td>
+                        <td class="col-md-9">
+                            <a href="{{route('formation.show',$formation)}}">{{$formation->name}}</a>
+                        </td>
+                        @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(9))
                         <td>
                             <form action="{{route('formation.destroy',$formation)}}" method="POST">
-                               {{csrf_field()}} {{method_field('DELETE')}}
-                                <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i></button>
+                                {{csrf_field()}} {{method_field('DELETE')}}
+                                <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
+                                </button>
                             </form>
                         </td>
+                        @endif
                     </tr>
                 @endforeach
                 </tbody>

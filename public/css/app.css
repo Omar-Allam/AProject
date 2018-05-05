@@ -3068,9 +3068,7 @@
 .nav-link {
     color: white !important;
 }
-
 body {
-    background-image: url('/background.png') !important;
     padding-bottom:80px ;
 }
 .footer {
