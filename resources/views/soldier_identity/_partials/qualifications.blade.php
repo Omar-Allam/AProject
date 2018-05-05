@@ -120,7 +120,7 @@
 
                 </td>
                 <td>
-                <input type="date" name="qualifications[` + qua_count + `][soldier_graduation_date]" class="form-control" required>
+                                <input type="text" name="qualifications[` + qua_count + `][soldier_graduation_date]"  class="form-control datetimepicker2"  required/>
                 </td>
             </tr>`)
             qua_count++

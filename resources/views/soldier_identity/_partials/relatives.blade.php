@@ -51,7 +51,7 @@
                         {{Form::text('relatives['.$key.'][relative_place_of_birth]',null, ['class' => 'form-control'])}}
                     </td>
                     <td>
-                        {{Form::date('relatives['.$key.'][relative_date_of_birth]',null, ['class' => 'form-control'])}}
+                        <input type="text" name="relatives['.{{$key}}.'][relative_date_of_birth]"  class="form-control datetimepicker2" id='datetimepicker2'  value="{{$relative['relative_date_of_birth']}}" required/>
                     </td>
                     </tr>
                 @endforeach
@@ -109,6 +109,7 @@
     <script>
         var rela_count = 0
         $('button#relatives').click(function () {
+
             var row = $('#row-relative')
             $('table#relatives-table tbody:last-child').append(`<tr>
                     <td>
@@ -135,13 +136,11 @@
                 <input type="text" name="relatives[` + rela_count + `][relative_place_of_birth]" class="form-control" required>
                 </td>
                 <td>
-                <input type="date" name="relatives[` + rela_count + `][relative_date_of_birth]" class="form-control" required>
+                <input type="text" name="relatives[` + rela_count + `][relative_date_of_birth]"  class="form-control datetimepicker3"  required/>
                 </td>
                 </tr>`)
             rela_count++
         });
-
-
 
         $('button#remove-relatives').click(function () {
             if ($("table#relatives-table tbody tr").length !== 0) {
@@ -149,5 +148,6 @@
                 rela_count--;
             }
         });
+
     </script>
 @append

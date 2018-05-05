@@ -11,6 +11,7 @@ use App\SoldierQualifications;
 use App\SoldierRelatives;
 use App\SoldierSons;
 use App\SoldierVacations;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -205,6 +206,13 @@ class SoldierIdentityController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request['hiring_date'] = Carbon::createFromFormat('Y-m-d',$request->hiring_date,'Asia/Riyadh');
+        $request['decision_date'] = Carbon::createFromFormat('Y-m-d',$request->decision_date,'Asia/Riyadh');
+        $request['enroll_date'] = Carbon::createFromFormat('Y-m-d',$request->enroll_date,'Asia/Riyadh');
+        $request['promotion_date'] = Carbon::createFromFormat('Y-m-d',$request->promotion_date,'Asia/Riyadh');
+        $request['id_date'] = Carbon::createFromFormat('Y-m-d',$request->id_date,'Asia/Riyadh');
+        $request['date_of_birth'] = Carbon::createFromFormat('Y-m-d',$request->date_of_birth,'Asia/Riyadh');
+
         $soldierIdentity = SoldierIdentity::find($id);
         $soldierIdentity->update($request->all());
 
@@ -221,6 +229,7 @@ class SoldierIdentityController extends Controller
         if (count($request->relatives)) {
             $soldierIdentity->relatives()->delete();
             foreach ($request->relatives as $relative) {
+                $relative['relative_date_of_birth'] = Carbon::createFromFormat('Y-m-d',$relative['relative_date_of_birth'],'Asia/Riyadh');
                 SoldierRelatives::create([
                     'form_id' => 0,
                     'soldier_id' => $soldierIdentity->id,
