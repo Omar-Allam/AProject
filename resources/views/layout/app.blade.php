@@ -7,9 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Army</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.4.0/css/bootstrap-flipped.css">
+    <link rel="stylesheet" href="{{asset('css/app.css').'?blabla'}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.css?blabla')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap-flipped.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('styles')
 </head>
