@@ -39,14 +39,7 @@
 
         </thead>
         <tbody>
-        <tr>
-            <td>
-                {{Form::text('sons[0][soldier_son_name]',null, ['class' => 'form-control'])}}
-            </td>
-            <td>
-                {{Form::date('sons[0][soldier_son_date_of_birth]',null, ['class' => 'form-control'])}}
-            </td>
-        </tr>
+
         </tbody>
     </table>
 @endif
@@ -63,8 +56,7 @@
     <script>
         var son_count = 0;
         $('button#sons').click(function () {
-            son_count++;
-            $('table#sons-table tr:last').after(`
+            $('table#sons-table  tbody:last-child').append(`
 <tr>
 <td>
                 <input type="text" name="sons[` + son_count + `][soldier_son_name]"  class="form-control" required>
@@ -77,10 +69,12 @@
 </tr>
 
                `)
+            son_count++;
+
         });
 
         $('button#remove-sons').click(function () {
-            if ($("table#sons-table tbody tr").length > 1) {
+            if ($("table#sons-table tbody tr").length !== 0) {
                 $('table#sons-table tr:last').remove()
                 son_count--;
             }

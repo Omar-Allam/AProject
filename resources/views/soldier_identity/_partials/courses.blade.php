@@ -84,26 +84,7 @@
 
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <p>1</p>
-            </td>
-            <td>
-                {{Form::text('course[0][course_name]',null, ['class' => 'form-control'])}}
-            </td>
-            <td>
-                {{Form::text('course[0][course_time_frame]',null, ['class' => 'form-control'])}}
-            </td>
-            <td>
-                {{Form::text('course[0][course_place]',null, ['class' => 'form-control'])}}
-            </td>
-            <td>
-                {{Form::date('course[0][graduation_date]',null, ['class' => 'form-control'])}}
-            </td>
-            <td>
-                {{Form::text('course[0][course_grade]',null, ['class' => 'form-control'])}}
-            </td>
-        </tr>
+
         </tbody>
     </table>
 
@@ -124,8 +105,7 @@
         var course_count = 0
         $('button#courses').click(function () {
             course_counter++
-            course_count++
-            $('table#courses-table tr:last').after(`
+            $('table#courses-table  tbody:last-child').append(`
             <tr>
                 <td>
                    <p>` + (course_counter) + `</p>
@@ -146,10 +126,12 @@
                 <input type="text" name="course[` + course_count + `][course_grade]"  class="form-control" required>
                 </td>
             </tr>`)
+            course_count++
+
         });
 
         $('button#remove-course').click(function () {
-            if ($("table#courses-table tbody tr").length > 1) {
+            if ($("table#courses-table tbody tr").length !== 0) {
                 $('table#courses-table tr:last').remove()
                 course_counter--;
                 course_count--;

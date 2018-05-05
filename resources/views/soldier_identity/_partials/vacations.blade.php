@@ -82,24 +82,7 @@
 
         </thead>
         <tbody>
-        <tr>
-            <td>
-                1
-            </td>
-            <td>
-                {{Form::text('vacations[0][vacation_type]',null, ['class' => 'form-control'])}}
-            </td>
-            <td>
-                {{Form::text('vacations[0][vacation_period]',null, ['class' => 'form-control'])}}
-            </td>
 
-            <td>
-                {{Form::text('vacations[0][vacation_place]',null, ['class' => 'form-control'])}}
-            </td>
-            <td>
-                {{Form::date('vacations[0][vacation_end_date]',null, ['class' => 'form-control'])}}
-            </td>
-        </tr>
         </tbody>
     </table>
     <div class="btn-group">
@@ -123,7 +106,6 @@
 
         $('button#vacations').click(function () {
             vaca_counter++
-            vaca_count++
             $('table#vactions-table tr:last').after(`
 <tr>
 <td>
@@ -144,10 +126,12 @@
                 <input type="date" name="vacations[` + vaca_count + `][vacation_end_date]"  class="form-control" required>
                 </td>
    </tr>  `)
+            vaca_count++
+
         });
 
         $('button#remove-vacations').click(function () {
-            if ($("table#vactions-table tbody tr").length > 1) {
+            if ($("table#vactions-table tbody tr").length !== 1) {
                 $('table#vactions-table tr:last').remove()
                 vaca_counter--;
                 vaca_count--;

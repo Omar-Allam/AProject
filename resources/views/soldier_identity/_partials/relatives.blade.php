@@ -91,29 +91,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            {{Form::text('relatives[0][relative_name]',null, ['class' => 'form-control'])}}
-                        </td>
-                        <td>
-                            {{Form::select('relatives[0][relative_type]',\App\RelativeType::all()->pluck('name'),null, ['class' => 'form-control'])}}
-                        </td>
-                        <td>
-                            {{Form::text('relatives[0][original_nationality]',null, ['class' => 'form-control'])}}
-                        </td>
-                        <td>
-                            {{Form::text('relatives[0][current_nationality]',null, ['class' => 'form-control'])}}
-                        </td>
-                        <td>
-                            {{Form::text('relatives[0][relative_place_of_origin]',null, ['class' => 'form-control'])}}
-                        </td>
-                        <td>
-                            {{Form::text('relatives[0][relative_place_of_birth]',null, ['class' => 'form-control'])}}
-                        </td>
-                        <td>
-                            {{Form::date('relatives[0][relative_date_of_birth]',null, ['class' => 'form-control'])}}
-                        </td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -131,9 +109,8 @@
     <script>
         var rela_count = 0
         $('button#relatives').click(function () {
-            rela_count++
             var row = $('#row-relative')
-            $('table#relatives-table tr:last').after(`<tr>
+            $('table#relatives-table tbody:last-child').append(`<tr>
                     <td>
                      <input type="text" name="relatives[` + rela_count + `][relative_name]" class="form-control" required>
                 </td>
@@ -161,12 +138,13 @@
                 <input type="date" name="relatives[` + rela_count + `][relative_date_of_birth]" class="form-control" required>
                 </td>
                 </tr>`)
+            rela_count++
         });
 
 
 
         $('button#remove-relatives').click(function () {
-            if ($("table#relatives-table tbody tr").length > 1) {
+            if ($("table#relatives-table tbody tr").length !== 0) {
                 $('table#relatives-table tr:last').remove()
                 rela_count--;
             }

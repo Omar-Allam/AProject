@@ -69,20 +69,7 @@
 
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    1
-                </td>
-                <td>
-                    {{Form::text('jobs[0][job_name]',null, ['class' => 'form-control'])}}
-                </td>
-                <td>
-                    {{Form::text('jobs[0][soldier_job_unit]',null, ['class' => 'form-control'])}}
-                </td>
-                <td>
-                    {{Form::date('jobs[0][consider_from]',null, ['class' => 'form-control'])}}
-                </td>
-            </tr>
+
         </tbody>
     </table>
     <div class="btn-group">
@@ -96,12 +83,11 @@
 
 @section('scripts')
     <script>
-        var jobs_counter = 1
+        var jobs_counter = $('#courses-table > tbody:last > tr').length
         var jobs_count = 0
         $('button#jobs').click(function () {
             jobs_counter++
-            jobs_count++
-            $('table#jobs-table tr:last').after(`
+            $('table#jobs-table tbody:last-child').append(`
             <tr>
             <td><p>` + ((jobs_counter)) + `</p></td>
             <td>
@@ -115,10 +101,12 @@
             </td>
             </tr>
             `)
+            jobs_count++
+
         });
 
         $('button#remove-job').click(function () {
-            if ($("table#jobs-table tbody tr").length > 1) {
+            if ($("table#jobs-table tbody tr").length !== 1) {
                 $('table#jobs-table tr:last').remove()
                 jobs_counter--
                 jobs_count--
