@@ -110,8 +110,7 @@
         var rela_count = 0;
         var id = 1;
         $('button#relatives').click(function () {
-
-            var row = $('#row-relative')
+            console.log('sfsdf')
             $('table#relatives-table tbody:last-child').append(`<tr>
                     <td>
                      <input type="text" name="relatives[` + rela_count + `][relative_name]" class="form-control" required>
@@ -139,8 +138,7 @@
                 <td>
                     <input type="text" name="relatives[` + rela_count + `][relative_date_of_birth]" class="form-control" id="relative_date`+id+`" required>
                 </td>
-                </tr>`)
-            rela_count++
+                </tr>`);
 
             $('#relative_date'+id).calendarsPicker({
                 calendar: $.calendars.instance('islamic'),
@@ -148,6 +146,8 @@
                 dateFormat: 'yyyy-mm-dd'
             });
             id++
+            rela_count++
+
         });
 
         $('button#remove-relatives').click(function () {
@@ -159,4 +159,4 @@
 
     </script>
 
-@stop
+@append
