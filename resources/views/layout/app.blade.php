@@ -144,29 +144,28 @@
 <script src="{{asset('js/sweet.js')}}"></script>
 @include('sweetalert::alert')
 <script src="{{asset('js/jQuery.js')}}"></script>
-<script src="{{asset('js/bootstrap.js')}}"></script>
 <script src="{{asset('js/jquery.calendars.min.js')}}"></script>
 <script src="{{asset('js/jquery.calendars.ummalqura.min.js')}}"></script>
 <script src="{{asset('js/jquery.calendars.ummalqura-ar.js')}}"></script>
 <script src="{{asset('js/bootstrap-calendars.min.js')}}"></script>
 <script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
-<script>
-    $(document).ready(function(){
-        // Umm ALqura Calendar
-        $('.datetimepicker2').datetimepicker({
-            locale: {calender: 'ummalqura', lang: 'ar'},
-            format: 'YYYY-MM-DD'
-        });
 
-        $('.datetimepicker3').datetimepicker({
-            locale: {calender: 'ummalqura', lang: 'ar'},
-            format: 'YYYY-MM-DD'
-        });
-    });
-</script>
 @yield('scripts')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.js"></script>
+<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.plus.min.js"></script>
+<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.plugin.min.js"></script>
+<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.picker.js"></script>
+<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.islamic.min.js"></script>
 
-
+<link href="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/css/jquery.calendars.picker.css" rel="stylesheet"/>
+<script>
+    $('.datetimepicker2').calendarsPicker({
+        calendar: $.calendars.instance('islamic'),
+        monthsToShow: [1,1],
+        dateFormat: 'yyyy-mm-dd'
+    });
+</script>
 </body>
 </html>

@@ -40,7 +40,8 @@
                     {{Form::text('course['.$key.'][course_place]',$course->course_place ?? '', ['class' => 'form-control'])}}
                 </td>
                 <td>
-                    {{Form::date('course['.$key.'][graduation_date]',$course->graduation_date ?? '', ['class' => 'form-control'])}}
+                    <input type="text" name="course[{{$key}}][graduation_date]"  class="form-control datetimepicker2" id="datetimepicker2" value="{{$course->graduation_date ?? ''}}" required>
+
                 </td>
                 <td>
                     {{Form::text('course['.$key.'][course_grade]',$course->course_grade ?? '', ['class' => 'form-control'])}}
@@ -103,6 +104,7 @@
     <script>
         var course_counter = $('#courses-table > tbody:last > tr').length
         var course_count = 0
+        var id = 1;
         $('button#courses').click(function () {
             course_counter++
             $('table#courses-table  tbody:last-child').append(`
@@ -120,14 +122,19 @@
                  <input type="text" name="course[` + course_count + `][course_place]"  class="form-control" required>
                 </td>
                 <td>
-                 <input type="date" name="course[` + course_count + `][graduation_date]"  class="form-control" required>
+                 <input type="text" name="course[` + course_count + `][graduation_date]"  class="form-control" id="course`+id+`" required>
                 </td>
                 <td>
-                <input type="text" name="course[` + course_count + `][course_grade]"  class="form-control" required>
+                <input type="text" name="course[` + course_count + `][course_grade]"  class="form-control"  required>
                 </td>
             </tr>`)
             course_count++
-
+            $('#course'+id).calendarsPicker({
+                calendar: $.calendars.instance('islamic'),
+                monthsToShow: [1,1],
+                dateFormat: 'yyyy-mm-dd'
+            });
+            id++
         });
 
         $('button#remove-course').click(function () {

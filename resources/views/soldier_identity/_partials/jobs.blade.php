@@ -34,7 +34,8 @@
                     {{Form::text('jobs['.$key.'][soldier_job_unit]',$job->soldier_job_unit ?? '', ['class' => 'form-control'])}}
                 </td>
                 <td>
-                    {{Form::date('jobs['.$key.'][consider_from]',$job->consider_from ?? '', ['class' => 'form-control'])}}
+                    <input type="text" name="jobs[{{$key}}][consider_from]"  class="form-control datetimepicker2" id="" value="{{$job->consider_from ?? ''}}" required>
+
                 </td>
             </tr>
         @endforeach
@@ -85,6 +86,7 @@
     <script>
         var jobs_counter = $('#courses-table > tbody:last > tr').length
         var jobs_count = 0
+        var id = 1
         $('button#jobs').click(function () {
             jobs_counter++
             $('table#jobs-table tbody:last-child').append(`
@@ -97,10 +99,19 @@
                 <input type="text" name="jobs[` + jobs_count + `][soldier_job_unit]"  class="form-control" required>
             </td>
             <td>
-              <input type="date" name="jobs[` + jobs_count + `][consider_from]"  class="form-control" required>
+              <input type="text" name="jobs[` + jobs_count + `][consider_from]"  class="form-control" id="soldier_jobs`+id+`" required>
             </td>
             </tr>
             `)
+
+            $('#soldier_jobs'+id).calendarsPicker({
+                calendar: $.calendars.instance('islamic'),
+                monthsToShow: [1,1],
+                dateFormat: 'yyyy-mm-dd'
+            });
+            id++
+
+
             jobs_count++
 
         });

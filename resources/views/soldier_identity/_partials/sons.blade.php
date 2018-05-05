@@ -18,7 +18,8 @@
                     {{Form::text('sons['.$key.'][soldier_son_name]',null, ['class' => 'form-control'])}}
                 </td>
                 <td>
-                    {{Form::date('sons['.$key.'][soldier_son_date_of_birth]',null, ['class' => 'form-control'])}}
+                    <input type="text" name="sons[{{$key}}][soldier_son_date_of_birth]"  class="form-control datetimepicker2" value="{{$son['soldier_son_date_of_birth'] ?? ''}}"  required>
+
                 </td>
             </tr>
         @endforeach
@@ -55,6 +56,7 @@
 @section('scripts')
     <script>
         var son_count = 0;
+        var id = 0
         $('button#sons').click(function () {
             $('table#sons-table  tbody:last-child').append(`
 <tr>
@@ -63,12 +65,19 @@
 
 </td>
 <td>
-                <input type="date" name="sons[` + son_count + `][soldier_son_date_of_birth]"  class="form-control" required>
+                <input type="text" name="sons[` + son_count + `][soldier_son_date_of_birth]"  class="form-control datetimepicker2" id="soldier_sons`+id+`" required>
 
 </td>
 </tr>
 
                `)
+
+            $('#soldier_sons'+id).calendarsPicker({
+                calendar: $.calendars.instance('islamic'),
+                monthsToShow: [1,1],
+                dateFormat: 'yyyy-mm-dd'
+            });
+            id++
             son_count++;
 
         });

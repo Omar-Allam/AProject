@@ -1,3 +1,4 @@
+
 @include('soldier_identity._partials.basic')
 <hr>
 @include('soldier_identity._partials.relatives')

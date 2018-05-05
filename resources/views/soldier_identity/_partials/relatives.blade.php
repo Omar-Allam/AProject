@@ -51,7 +51,7 @@
                         {{Form::text('relatives['.$key.'][relative_place_of_birth]',null, ['class' => 'form-control'])}}
                     </td>
                     <td>
-                        <input type="text" name="relatives['.{{$key}}.'][relative_date_of_birth]"  class="form-control datetimepicker2" id='datetimepicker2'  value="{{$relative['relative_date_of_birth']}}" required/>
+                        <input type="text" name="relatives[{{$key}}][relative_date_of_birth]"  class="form-control datetimepicker2" id='datetimepicker2'  value="{{$relative['relative_date_of_birth']}}" required/>
                     </td>
                     </tr>
                 @endforeach
@@ -106,8 +106,9 @@
 
 
 @section('scripts')
-    <script>
-        var rela_count = 0
+    <script type="text/javascript">
+        var rela_count = 0;
+        var id = 1;
         $('button#relatives').click(function () {
 
             var row = $('#row-relative')
@@ -136,10 +137,17 @@
                 <input type="text" name="relatives[` + rela_count + `][relative_place_of_birth]" class="form-control" required>
                 </td>
                 <td>
-                <input type="text" name="relatives[` + rela_count + `][relative_date_of_birth]"  class="form-control datetimepicker3"  required/>
+                    <input type="text" name="relatives[` + rela_count + `][relative_date_of_birth]" class="form-control" id="relative_date`+id+`" required>
                 </td>
                 </tr>`)
             rela_count++
+
+            $('#relative_date'+id).calendarsPicker({
+                calendar: $.calendars.instance('islamic'),
+                monthsToShow: [1,1],
+                dateFormat: 'yyyy-mm-dd'
+            });
+            id++
         });
 
         $('button#remove-relatives').click(function () {
@@ -150,4 +158,5 @@
         });
 
     </script>
-@append
+
+@stop

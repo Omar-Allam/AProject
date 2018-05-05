@@ -42,7 +42,8 @@
                             {{Form::text('qualifications['.$key.'][soldier_educational_place]',null, ['class' => 'form-control'])}}
                         </td>
                         <td>
-                            {{Form::date('qualifications['.$key.'][soldier_graduation_date]',null, ['class' => 'form-control'])}}
+                            <input type="text" name="qualifications[{{$key}}][soldier_graduation_date]"  class="form-control datetimepicker2"  id="" value="{{$qualification->soldier_graduation_date ?? ''}}" required/>
+
                         </td>
                     </tr>
                 @endforeach
@@ -104,6 +105,7 @@
 @section('scripts')
     <script>
         var qua_count = 0
+        var id = 1
         $('button#qualifications').click(function () {
             $('table#qualifications-table  tbody:last-child').append(`<tr>
                 <td>
@@ -120,9 +122,17 @@
 
                 </td>
                 <td>
-                                <input type="text" name="qualifications[` + qua_count + `][soldier_graduation_date]"  class="form-control datetimepicker2"  required/>
+                <input type="text" name="qualifications[` + qua_count + `][soldier_graduation_date]"  class="form-control datetimepicker2"  id="soldier_qualification`+id+`" required/>
+
                 </td>
             </tr>`)
+
+            $('#soldier_qualification'+id).calendarsPicker({
+                calendar: $.calendars.instance('islamic'),
+                monthsToShow: [1,1],
+                dateFormat: 'yyyy-mm-dd'
+            });
+            id++
             qua_count++
         });
 

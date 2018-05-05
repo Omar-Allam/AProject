@@ -13,4 +13,20 @@
     @include('soldier_identity._form')
 
     {{Form::close()}}
+
+@stop
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.datetimepicker2').datetimepicker({
+                locale: {calender: 'ummalqura', lang: 'ar'},
+                format: 'YYYY-MM-DD'
+            });
+
+            $('#datetimepicker2').datetimepicker({
+                locale: {calender: 'ummalqura', lang: 'ar'},
+                format: 'YYYY-MM-DD'
+            });
+        });
+    </script>
 @stop

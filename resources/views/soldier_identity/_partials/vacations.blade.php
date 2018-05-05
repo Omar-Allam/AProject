@@ -42,7 +42,7 @@
                     {{Form::text('vacations['.$key.'][vacation_place]',$vacation->vacation_place ?? '', ['class' => 'form-control'])}}
                 </td>
                 <td>
-                    {{Form::date('vacations['.$key.'][vacation_end_date]',$vacation->vacation_end_date ?? '', ['class' => 'form-control'])}}
+                    <input type="text" name="vacations[{{$key}}][vacation_end_date]"  class="form-control datetimepicker2" value="{{$vacation->vacation_end_date ?? ''}}" required>
                 </td>
             </tr>
         @endforeach
@@ -123,9 +123,16 @@
                 <input type="text" name="vacations[` + vaca_count + `][vacation_place]"  class="form-control" required>
 </td>
 <td>
-                <input type="date" name="vacations[` + vaca_count + `][vacation_end_date]"  class="form-control" required>
+                <input type="text" name="vacations[` + vaca_count + `][vacation_end_date]"  class="form-control" id="soldier_vacations`+id+`" required>
                 </td>
    </tr>  `)
+
+            $('#soldier_vacations'+id).calendarsPicker({
+                calendar: $.calendars.instance('islamic'),
+                monthsToShow: [1,1],
+                dateFormat: 'yyyy-mm-dd'
+            });
+            id++
             vaca_count++
 
         });
