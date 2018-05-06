@@ -23,7 +23,10 @@
                     <th>الرقم العام</th>
                     <th>الوحدة</th>
                     <th>الرتبة</th>
-                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
+                    <th>تاريخ تعبئة النمودج</th>
+                    <th>المسئول عن تعبئة النمودج</th>
+                    <th>آخر تعديل على النمودج</th>
+                @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
                         <th></th>
                     @endif
                 </tr>
@@ -35,6 +38,9 @@
                         <td><a href="{{route('identity.edit', $soldier)}}">{{$soldier->general_number ?? ''}}</a></td>
                         <td>{{$soldier->unit ?? ''}}</td>
                         <td>{{$soldier->rank->name ?? ''}}</td>
+                        <td>{{$soldier->created_at->format('Y/m/d') ?? ''}}</td>
+                        <td>{{$soldier->created_by ?? ''}}</td>
+                        <td>{{$soldier->last_update_by ?? ''}}</td>
                         @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
                             <td>
                                 <form action="{{route('identity.destroy',$soldier)}}" method="POST">

@@ -7,7 +7,7 @@
             </div>
 
 
-            <table class="table table-striped" id="formations">
+            <table class="table table-striped" id="formations" style="overflow-y:scroll;">
                 <thead>
                 <tr class="text-center">
                     <td>
