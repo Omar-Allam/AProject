@@ -122,6 +122,7 @@ class FormationController extends Controller
 
     function getSoldierInfo(Request $request)
     {
+        dump(SoldierIdentity::all());
         $soldier = SoldierIdentity::where('general_number', $request->get('general_number'))->first();
         if ($soldier) {
             /** @var SoldierIdentity $soldier */
