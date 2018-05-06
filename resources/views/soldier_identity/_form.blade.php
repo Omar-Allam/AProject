@@ -58,9 +58,6 @@
 <hr>
 @include('soldier_identity._partials.jobs')
 <hr>
-@include('soldier_identity._partials.vacations')
-
-<hr>
 
 <div class="row">
     <div class="form-group  col-md-12 {{$errors->has('exeption_promotions')? 'has-error' : ''}}">
@@ -95,6 +92,10 @@
         @endif
     </div>
 </div>
+
+@include('soldier_identity._partials.vacations')
+
+<hr>
 
 <h4>تقارير الكفاءة السنوية</h4>
 
