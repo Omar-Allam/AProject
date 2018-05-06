@@ -266,8 +266,8 @@ class SoldierIdentityController extends Controller
         $soldierIdentity->last_update_by = Auth::user()->name;
         $soldierIdentity->save();
 
+        $soldierIdentity->languages()->delete();
         if (count($request->languages)) {
-            $soldierIdentity->languages()->delete();
             foreach ($request->languages as $language) {
                 SoldierLanguages::create([
                     'form_id' => 0,
@@ -276,8 +276,8 @@ class SoldierIdentityController extends Controller
                 ]);
             }
         }
+        $soldierIdentity->relatives()->delete();
         if (count($request->relatives)) {
-            $soldierIdentity->relatives()->delete();
             foreach ($request->relatives as $relative) {
                 if ($relative['relative_date_of_birth']) {
                     $relative['relative_date_of_birth'] = Carbon::createFromFormat('Y-m-d', $relative['relative_date_of_birth'], 'Asia/Riyadh');
@@ -298,8 +298,8 @@ class SoldierIdentityController extends Controller
 
         }
 
+        $soldierIdentity->qualifications()->delete();
         if (count($request->qualifications)) {
-            $soldierIdentity->qualifications()->delete();
             foreach ($request->qualifications as $qualification) {
                 if ($qualification['soldier_graduation_date']) {
                     $qualification['soldier_graduation_date'] = Carbon::createFromFormat('Y-m-d', $qualification['soldier_graduation_date'], 'Asia/Riyadh');
@@ -317,8 +317,8 @@ class SoldierIdentityController extends Controller
             }
         }
 
+        $soldierIdentity->sons()->delete();
         if (count($request->sons)) {
-            $soldierIdentity->sons()->delete();
             foreach ($request->sons as $son) {
                 if ($son['soldier_son_date_of_birth']) {
                     $son['soldier_son_date_of_birth'] = Carbon::createFromFormat('Y-m-d', $son['soldier_son_date_of_birth'], 'Asia/Riyadh');
@@ -333,8 +333,8 @@ class SoldierIdentityController extends Controller
             }
         }
 
+        $soldierIdentity->courses()->delete();
         if (count($request->course)) {
-            $soldierIdentity->courses()->delete();
             foreach ($request->course as $course) {
                 if ($course['graduation_date']) {
                     $course['graduation_date'] = Carbon::createFromFormat('Y-m-d', $course['graduation_date'], 'Asia/Riyadh');
@@ -352,8 +352,8 @@ class SoldierIdentityController extends Controller
             }
         }
 
+        $soldierIdentity->jobs()->delete();
         if (count($request->jobs)) {
-            $soldierIdentity->jobs()->delete();
             foreach ($request->jobs as $job) {
                 if ($job['consider_from']) {
                     $job['consider_from'] = Carbon::createFromFormat('Y-m-d', $job['consider_from'], 'Asia/Riyadh');
@@ -369,8 +369,8 @@ class SoldierIdentityController extends Controller
             }
         }
 
+        $soldierIdentity->vacations()->delete();
         if (count($request->vacations)) {
-            $soldierIdentity->vacations()->delete();
             foreach ($request->vacations as $vacation) {
                 if ($vacation['vacation_end_date']) {
                     $vacation['vacation_end_date'] = Carbon::createFromFormat('Y-m-d', $vacation['vacation_end_date'], 'Asia/Riyadh');
