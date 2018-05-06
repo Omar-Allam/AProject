@@ -99,6 +99,17 @@ class FormationController extends Controller
                                     'is_a' => $lFormation['is_a'] ?? 0,
                                     'notes' => $lFormation['notes'],
                                 ]);
+                            }else{
+                                FormationSoldiers::create([
+                                    'formation_id' => $formation->id,
+                                    'soldier_id' => null,
+                                    'private_number' => $lFormation['private_number'],
+                                    'job_description' => $lFormation['job_description'],
+                                    'current_rate' => $lFormation['current_rate'],
+                                    'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
+                                    'is_a' => $lFormation['is_a'] ?? 0,
+                                    'notes' => $lFormation['notes'],
+                                ]);
                             }
                         }
 
