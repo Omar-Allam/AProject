@@ -78,7 +78,7 @@
                             {{Form::text('formation['.$key.'][rate]',$soldier->soldier->rank->name ?? '', ['class' => 'form-control rate','readonly'=>'readonly'])}}
                         </td>
                         <td>
-                            {{Form::text('formation['.$key.'][job_description]',$soldier->soldier->installed_job ?? '', ['class' => 'form-control','readonly'=>'readonly'])}}
+                            {{Form::text('formation['.$key.'][job_description]',$soldier->soldier->installed_job ?? '', ['class' => 'form-control job_description','readonly'=>'readonly'])}}
                         </td>
                         <td>
                             {{Form::text('formation['.$key.'][soldier_name]',$soldier->soldier->name ?? '', ['class' => 'form-control soldier_name','readonly'=>'readonly'])}}
@@ -334,6 +334,10 @@
                             $(this).parent().parent().children().find('.rate').val(res.rank)
                             $(this).parent().parent().children().find('.soldier_name').val(res.name)
                             $(this).parent().parent().children().find('.job_description').val(res.job_description)
+                        }else{
+                            $(this).parent().parent().children().find('.rate').val('')
+                            $(this).parent().parent().children().find('.soldier_name').val('')
+                            $(this).parent().parent().children().find('.job_description').val('')
                         }
                     });
                 }

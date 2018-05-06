@@ -123,7 +123,7 @@ class FormationController extends Controller
     function getSoldierInfo(Request $request)
     {
         $soldier = SoldierIdentity::where('general_number', $request->get('soldier-id'))->first();
-
+        dump($soldier,$request->all());
         if ($soldier) {
             /** @var SoldierIdentity $soldier */
             return $soldier->morphToJson();
