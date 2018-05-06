@@ -1,40 +1,39 @@
-<div id="row-formation" class="row-formation">
+<div id="row-formation" class="row-formation" >
     @if(isset($formation) && $formation->soldiers)
-        <div class="row">
+        <div class="row" >
             <div class="form-group">
                 <p><b>التشكيل</b></p>
                 <input type="text" class="form-control" name="formation_name" value="{{$formation->name}}" required>
             </div>
-
-
-            <table class="table table-striped" id="formations" style="overflow-y:scroll;">
+            <div  class="table-responsive">
+            <table class="table table-striped" id="formations" style="overflow-x: scroll; width:2000px;">
                 <thead>
                 <tr class="text-center">
-                    <td>
+                    <td class="col-md-1">
                         {{Form::label('name', 'العدد', ['class' => 'control-label'])}}
                     </td>
-                    <td>
+                    <td class="col-md-1">
                         {{Form::label('private_number', 'الرقم الخاص', ['class' => 'control-label'])}}
                     </td>
-                    <td>
+                    <td class="col-md-1">
                         {{Form::label('general_number', 'الرقم العام', ['class' => 'control-label'])}}
                     </td>
-                    <td>
+                    <td class="col-md-1">
                         {{Form::label('rate', 'الرتبة', ['class' => 'control-label'])}}
                     </td>
 
-                    <td>
+                    <td class="col-md-1">
                         {{Form::label('job_description', 'مسمى الوظيفة', ['class' => 'control-label'])}}
                     </td>
-                    <td>
+                    <td class="col-md-2">
                         {{Form::label('soldier_name', 'الاسم', ['class' => 'control-label'])}}
                     </td>
-                    <td>
+                    <td  class="col-md-1">
                         {{Form::label('current_rate', 'الرتبة الحالية', ['class' => 'control-label'])}}
                     </td>
 
 
-                    <td>
+                    <td class="col-md-1">
                         {{Form::label('is_participate', 'مشارك في عاصفة الحزم', ['class' => 'control-label'])}}
                     </td>
 
@@ -54,7 +53,11 @@
                         {{Form::label('is_a[]', 'مفرز', ['class' => 'control-label'])}}
                     </td>
 
-                    <td>
+                    <td class="col-md-2">
+                        {{Form::label('tranformation', 'التنقلات والتعيين وإنهاء الخدمات', ['class' => 'control-label'])}}
+                    </td>
+
+                    <td class="col-md-4">
                         {{Form::label('notes', 'ملاحظات', ['class' => 'control-label'])}}
                     </td>
 
@@ -104,13 +107,25 @@
                             {{Form::radio('formation['.$key.'][is_a]',4,$soldier->is_a == 4)}}
                         </td>
                         <td>
+                            <select class="form-control" name="formation[{{$key}}][soldier_status]">
+                                <option value="0" @if($soldier->soldier_status == 0) selected @endif >اختر الحالة</option>
+                                <option value="1" @if($soldier->soldier_status == 1) selected @endif >منقول على الوحدة</option>
+                                <option value="2" @if($soldier->soldier_status == 2) selected @endif >معين على الوحدة </option>
+                                <option value="3" @if($soldier->soldier_status == 3) selected @endif >منهاه خدمته</option>
+                                <option value="4" @if($soldier->soldier_status == 4) selected @endif >معاد</option>
+                                <option value="5" @if($soldier->soldier_status == 5) selected @endif >منقول خارج الوحدة</option>
+                                <option value="6" @if($soldier->soldier_status == 6) selected @endif >مفرز منتدب</option>
+                                <option value="7" @if($soldier->soldier_status == 7) selected @endif >الملحق ( مكتب ) </option>
+                            </select>
+                        </td>
+                        <td>
                             {{Form::text('formation['.$key.'][notes]',$soldier->notes, ['class' => 'form-control'])}}
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-
+            </div>
             @else
                 <div>
                     <p><b>التشكيل</b></p>
@@ -303,9 +318,21 @@
 <td>
 <input type="radio"  name="formation[` + count + `][is_a]" value="3">
 </td>
-
 <td>
 <input type="radio"  name="formation[` + count + `][is_a]" value="4">
+</td>
+
+<td>
+<select class="form-control" name="formation[` + count + `][soldier_status]">
+                                <option value="0">اختر الحالة</option>
+                                <option value="1">منقول على الوحدة</option>
+                                <option value="2">معين على الوحدة </option>
+                                <option value="3">منهاه خدمته</option>
+                                <option value="4">معاد</option>
+                                <option value="5">منقول خارج الوحدة</option>
+                                <option value="6">مفرز منتدب</option>
+                                <option value="7">الملحق ( مكتب ) </option>
+                            </select>
 </td>
                     <td>
                      <input type="text" name="formation[` + count + `][notes]"  class="form-control">

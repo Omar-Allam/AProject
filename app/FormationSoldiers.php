@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FormationSoldiers extends Model
 {
     protected $table = 'formation_soldiers';
-    protected $fillable = ['formation_id', 'soldier_id', 'job_description', 'current_rate', 'notes', 'private_number', 'is_participate', 'is_a'];
+    protected $fillable = ['formation_id', 'soldier_id', 'job_description', 'current_rate', 'notes', 'private_number', 'is_participate', 'is_a','soldier_status'];
 
     function soldier()
     {

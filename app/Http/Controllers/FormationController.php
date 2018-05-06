@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Formation;
 use App\FormationSoldiers;
 use App\SoldierIdentity;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,6 +66,9 @@ class FormationController extends Controller
 
             }
         }
+
+        alert()->success('التشكيل', 'تم الحفظ بنجاح');
+
         return redirect()->route('formation.index');
     }
 
@@ -78,59 +82,82 @@ class FormationController extends Controller
 
     function update(Formation $formation, Request $request)
     {
-        $formation->update(['name' => $request->formation_name]);
-        $formation->soldiers()->delete();
-        foreach ($request->formation as $key => $lFormation) {
-            if ($lFormation['private_number']) {
-                $soldier_exists = FormationSoldiers::where('private_number', $lFormation['private_number'])->first();
-                if (!$soldier_exists) {
-                    if ($lFormation['general_number']) {
-                        $soldier = SoldierIdentity::where('general_number', $lFormation['general_number'])->first();
-                        if($soldier){
-                            $soldier_found = FormationSoldiers::where('soldier_id', $soldier->id)->first();
-                            if (!$soldier_found) {
-                                FormationSoldiers::create([
-                                    'formation_id' => $formation->id,
-                                    'soldier_id' => $soldier->id ,
-                                    'private_number' => $lFormation['private_number'],
-                                    'job_description' => $lFormation['job_description'],
-                                    'current_rate' => $lFormation['current_rate'],
-                                    'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
-                                    'is_a' => $lFormation['is_a'] ?? 0,
-                                    'notes' => $lFormation['notes'],
-                                ]);
-                            }else{
-                                FormationSoldiers::create([
-                                    'formation_id' => $formation->id,
-                                    'soldier_id' => null,
-                                    'private_number' => $lFormation['private_number'],
-                                    'job_description' => $lFormation['job_description'],
-                                    'current_rate' => $lFormation['current_rate'],
-                                    'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
-                                    'is_a' => $lFormation['is_a'] ?? 0,
-                                    'notes' => $lFormation['notes'],
-                                ]);
+        $private_numbers = collect();
+        $private_numbers_prev = collect();
+        try {
+            $formation->update(['name' => $request->formation_name]);
+            $formation->soldiers()->delete();
+            foreach ($request->formation as $key => $lFormation) {
+                if ($lFormation['private_number']) {
+
+                    if($private_numbers->has($lFormation['private_number'])){
+                        $private_numbers_prev->put('private',$lFormation['private_number']);
+                    }
+
+                    $private_numbers->put($lFormation['private_number'],$lFormation['private_number']);
+                    $soldier_exists = FormationSoldiers::where('private_number', $lFormation['private_number'])->first();
+                    if (!$soldier_exists) {
+                        if ($lFormation['general_number']) {
+                            $soldier = SoldierIdentity::where('general_number', $lFormation['general_number'])->first();
+                            if ($soldier) {
+                                $soldier_found = FormationSoldiers::where('soldier_id', $soldier->id)->first();
+                                if (!$soldier_found) {
+                                    FormationSoldiers::create([
+                                        'formation_id' => $formation->id,
+                                        'soldier_id' => $soldier->id,
+                                        'private_number' => $lFormation['private_number'],
+                                        'job_description' => $lFormation['job_description'],
+                                        'current_rate' => $lFormation['current_rate'],
+                                        'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
+                                        'is_a' => $lFormation['is_a'] ?? 0,
+                                        'notes' => $lFormation['notes'],
+                                        'soldier_status' => $lFormation['soldier_status'] ?? 0
+
+                                    ]);
+                                } else {
+                                    FormationSoldiers::create([
+                                        'formation_id' => $formation->id,
+                                        'soldier_id' => null,
+                                        'private_number' => $lFormation['private_number'],
+                                        'job_description' => $lFormation['job_description'],
+                                        'current_rate' => $lFormation['current_rate'],
+                                        'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
+                                        'is_a' => $lFormation['is_a'] ?? 0,
+                                        'notes' => $lFormation['notes'],
+                                        'soldier_status' => $lFormation['soldier_status'] ?? 0
+                                    ]);
+                                }
                             }
+
+                        } else {
+                            FormationSoldiers::create([
+                                'formation_id' => $formation->id,
+                                'soldier_id' => null,
+                                'private_number' => $lFormation['private_number'],
+                                'job_description' => $lFormation['job_description'],
+                                'current_rate' => $lFormation['current_rate'],
+                                'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
+                                'is_a' => $lFormation['is_a'] ?? 0,
+                                'notes' => $lFormation['notes'],
+                                'soldier_status' => $lFormation['soldier_status'] ?? 0
+                            ]);
                         }
 
-                    } else {
-                        FormationSoldiers::create([
-                            'formation_id' => $formation->id,
-                            'soldier_id' => null,
-                            'private_number' => $lFormation['private_number'],
-                            'job_description' => $lFormation['job_description'],
-                            'current_rate' => $lFormation['current_rate'],
-                            'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
-                            'is_a' => $lFormation['is_a'] ?? 0,
-                            'notes' => $lFormation['notes'],
-                        ]);
                     }
 
                 }
+            }
+
+            if($private_numbers_prev->count()){
+                alert()->success('التشكيل', 'تم الحفظ بنجاح وتم حذف الأرقام المكررة');
+            }else{
+                alert()->success('التشكيل', 'تم الحفظ بنجاح');
 
             }
+        }catch (QueryException $e){
+            alert()->error('التشكيل', 'لم يتم الحفظ');
+            return redirect()->route('formation.index');
         }
-
         return redirect()->route('formation.index');
     }
 
