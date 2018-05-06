@@ -51,7 +51,7 @@
                         {{Form::text('relatives['.$key.'][relative_place_of_birth]',null, ['class' => 'form-control'])}}
                     </td>
                     <td>
-                        <input type="text" name="relatives[{{$key}}][relative_date_of_birth]"  class="form-control datetimepicker2" id='datetimepicker2'  value="{{$relative['relative_date_of_birth']}}" required/>
+                        <input type="text" name="relatives[{{$key}}][relative_date_of_birth]"  class="form-control datetimepicker2" id='datetimepicker2'  value="{{$relative['relative_date_of_birth']}}"/>
                     </td>
                     </tr>
                 @endforeach
@@ -113,7 +113,7 @@
             console.log('sfsdf')
             $('table#relatives-table tbody:last-child').append(`<tr>
                     <td>
-                     <input type="text" name="relatives[` + rela_count + `][relative_name]" class="form-control" required>
+                     <input type="text" name="relatives[` + rela_count + `][relative_name]" class="form-control">
                 </td>
                 <td>
                  <select name="relatives[` + rela_count + `][relative_type]" class="form-control">
@@ -124,19 +124,19 @@
                 </td>
 
                 <td>
-                <input type="text" name="relatives[` + rela_count + `][original_nationality]" class="form-control" required>
+                <input type="text" name="relatives[` + rela_count + `][original_nationality]" class="form-control">
                 </td>
                 <td>
-                <input type="text" name="relatives[` + rela_count + `][current_nationality]" class="form-control" required>
+                <input type="text" name="relatives[` + rela_count + `][current_nationality]" class="form-control">
                 </td>
                 <td>
-                <input type="text" name="relatives[` + rela_count + `][relative_place_of_origin]" class="form-control" required>
+                <input type="text" name="relatives[` + rela_count + `][relative_place_of_origin]" class="form-control">
                 </td>
                 <td>
-                <input type="text" name="relatives[` + rela_count + `][relative_place_of_birth]" class="form-control" required>
+                <input type="text" name="relatives[` + rela_count + `][relative_place_of_birth]" class="form-control">
                 </td>
                 <td>
-                    <input type="text" name="relatives[` + rela_count + `][relative_date_of_birth]" class="form-control" id="relative_date`+id+`" required>
+                    <input type="text" name="relatives[` + rela_count + `][relative_date_of_birth]" class="form-control" id="relative_date`+id+`">
                 </td>
                 </tr>`);
 
