@@ -95,7 +95,7 @@ class FormationController extends Controller
                                 'job_description' => $lFormation['job_description'],
                                 'current_rate' => $lFormation['current_rate'],
                                 'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
-                                'is_a' => $lFormation['is_a'],
+                                'is_a' => $lFormation['is_a'] ?? 0,
                                 'notes' => $lFormation['notes'],
                             ]);
                         }
@@ -107,7 +107,7 @@ class FormationController extends Controller
                             'job_description' => $lFormation['job_description'],
                             'current_rate' => $lFormation['current_rate'],
                             'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
-                            'is_a' => $lFormation['is_a'] ,
+                            'is_a' => $lFormation['is_a'] ?? 0,
                             'notes' => $lFormation['notes'],
                         ]);
                     }
