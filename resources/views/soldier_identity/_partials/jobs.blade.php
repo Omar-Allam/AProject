@@ -34,7 +34,7 @@
                     {{Form::text('jobs['.$key.'][soldier_job_unit]',$job->soldier_job_unit ?? '', ['class' => 'form-control'])}}
                 </td>
                 <td>
-                    <input type="text" name="jobs[{{$key}}][consider_from]"  class="form-control datetimepicker2" id="" value="{{$job->consider_from ?? ''}}" required>
+                    <input type="text" name="jobs[{{$key}}][consider_from]"  class="form-control datetimepicker2" id="" value="{{$job->consider_from ?? ''}}" >
 
                 </td>
             </tr>
@@ -93,13 +93,13 @@
             <tr>
             <td><p>` + ((jobs_counter)) + `</p></td>
             <td>
-             <input type="text" name="jobs[` + jobs_count + `][job_name]"  class="form-control" required>
+             <input type="text" name="jobs[` + jobs_count + `][job_name]"  class="form-control" >
             </td>
             <td>
-                <input type="text" name="jobs[` + jobs_count + `][soldier_job_unit]"  class="form-control" required>
+                <input type="text" name="jobs[` + jobs_count + `][soldier_job_unit]"  class="form-control" >
             </td>
             <td>
-              <input type="text" name="jobs[` + jobs_count + `][consider_from]"  class="form-control" id="soldier_jobs`+id+`" required>
+              <input type="text" name="jobs[` + jobs_count + `][consider_from]"  class="form-control" id="soldier_jobs`+id+`" >
             </td>
             </tr>
             `)

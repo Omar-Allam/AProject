@@ -40,7 +40,7 @@
                     {{Form::text('course['.$key.'][course_place]',$course->course_place ?? '', ['class' => 'form-control'])}}
                 </td>
                 <td>
-                    <input type="text" name="course[{{$key}}][graduation_date]"  class="form-control datetimepicker2" id="datetimepicker2" value="{{$course->graduation_date ?? ''}}" required>
+                    <input type="text" name="course[{{$key}}][graduation_date]"  class="form-control datetimepicker2" id="datetimepicker2" value="{{$course->graduation_date ?? ''}}" >
 
                 </td>
                 <td>
@@ -113,19 +113,19 @@
                    <p>` + (course_counter) + `</p>
                 </td>
                 <td>
-                 <input type="text" name="course[` + course_count + `][course_name]"  class="form-control" required>
+                 <input type="text" name="course[` + course_count + `][course_name]"  class="form-control" >
                 </td>
                 <td>
-                <input type="text" name="course[` + course_count + `][course_time_frame]"  class="form-control" required>
+                <input type="text" name="course[` + course_count + `][course_time_frame]"  class="form-control" >
                 </td>
                 <td>
-                 <input type="text" name="course[` + course_count + `][course_place]"  class="form-control" required>
+                 <input type="text" name="course[` + course_count + `][course_place]"  class="form-control" >
                 </td>
                 <td>
-                 <input type="text" name="course[` + course_count + `][graduation_date]"  class="form-control" id="course`+id+`" required>
+                 <input type="text" name="course[` + course_count + `][graduation_date]"  class="form-control" id="course`+id+`" >
                 </td>
                 <td>
-                <input type="text" name="course[` + course_count + `][course_grade]"  class="form-control"  required>
+                <input type="text" name="course[` + course_count + `][course_grade]"  class="form-control"  >
                 </td>
             </tr>`)
             course_count++
