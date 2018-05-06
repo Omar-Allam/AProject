@@ -2,7 +2,7 @@
     {{csrf_field()}}
     <div class="form-group col-md-2 {{$errors->has('first_name')? 'has-error' : ''}}">
         {{Form::label('first_name', ' الاسم الأول', ['class' => 'control-label'])}}
-        {{Form::text('first_name', old('first_name') ?? null, ['class' => 'form-control','required'=>'required'])}}
+        {{Form::text('first_name', old('first_name'), ['class' => 'form-control','required'=>'required'])}}
         @if ($errors->has('first_name'))
             <div class="error-message">{{$errors->first('first_name')}}</div>
         @endif
