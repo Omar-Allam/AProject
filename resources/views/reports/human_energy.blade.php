@@ -13,12 +13,12 @@
     <section class="col-sm-12">
         <table class="table table-hover table-striped">
             <thead class="bg-primary">
-            <tr >
-                <th>الفعلي ( ظباط )</th>
-                <th>شاغر ( ظباط )</th>
-                <th>مجمد ( ظباط )</th>
-                <th>مكتسب ( ظباط )</th>
-                <th>مفرز ( ظباط )</th>
+            <tr>
+                <th>الفعلي ( ضباط )</th>
+                <th>شاغر ( ضباط )</th>
+                <th>مجمد ( ضباط )</th>
+                <th>مكتسب ( ضباط )</th>
+                <th>مفرز ( ضباط )</th>
             </tr>
 
             </thead>
