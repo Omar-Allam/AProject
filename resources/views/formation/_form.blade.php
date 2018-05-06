@@ -328,7 +328,8 @@
                 if (general_number.length > 0) {
                     $.ajax({
                         type: "GET",
-                        url: '/get-soldier-info?soldierid='+general_number,
+                        data:{general_number},
+                        url: '/get-soldier-info',
 
                     }).done((res) => {
                         if (res !== 0) {
