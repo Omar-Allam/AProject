@@ -99,7 +99,8 @@ class SoldierIdentityController extends Controller
             'mobile_phone' => $request->mobile_phone,
             'medical_status' => $request->medical_status,
             'created_by' => Auth::user()->name,
-            'last_update_by' => Auth::user()->name
+            'last_update_by' => Auth::user()->name,
+            'nofoos_save' => $request->medical_status
         ]);
 
         if (count($request->relatives)) {

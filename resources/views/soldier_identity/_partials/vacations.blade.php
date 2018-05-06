@@ -1,7 +1,7 @@
 @if(isset($soldier) && $soldier->vacations)
     <br>
     <p><b>الإجازات التي حصل عليها وأماكن قضائها</b></p>
-    <table class="table table-striped" id="vactions-table">
+    <table class="table table-striped" id="vacations-table">
         <thead>
         <tr class="text-center">
             <td>
@@ -57,7 +57,7 @@
     </div>
 @else
     <p><b>الإجازات التي حصل عليها وأماكن قضائها</b></p>
-    <table class="table table-striped" id="vactions-table">
+    <table class="table table-striped" id="vacations-table">
         <thead>
         <tr class="text-center">
             <td>
@@ -98,15 +98,19 @@
 
 @section('scripts')
     <script>
-        let vaca_counter = $('#vactions-table > tbody:last > tr').length
-        let vaca_count = 0
-        if(vaca_counter > 0){
-            vaca_count = vaca_counter-1
-        }
+         @if(isset($soldier) && $soldier->vacations)
+        var vaca_counter =
+                {{$soldier->vacations->count() ?? 0}}
+        var vaca_count =
+                {{$soldier->vacations->count() ?? 0}}
+                @else
+        var vaca_counter = 0
+        var vaca_count = 0
+                @endif
 
         $('button#vacations').click(function () {
             vaca_counter++
-            $('table#vactions-table tr:last').after(`
+            $('table#vacations-table tbody:last-child').append(`
 <tr>
 <td>
                 <p>` + (vaca_counter) + `</p>
@@ -138,8 +142,9 @@
         });
 
         $('button#remove-vacations').click(function () {
-            if ($("table#vactions-table tbody tr").length != 0) {
-                $('table#vactions-table tr:last').remove()
+
+            if ($("table#vacations-table tbody tr").length != 0) {
+                $('table#vacations-table tbody tr:last').remove()
                 vaca_counter--;
                 vaca_count--;
             }

@@ -84,8 +84,16 @@
 
 @section('scripts')
     <script>
-        var jobs_counter = $('#courses-table > tbody:last > tr').length
-        var jobs_count = 0
+        @if(isset($soldier) && $soldier->jobs)
+        var jobs_counter =
+                {{$soldier->jobs->count() ?? 0}}
+        var jobs_count =
+                {{$soldier->jobs->count() ?? 0}}
+                @else
+        var course_counter = 0
+        var course_count = 0
+                @endif
+
         var id = 1
         $('button#jobs').click(function () {
             jobs_counter++
@@ -103,6 +111,7 @@
             </td>
             </tr>
             `)
+            jobs_count++
 
             $('#soldier_jobs'+id).calendarsPicker({
                 calendar: $.calendars.instance('islamic'),
@@ -111,8 +120,6 @@
             });
             id++
 
-
-            jobs_count++
 
         });
 

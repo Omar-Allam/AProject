@@ -44,7 +44,13 @@
 
                 </td>
                 <td>
-                    {{Form::text('course['.$key.'][course_grade]',$course->course_grade ?? '', ['class' => 'form-control'])}}
+                    <select class="form-control" name="course[{{$key}}][course_grade]">
+                        <option value="0" @if($course->course_grade == 0) selected @endif >اختر التقدير</option>
+                        <option value="1" @if($course->course_grade == 1) selected @endif >ممتاز</option>
+                        <option value="2" @if($course->course_grade == 2) selected @endif >جيد جدا</option>
+                        <option value="3" @if($course->course_grade == 3) selected @endif >جيد</option>
+                        <option value="4" @if($course->course_grade == 4) selected @endif >ضعيف</option>
+                    </select>
                 </td>
             </tr>
         @endforeach
@@ -102,8 +108,16 @@
 
 @section('scripts')
     <script>
-        var course_counter = $('#courses-table > tbody:last > tr').length
+        @if(isset($soldier) && $soldier->courses)
+        var course_counter =
+                {{$soldier->courses->count() ?? 0}}
+        var course_count =
+                {{$soldier->courses->count() ?? 0}}
+        @else
+        var course_counter = 0
         var course_count = 0
+        @endif
+
         var id = 1;
         $('button#courses').click(function () {
             course_counter++
@@ -125,10 +139,18 @@
                  <input type="text" name="course[` + course_count + `][graduation_date]"  class="form-control" id="course`+id+`" >
                 </td>
                 <td>
-                <input type="text" name="course[` + course_count + `][course_grade]"  class="form-control"  >
+                  <select class="form-control" name="course[` + course_count + `][course_grade]">
+                        <option value="0"  >اختر التقدير</option>
+                        <option value="1" >ممتاز</option>
+                        <option value="2"  >جيد جدا</option>
+                        <option value="3" >جيد</option>
+                        <option value="4" >ضعيف</option>
+                    </select>
                 </td>
             </tr>`)
+
             course_count++
+
             $('#course'+id).calendarsPicker({
                 calendar: $.calendars.instance('islamic'),
                 monthsToShow: [1,1],

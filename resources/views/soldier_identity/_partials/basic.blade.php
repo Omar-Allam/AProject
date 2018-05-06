@@ -122,7 +122,7 @@
 
     <div class="form-group  col-md-2 {{$errors->has('decision_side')? 'has-error' : ''}}">
         {{Form::label('decision_side', 'جهته', ['class' => 'control-label'])}}
-        {{Form::text('decision_side',null, ['class' => 'form-control'])}}
+        {{Form::select('decision_side',\App\Specialization::all()->pluck('name')->prepend('اختار الجهة'),null, ['class' => 'form-control'])}}
         @if ($errors->has('decision_side'))
             <div class="error-message">{{$errors->first('decision_side')}}</div>
         @endif
@@ -182,6 +182,14 @@
         {{Form::text('worked_job',null, ['class' => 'form-control'])}}
         @if ($errors->has('worked_job'))
             <div class="error-message">{{$errors->first('worked_job')}}</div>
+        @endif
+    </div>
+
+    <div class="form-group  col-md-4 {{$errors->has('nofoos_save')? 'has-error' : ''}}">
+        {{Form::label('nofoos_save', 'حفيظة النفوس', ['class' => 'control-label'])}}
+        {{Form::text('nofoos_save',null, ['class' => 'form-control'])}}
+        @if ($errors->has('nofoos_save'))
+            <div class="error-message">{{$errors->first('nofoos_save')}}</div>
         @endif
     </div>
 
