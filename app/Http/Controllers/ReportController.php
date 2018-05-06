@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
     function hazmParticipation(){
-        $soldiers = FormationSoldiers::where('is_participate',1)->paginate(15);
+        $soldiers = FormationSoldiers::whereNotNull('soldier_id')->where('is_participate',1)->paginate(15);
         return view('reports.hazm_storm_participation',compact('soldiers'));
     }
 
