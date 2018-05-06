@@ -27,15 +27,7 @@
                         <td class="col-md-9">
                             <a href="{{route('formation.show',$formation)}}">{{$formation->name}}</a>
                         </td>
-                        @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(9))
-                        <td>
-                            <form action="{{route('formation.destroy',$formation)}}" method="POST">
-                                {{csrf_field()}} {{method_field('DELETE')}}
-                                <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
-                                </button>
-                            </form>
-                        </td>
-                        @endif
+
                     </tr>
                 @endforeach
                 </tbody>
