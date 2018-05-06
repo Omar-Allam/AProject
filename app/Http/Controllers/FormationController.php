@@ -12,7 +12,7 @@ class FormationController extends Controller
 {
     function index()
     {
-        if(Auth::user()->hasRole(1) || Auth::user()->hasRole(6)){
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(6)) {
             $formations = Formation::all();
             return view('formation.index', compact('formations'));
         }
@@ -39,7 +39,7 @@ class FormationController extends Controller
                         if ($soldier && !$soldier_found) {
                             FormationSoldiers::create([
                                 'formation_id' => $new_formation->id,
-                                'soldier_id' => $soldier->id ,
+                                'soldier_id' => $soldier->id,
                                 'private_number' => $formation['private_number'],
                                 'job_description' => $formation['job_description'],
                                 'current_rate' => $formation['current_rate'],
@@ -70,7 +70,7 @@ class FormationController extends Controller
 
     function show(Formation $formation)
     {
-        if(Auth::user()->hasRole(1) || Auth::user()->hasRole(8)){
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(8)) {
             return view('formation.show', compact('formation'));
         }
         return view('not-authorize');
@@ -86,19 +86,18 @@ class FormationController extends Controller
                 if (!$soldier_exists) {
                     if ($lFormation['general_number']) {
                         $soldier = SoldierIdentity::where('general_number', $lFormation['general_number'])->first();
-                        $soldier_found = FormationSoldiers::where('soldier_id', $soldier->id)->first();
-                        if ($soldier && !$soldier_found) {
-                            FormationSoldiers::create([
-                                'formation_id' => $formation->id,
-                                'soldier_id' => $soldier->id ,
-                                'private_number' => $lFormation['private_number'],
-                                'job_description' => $lFormation['job_description'],
-                                'current_rate' => $lFormation['current_rate'],
-                                'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
-                                'is_a' => $lFormation['is_a'] ?? 0,
-                                'notes' => $lFormation['notes'],
-                            ]);
-                        }
+                        FormationSoldiers::create([
+                            'formation_id' => $formation->id,
+                            'soldier_id' => $soldier->id ?? null,
+                            'private_number' => $lFormation['private_number'],
+                            'job_description' => $lFormation['job_description'],
+                            'current_rate' => $lFormation['current_rate'],
+                            'is_participate' => isset($lFormation['is_participate']) ? 1 : 0,
+                            'is_a' => $lFormation['is_a'] ?? 0,
+                            'notes' => $lFormation['notes'],
+                        ]);
+
+
                     } else {
                         FormationSoldiers::create([
                             'formation_id' => $formation->id,
@@ -131,7 +130,8 @@ class FormationController extends Controller
     }
 
 
-    function destroy(Formation $formation){
+    function destroy(Formation $formation)
+    {
         $formation->soldiers()->delete();
         $formation->delete();
 
