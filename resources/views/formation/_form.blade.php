@@ -65,7 +65,7 @@
                 @foreach($formation->soldiers as $key=>$soldier)
                     <tr class="text-center">
                         <td>
-                            {{++$key}}
+                            {{$key+1}}
                         </td>
                         <td>
                             {{Form::text('formation['.$key.'][private_number]',$soldier->private_number, ['class' => 'form-control'])}}
@@ -244,9 +244,9 @@
 
     @section('scripts')
         <script>
-                    @if(isset($formation))
+            @if(isset($formation))
             var counter =
-                    {{$formation->soldiers->count() ?? 1}}
+                    {{$formation->soldiers->count() ?? 0}}
             var count =
                     {{$formation->soldiers->count() ?? 0}}
             var soldier_count = $("table#formations-table tbody tr").length
@@ -314,7 +314,8 @@
             });
 
             $('button#formations-remove').click(function () {
-                if ($("#formations tr:last").index() > 1) {
+                if ($("table#formations tbody tr").length !== 0) {
+                    console.log($("table#formations tbody tr").length)
                     $('table#formations tr:last').remove()
                     counter--;
                     count--;
@@ -329,7 +330,7 @@
                         url: '/get-soldier-info?soldier-id=' + general_number,
 
                     }).done((res) => {
-                        if (res != 0) {
+                        if (res !== 0) {
                             $(this).parent().parent().children().find('.rate').val(res.rank)
                             $(this).parent().parent().children().find('.soldier_name').val(res.name)
                             $(this).parent().parent().children().find('.job_description').val(res.job_description)
