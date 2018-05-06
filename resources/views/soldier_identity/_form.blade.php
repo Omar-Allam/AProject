@@ -84,13 +84,7 @@
         @endif
     </div>
 
-    <div class="form-group  col-md-12 {{$errors->has('vacations_and_places')? 'has-error' : ''}}">
-    {{Form::label('vacations_and_places', 'الإجازات التي حصل عليها وأماكن قضائها', ['class' => 'control-label'])}}
-        {{Form::text('vacations_and_places',null, ['class' => 'form-control'])}}
-        @if ($errors->has('vacations_and_places'))
-            <div class="error-message">{{$errors->first('vacations_and_places')}}</div>
-        @endif
-    </div>
+
 </div>
 
 @include('soldier_identity._partials.vacations')
