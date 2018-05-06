@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('identity', 'SoldierIdentityController');
     Route::resource('formation', 'FormationController');
     Route::resource('sick-leave', 'SoldierSickLeaveController');
-    Route::get('get-soldier-info', 'FormationController@getSoldierInfo');
+    Route::get('/get-soldier-info', 'FormationController@getSoldierInfo');
     Route::resource('exemption', 'SoldierExemptionController');
     Route::resource('user', 'UserController');
 
