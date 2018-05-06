@@ -138,7 +138,7 @@
         });
 
         $('button#remove-vacations').click(function () {
-            if ($("table#vactions-table tbody tr").length !== 1) {
+            if ($("table#vactions-table tbody tr").length != 0) {
                 $('table#vactions-table tr:last').remove()
                 vaca_counter--;
                 vaca_count--;
