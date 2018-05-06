@@ -52,7 +52,7 @@
                         <td>
                             <input type="text" name="qualifications[{{$key}}][soldier_graduation_date]"
                                    class="form-control datetimepicker2" id=""
-                                   value="{{$qualification->soldier_graduation_date ?? ''}}" />
+                                   value="{{$qualification->soldier_graduation_date ?? ''}}" readonly />
 
                         </td>
                     </tr>
@@ -141,7 +141,7 @@
 
                 </td>
                 <td>
-                <input type="text" name="qualifications[` + qua_count + `][soldier_graduation_date]"  class="form-control datetimepicker2"  id="soldier_qualification` + id + `" />
+                <input type="text" name="qualifications[` + qua_count + `][soldier_graduation_date]" readonly  class="form-control datetimepicker2"  id="soldier_qualification` + id + `" />
 
                 </td>
             </tr>`)

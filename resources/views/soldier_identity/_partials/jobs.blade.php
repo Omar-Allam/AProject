@@ -34,7 +34,7 @@
                     {{Form::text('jobs['.$key.'][soldier_job_unit]',$job->soldier_job_unit ?? '', ['class' => 'form-control'])}}
                 </td>
                 <td>
-                    <input type="text" name="jobs[{{$key}}][consider_from]"  class="form-control datetimepicker2" id="" value="{{$job->consider_from ?? ''}}" >
+                    <input type="text" name="jobs[{{$key}}][consider_from]"  class="form-control datetimepicker2" readonly value="{{$job->consider_from ?? ''}}" >
 
                 </td>
             </tr>
@@ -49,6 +49,10 @@
         <button id="remove-job" type="button" class="btn btn-sm btn-danger"><i class="fa fa-remove"></i></button>
     </div>
 @else
+    <br>
+
+    <p><b>الوظائف والأماكن التي عمل بها</b></p>
+
     <table class="table table-striped" id="jobs-table">
         <thead>
         <tr class="text-center">
@@ -90,8 +94,8 @@
         var jobs_count =
                 {{$soldier->jobs->count() ?? 0}}
                 @else
-        var course_counter = 0
-        var course_count = 0
+        var jobs_counter = 0
+        var jobs_count = 0
                 @endif
 
         var id = 1
@@ -107,7 +111,7 @@
                 <input type="text" name="jobs[` + jobs_count + `][soldier_job_unit]"  class="form-control" >
             </td>
             <td>
-              <input type="text" name="jobs[` + jobs_count + `][consider_from]"  class="form-control" id="soldier_jobs`+id+`" >
+              <input type="text" name="jobs[` + jobs_count + `][consider_from]"  class="form-control" readonly id="soldier_jobs`+id+`" >
             </td>
             </tr>
             `)

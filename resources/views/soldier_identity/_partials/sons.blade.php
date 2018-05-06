@@ -18,7 +18,7 @@
                     {{Form::text('sons['.$key.'][soldier_son_name]',null, ['class' => 'form-control'])}}
                 </td>
                 <td>
-                    <input type="text" name="sons[{{$key}}][soldier_son_date_of_birth]"  class="form-control datetimepicker2" value="{{$son['soldier_son_date_of_birth'] ?? ''}}"  >
+                    <input type="text" name="sons[{{$key}}][soldier_son_date_of_birth]" readonly  class="form-control datetimepicker2" value="{{$son['soldier_son_date_of_birth'] ?? ''}}"  >
 
                 </td>
             </tr>
@@ -65,7 +65,7 @@
 
 </td>
 <td>
-                <input type="text" name="sons[` + son_count + `][soldier_son_date_of_birth]"  class="form-control datetimepicker2" id="soldier_sons`+id+`">
+                <input type="text" name="sons[` + son_count + `][soldier_son_date_of_birth]"  class="form-control datetimepicker2" readonly id="soldier_sons`+id+`">
 
 </td>
 </tr>

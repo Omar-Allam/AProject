@@ -51,7 +51,7 @@
                         {{Form::text('relatives['.$key.'][relative_place_of_birth]',null, ['class' => 'form-control'])}}
                     </td>
                     <td>
-                        <input type="text" name="relatives[{{$key}}][relative_date_of_birth]"  class="form-control datetimepicker2" id='datetimepicker2'  value="{{$relative['relative_date_of_birth']}}"/>
+                        <input type="text" name="relatives[{{$key}}][relative_date_of_birth]"  class="form-control datetimepicker2" id='datetimepicker2' readonly value="{{$relative['relative_date_of_birth']}}"/>
                     </td>
                     </tr>
                 @endforeach
@@ -136,7 +136,7 @@
                 <input type="text" name="relatives[` + rela_count + `][relative_place_of_birth]" class="form-control">
                 </td>
                 <td>
-                    <input type="text" name="relatives[` + rela_count + `][relative_date_of_birth]" class="form-control" id="relative_date`+id+`">
+                    <input type="text" name="relatives[` + rela_count + `][relative_date_of_birth]" class="form-control" readonly id="relative_date`+id+`">
                 </td>
                 </tr>`);
 

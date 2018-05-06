@@ -42,7 +42,7 @@
                     {{Form::text('vacations['.$key.'][vacation_place]',$vacation->vacation_place ?? '', ['class' => 'form-control'])}}
                 </td>
                 <td>
-                    <input type="text" name="vacations[{{$key}}][vacation_end_date]"  class="form-control datetimepicker2" value="{{$vacation->vacation_end_date ?? ''}}" >
+                    <input type="text" name="vacations[{{$key}}][vacation_end_date]"  class="form-control datetimepicker2" readonly value="{{$vacation->vacation_end_date ?? ''}}" >
                 </td>
             </tr>
         @endforeach
@@ -127,7 +127,7 @@
                 <input type="text" name="vacations[` + vaca_count + `][vacation_place]"  class="form-control" >
 </td>
 <td>
-                <input type="text" name="vacations[` + vaca_count + `][vacation_end_date]"  class="form-control" id="soldier_vacations`+id+`" >
+                <input type="text" name="vacations[` + vaca_count + `][vacation_end_date]"  class="form-control" readonly id="soldier_vacations`+id+`" >
                 </td>
    </tr>  `)
 
