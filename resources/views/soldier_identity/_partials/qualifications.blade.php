@@ -32,11 +32,11 @@
                         <td>
                             <select class="form-control" name="qualifications[{{$key}}][soldier_level]">
                                 <option value="1" @if($qualification->soldier_level == 1) selected @endif >اختر المرحلة</option>
-                                <option value="2" @if($qualification->soldier_level == 2) selected @endif >إبتدائية</option>
+                                <option value="2" @if($qualification->soldier_level == 2) selected @endif >الإبتدائية</option>
                                 <option value="3" @if($qualification->soldier_level == 3) selected @endif >المتوسطة</option>
-                                <option value="4" @if($qualification->soldier_level == 4) selected @endif >الثانوي</option>
+                                <option value="4" @if($qualification->soldier_level == 4) selected @endif >الثانوية</option>
                                 <option value="5" @if($qualification->soldier_level == 5) selected @endif >كلية</option>
-                                <option value="6" @if($qualification->soldier_level == 6) selected @endif >جامعة</option>
+                                <option value="6" @if($qualification->soldier_level == 6) selected @endif >الجامعية</option>
                                 <option value="7" @if($qualification->soldier_level == 7) selected @endif >أخرى</option>
                             </select>
                         </td>
@@ -121,11 +121,11 @@
                 <td>
                     <select class="form-control" name="qualifications[` + qua_count + `][soldier_level]">
                     <option value="1">اختر المرحلة</option>
-                    <option value="2">إبتدائية</option>
+                    <option value="2">الإبتدائية</option>
                     <option value="3">المتوسطة</option>
-                    <option value="4">الثانوي</option>
+                    <option value="4">الثانوية</option>
                     <option value="5">كلية</option>
-                    <option value="6">جامعة</option>
+                    <option value="6">الجامعية</option>
                     <option value="7">أخرى</option>
                     </select>
 
