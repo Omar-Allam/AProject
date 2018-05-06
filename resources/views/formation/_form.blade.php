@@ -324,10 +324,11 @@
 
             $(document).on('blur', '.formation-gn', function () {
                 let general_number = $(this).val()
+                console.log(general_number)
                 if (general_number.length > 0) {
                     $.ajax({
                         type: "GET",
-                        url: '/get-soldier-info?soldier-id=' + general_number,
+                        url: '/get-soldier-info?soldierid='+general_number,
 
                     }).done((res) => {
                         if (res !== 0) {
