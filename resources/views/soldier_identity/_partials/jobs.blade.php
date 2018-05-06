@@ -117,7 +117,7 @@
         });
 
         $('button#remove-job').click(function () {
-            if ($("table#jobs-table tbody tr").length !== 1) {
+            if ($("table#jobs-table tbody tr").length != 0) {
                 $('table#jobs-table tr:last').remove()
                 jobs_counter--
                 jobs_count--
