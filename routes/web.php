@@ -32,4 +32,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/identity-print/{identity}', 'SoldierIdentityController@print')->name('identity.print');
     Route::get('/formation-print/{formation}', 'FormationController@print')->name('formation.print');
     Route::get('/sick-leave-print', 'SoldierSickLeaveController@print')->name('sickleave.print');
+    Route::get('/medical-exemption', 'SoldierExemptionController@print')->name('exemption.print');
 });

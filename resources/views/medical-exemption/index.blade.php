@@ -43,15 +43,18 @@
                         <td>{{$exemption->tasks ?? ''}}</td>
                         <td>{{$exemption->prev_balance ?? ''}}</td>
 
-                        @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(17))
                             <td>
                                 <form action="{{route('exemption.destroy',$exemption)}}" method="POST">
                                     {{csrf_field()}} {{method_field('DELETE')}}
+                                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(17))
+
                                     <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
                                     </button>
+                                    @endif
+                                    <a type="button" href="{{route('exemption.print',$exemption)}}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
+                                    </a>
                                 </form>
                             </td>
-                        @endif
                     </tr>
                 @endforeach
                 </tbody>

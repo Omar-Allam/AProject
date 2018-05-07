@@ -81,4 +81,8 @@ class SoldierExemptionController extends Controller
 
         return redirect()->route('exemption.index');
     }
+    function print(){
+        $exemptions = SoldierExemption::all();
+        return view('print.exemption',compact('exemptions'));
+    }
 }
