@@ -39,7 +39,7 @@
                         <td>{{$exemption->soldier->name ?? ''}}</td>
                         <td>{{$exemption->soldier->rank->name ?? ''}}</td>
                         <td>{{$exemption->reason ?? ''}}</td>
-                        <td>{{$exemption->end_at->diffInDays($exemption->start_from) ?? ''}}</td>
+                        <td>{{$exemption->end_at ? $exemption->end_at->diffInDays($exemption->start_from) : ''}}</td>
                         <td>{{$exemption->tasks ?? ''}}</td>
                         <td>{{$exemption->prev_balance ?? ''}}</td>
 
