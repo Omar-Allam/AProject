@@ -25,7 +25,7 @@
                     <td style="width:80px">
                         {{Form::label('job_description', 'مسمى الوظيفة', ['class' => 'control-label'])}}
                     </td>
-                    <td style="width:180px">
+                    <td style="width:230px">
                         {{Form::label('soldier_name', 'الاسم', ['class' => 'control-label'])}}
                     </td>
                     <td style="width:100px" >
@@ -53,11 +53,11 @@
                         {{Form::label('is_a[]', 'مفرز', ['class' => 'control-label'])}}
                     </td>
 
-                    <td style="width:120px">
+                    <td style="width:130px">
                         {{Form::label('tranformation', 'التنقلات والتعيين وإنهاء الخدمات', ['class' => 'control-label'])}}
                     </td>
 
-                    <td >
+                    <td style="width:80px">
                         {{Form::label('notes', 'ملاحظات', ['class' => 'control-label'])}}
                     </td>
 
