@@ -51,20 +51,22 @@ class SoldierSickLeaveController extends Controller
 
     function store(Request $request)
     {
-        foreach ($request->sickLeave as $sick_leave) {
-            $soldier = SoldierIdentity::where('general_number', $sick_leave)->first();
-            if ($soldier) {
-                SoldierSickLeave::create([
-                    'soldier_id' => $soldier->id,
-                    'leave_from' => $sick_leave['leave_from'],
-                    'leave_to' => $sick_leave['leave_to'],
-                    'direct_date' => $sick_leave['direct_date'],
-                    'reason' => $sick_leave['reason'],
-                    'prev_balance' => $sick_leave['prev_balance'],
-                    'period_of_vacation' => $sick_leave['period_of_vacation'],
-                    'side_of_acceptance' => $sick_leave['side_of_acceptance'],
-                    'notes' => $sick_leave['notes']
-                ]);
+        if(count($request->sickLeave)){
+            foreach ($request->sickLeave as $sick_leave) {
+                $soldier = SoldierIdentity::where('general_number', $sick_leave)->first();
+                if ($soldier) {
+                    SoldierSickLeave::create([
+                        'soldier_id' => $soldier->id,
+                        'leave_from' => $sick_leave['leave_from'],
+                        'leave_to' => $sick_leave['leave_to'],
+                        'direct_date' => $sick_leave['direct_date'],
+                        'reason' => $sick_leave['reason'],
+                        'prev_balance' => $sick_leave['prev_balance'],
+                        'period_of_vacation' => $sick_leave['period_of_vacation'],
+                        'side_of_acceptance' => $sick_leave['side_of_acceptance'],
+                        'notes' => $sick_leave['notes']
+                    ]);
+                }
             }
         }
         return redirect()->route('sick-leave.index');

@@ -55,21 +55,23 @@ class SoldierExemptionController extends Controller
     function store(Request $request)
     {
 
-        foreach ($request->exemption as $exemption) {
-            $soldier = SoldierIdentity::where('general_number', $exemption['general_number'])->first();
+        if(count($request->exemption)){
+            foreach ($request->exemption as $exemption) {
+                $soldier = SoldierIdentity::where('general_number', $exemption['general_number'])->first();
 
-            if ($soldier) {
-                SoldierExemption::create([
-                    'soldier_id' => $soldier->id,
-                    'start_from' => $exemption['start_from'],
-                    'end_at' => $exemption['end_at'],
-                    'reason' => $exemption['reason'],
-                    'prev_balance' => $exemption['prev_balance'],
-                    'period_of_vacation' => $exemption['period_of_vacation'],
-                    'side_of_acceptance' => $exemption['side_of_acceptance'],
-                    'notes' => $exemption['notes'],
-                    "tasks" => $request->exemption[0]['tasks'],
-                ]);
+                if ($soldier) {
+                    SoldierExemption::create([
+                        'soldier_id' => $soldier->id,
+                        'start_from' => $exemption['start_from'],
+                        'end_at' => $exemption['end_at'],
+                        'reason' => $exemption['reason'],
+                        'prev_balance' => $exemption['prev_balance'],
+                        'period_of_vacation' => $exemption['period_of_vacation'],
+                        'side_of_acceptance' => $exemption['side_of_acceptance'],
+                        'notes' => $exemption['notes'],
+                        "tasks" => $request->exemption[0]['tasks'],
+                    ]);
+                }
             }
         }
         return redirect()->route('exemption.index');
