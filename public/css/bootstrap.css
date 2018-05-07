@@ -241,6 +241,12 @@ th {
   .navbar {
     display: none;
   }
+  .footer{
+    display: none;
+  }
+  button{
+    display: none;
+  }
   .btn > .caret,
   .dropup > .btn > .caret {
     border-top-color: #000 !important;

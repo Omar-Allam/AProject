@@ -431,4 +431,8 @@ class SoldierIdentityController extends Controller
 
         return redirect()->route('identity.index');
     }
+
+    function print(SoldierIdentity $identity){
+        return view('print.soldier_identity.index',compact('identity'));
+    }
 }

@@ -29,4 +29,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/hazm-participation', 'ReportController@hazmParticipation')->name('hazm.participate');
     Route::get('/human-energy', 'ReportController@humanEnergy')->name('human.energy');
     Route::get('/eng-weapon', 'ReportController@engineer_weapon')->name('eng.weapon');
+    Route::get('/identity-print/{identity}', 'SoldierIdentityController@print')->name('identity.print');
 });

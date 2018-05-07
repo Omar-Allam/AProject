@@ -26,8 +26,8 @@
                     <th>تاريخ تعبئة النموذج</th>
                     <th>المسئول عن تعبئة النموذج</th>
                     <th>آخر تعديل على النموذج</th>
-                @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
-                        <th></th>
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
+                        <th class="col-md-1"></th>
                     @endif
                 </tr>
                 </thead>
@@ -41,15 +41,18 @@
                         <td>{{$soldier->created_at->format('Y/m/d') ?? ''}}</td>
                         <td>{{$soldier->created_by ?? ''}}</td>
                         <td>{{$soldier->last_update_by ?? ''}}</td>
-                        @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
-                            <td>
+                        <td>
+                            @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
                                 <form action="{{route('identity.destroy',$soldier)}}" method="POST">
                                     {{csrf_field()}} {{method_field('DELETE')}}
-                                    <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
-                                    </button>
+                                    <a type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
+                                    </a>
+                                    <a type="button" href="{{route('identity.print',$soldier)}}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
+                                    </a>
                                 </form>
-                            </td>
-                        @endif
+                            @endif
+
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
