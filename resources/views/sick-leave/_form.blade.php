@@ -1,8 +1,7 @@
 <div id="row-formation" class="row-formation">
     <div class="row">
-
-        <div>
-            <table class="table table-striped" id="formations-table">
+        <div  class="table-responsive">
+            <table class="table table-striped" id="formations-table" style="overflow-x: scroll; width:2000px;">
                 <thead>
                 <tr>
                     <td>
@@ -48,60 +47,60 @@
                         {{Form::label('notes', 'ملاحظات', ['class' => 'control-label'])}}
                     </td>
                 </tr>
-
                 </thead>
                 <tbody>
-                <tr class="text-center">
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        {{Form::text('sickLeave[0][general_number]',$sickLeave->soldier->general_number ?? '' , array_merge(['class' => 'form-control sickleave-gn'],request('edit')?['readonly'=>'readonly']:[]))}}
-                    </td>
-                    <td>
-                        {{Form::text('sickLeave[0][soldier_name]',$sickLeave->soldier->name ?? '', ['class' => 'form-control soldier_name','readonly'=>'readonly'])}}
+                @if(isset($sickLeave))
+                    <tr class="text-center">
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            {{Form::text('sickLeave[0][general_number]',$sickLeave->soldier->general_number ?? '' , array_merge(['class' => 'form-control sickleave-gn'],request('edit')?['readonly'=>'readonly']:[]))}}
+                        </td>
+                        <td>
+                            {{Form::text('sickLeave[0][soldier_name]',$sickLeave->soldier->name ?? '', ['class' => 'form-control soldier_name','readonly'=>'readonly'])}}
 
-                    </td>
+                        </td>
 
-                    <td>
-                        {{Form::text('sickLeave[0][rate]',$sickLeave->soldier->rank->name ?? '', ['class' => 'form-control rate','readonly'=>'readonly'])}}
-                    </td>
-                    <td>
-                        {{Form::text('sickLeave[0][reason]',$sickLeave->reason ?? '', ['class' => 'form-control job_description'])}}
-                    </td>
+                        <td>
+                            {{Form::text('sickLeave[0][rate]',$sickLeave->soldier->rank->name ?? '', ['class' => 'form-control rate','readonly'=>'readonly'])}}
+                        </td>
+                        <td>
+                            {{Form::text('sickLeave[0][reason]',$sickLeave->reason ?? '', ['class' => 'form-control job_description'])}}
+                        </td>
 
-                    <td>
-                        {{Form::date('sickLeave[0][leave_from]', $sickLeave->leave_from ?? '',['class' => 'form-control'])}}
-                    </td>
+                        <td>
 
-                    <td>
-                        {{Form::date('sickLeave[0][leave_to]', $sickLeave->leave_to ?? '',['class' => 'form-control'])}}
-                    </td>
+                            {{Form::text('sickLeave[0][leave_from]', $sickLeave->leave_from->format('Y-m-d') ?? '',['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
+                        </td>
 
-                    <td>
-                        {{Form::text('sickLeave[0][period_of_vacation]',$sickLeave->period_of_vacation ?? '', ['class' => 'form-control'])}}
-                    </td>
+                        <td>
+                            {{Form::text('sickLeave[0][leave_to]', $sickLeave->leave_to->format('Y-m-d') ?? '',['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
+                        </td>
 
-                    <td>
-                        {{Form::date('sickLeave[0][direct_date]',$sickLeave->direct_date ?? '', ['class' => 'form-control'])}}
-                    </td>
+                        <td>
+                            {{Form::text('sickLeave[0][period_of_vacation]',$sickLeave->period_of_vacation ?? '', ['class' => 'form-control'])}}
+                        </td>
 
-                    <td>
-                        {{Form::text('sickLeave[0][prev_balance]',$sickLeave->prev_balance ?? '', ['class' => 'form-control'])}}
-                    </td>
+                        <td>
+                            {{Form::text('sickLeave[0][direct_date]',$sickLeave->direct_date->format('Y-m-d') ?? '', ['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
+                        </td>
 
-                    <td>
-                        {{Form::text('sickLeave[0][side_of_acceptance]',$sickLeave->side_of_acceptance ?? '', ['class' => 'form-control'])}}
-                    </td>
+                        <td>
+                            {{Form::text('sickLeave[0][prev_balance]',$sickLeave->prev_balance ?? '', ['class' => 'form-control'])}}
+                        </td>
 
-                    <td>
-                        {{Form::text('sickLeave[0][notes]',$sickLeave->notes ?? '', ['class' => 'form-control'])}}
-                    </td>
-                </tr>
+                        <td>
+                            {{Form::text('sickLeave[0][side_of_acceptance]',$sickLeave->side_of_acceptance ?? '', ['class' => 'form-control'])}}
+                        </td>
 
+                        <td>
+                            {{Form::text('sickLeave[0][notes]',$sickLeave->notes ?? '', ['class' => 'form-control'])}}
+                        </td>
+                    </tr>
+                @endif
                 </tbody>
-            </table>
-
+            </table >
         </div>
     </div>
 
@@ -130,21 +129,22 @@
 
     @section('scripts')
         <script>
+
+            var id = 1;
                     @if(isset($formation))
             var counter =
-                    {{$formation->soldiers->count() ?? 1}}
+                    {{$formation->soldiers->count() ?? 0}}
             var count =
                     {{$formation->soldiers->count() ?? 0}}
             var soldier_count = $("table#formations-table tbody tr").length
                     @else
-            var counter = 1
+            var counter = 0
             var count = 0
             @endif
             $('button#formations').click(function () {
                 counter++
-                count++
-                $('table#formations-table tr:last').after(`
-           <tr>
+                $('table#formations-table tbody:last-child').append(`
+           <tr class="text-center">
            <td>
            ` + ((counter.toLocaleString('en'))) + `
            </td>
@@ -163,11 +163,11 @@
             </td>
 
            <td>
-                <input type="date" name="sickLeave[` + count + `][leave_from]"  class="form-control">
+               <input type="text" name="sickLeave[` + count + `][leave_from]" value=""  class="form-control datetimepicker2" id='leave_from` + id + `' readonly />
             </td>
 
              <td>
-                <input type="date" name="sickLeave[` + count + `][leave_to]"  class="form-control ">
+                <input type="text" name="sickLeave[` + count + `][leave_to]" value=""  class="form-control datetimepicker2" id='leave_to` + id + `' readonly />
             </td>
 
 
@@ -177,7 +177,7 @@
 
 
              <td>
-                <input type="date" name="sickLeave[` + count + `][direct_date]"  class="form-control ">
+                 <input type="text" name="sickLeave[` + count + `][direct_date]" value=""  class="form-control datetimepicker2" id='direct_date` + id + `' readonly />
             </td>
 
             <td>
@@ -192,11 +192,30 @@
              <input type="text" name="sickLeave[` + count + `][notes]"  class="form-control">
              </td>
            </tr>`)
+
+                $('#leave_from' + id).calendarsPicker({
+                    calendar: $.calendars.instance('islamic'),
+                    monthsToShow: [1, 1],
+                    dateFormat: 'yyyy-mm-dd'
+                });
+
+                $('#leave_to' + id).calendarsPicker({
+                    calendar: $.calendars.instance('islamic'),
+                    monthsToShow: [1, 1],
+                    dateFormat: 'yyyy-mm-dd'
+                });
+
+                $('#direct_date' + id).calendarsPicker({
+                    calendar: $.calendars.instance('islamic'),
+                    monthsToShow: [1, 1],
+                    dateFormat: 'yyyy-mm-dd'
+                });
+                id++
+                count++
             });
 
             $('button#formations-remove').click(function () {
-
-                if ($("table#formations-table tbody tr").length > 1) {
+                if ($("table#formations-table tbody tr").length !== 0) {
                     $('div.row-formation tr:last').remove()
                     counter--;
                     count--;
@@ -208,8 +227,8 @@
                 if (general_number.length > 0) {
                     $.ajax({
                         type: "GET",
-                        url: '/get-soldier-info?soldier-id=' + general_number,
-
+                        data: {general_number: general_number},
+                        url: '/get-soldier-info',
                     }).done((res) => {
                         if (res != 0) {
                             $(this).parent().parent().children().find('.rate').val(res.rank)

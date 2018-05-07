@@ -115,56 +115,57 @@
 
                         </thead>
                         <tbody>
-                        <tr class="text-center">
-                            <td>
-                                1
-                            </td>
+                        @if(isset($exemption))
+                            <tr class="text-center">
+                                <td>
+                                    1
+                                </td>
 
-                            <td>
-                                {{Form::text('exemption[0][general_number]',$exemption->soldier->general_number ?? '',['class' => 'form-control sickleave-gn'])}}
-                            </td>
+                                <td>
+                                    {{Form::text('exemption[0][general_number]',$exemption->soldier->general_number ?? '',['class' => 'form-control sickleave-gn'])}}
+                                </td>
 
-                            <td>
-                                {{Form::text('exemption[0][soldier_name]',$exemption->soldier->name ?? '', ['class' => 'form-control soldier_name','readonly'=>'readonly'])}}
-                            </td>
+                                <td>
+                                    {{Form::text('exemption[0][soldier_name]',$exemption->soldier->name ?? '', ['class' => 'form-control soldier_name','readonly'=>'readonly'])}}
+                                </td>
 
-                            <td>
-                                {{Form::text('exemption[0][rate]',$exemption->soldier->rank->name ?? '', ['class' => 'form-control rate','readonly'=>'readonly'])}}
-                            </td>
+                                <td>
+                                    {{Form::text('exemption[0][rate]',$exemption->soldier->rank->name ?? '', ['class' => 'form-control rate','readonly'=>'readonly'])}}
+                                </td>
 
-                            <td>
-                                {{Form::text('exemption[0][reason]',$exemption->reason ?? '', ['class' => 'form-control job_description'])}}
-                            </td>
+                                <td>
+                                    {{Form::text('exemption[0][reason]',$exemption->reason ?? '', ['class' => 'form-control job_description'])}}
+                                </td>
 
-                            <td>
-                                {{Form::date('exemption[0][start_from]', $exemption->start_from ?? '' ,['class' => 'form-control'])}}
-                            </td>
+                                <td>
+                                    {{Form::text('exemption[0][start_from]', $exemption->start_from ?? '' ,['class' => 'form-control datetimepicker2' , 'readonly'=>'readonly'])}}
+                                </td>
 
-                            <td>
-                                {{Form::date('exemption[0][end_at]', $exemption->end_at ?? '',['class' => 'form-control'])}}
-                            </td>
+                                <td>
+                                    {{Form::text('exemption[0][end_at]', $exemption->end_at ?? '',['class' => 'form-control datetimepicker2', 'readonly'=>'readonly'])}}
+                                </td>
 
-                            <td>
-                                {{Form::text('exemption[0][period_of_vacation]',$exemption->exemption_period ?? '', ['class' => 'form-control'])}}
-                            </td>
+                                <td>
+                                    {{Form::text('exemption[0][period_of_vacation]',$exemption->exemption_period ?? '', ['class' => 'form-control'])}}
+                                </td>
 
-                            <td>
-                                {{Form::text('exemption[0][prev_balance]',$exemption->prev_balance ?? '', ['class' => 'form-control'])}}
-                            </td>
+                                <td>
+                                    {{Form::text('exemption[0][prev_balance]',$exemption->prev_balance ?? '', ['class' => 'form-control'])}}
+                                </td>
 
-                            <td>
-                                {{Form::text('exemption[0][side_of_acceptance]',$exemption->side_of_acceptance ?? '' , ['class' => 'form-control'])}}
-                            </td>
+                                <td>
+                                    {{Form::text('exemption[0][side_of_acceptance]',$exemption->side_of_acceptance ?? '' , ['class' => 'form-control'])}}
+                                </td>
 
-                            <td>
-                                {{Form::text('exemption[0][tasks]',$exemption->tasks ?? '' , ['class' => 'form-control'])}}
-                            </td>
+                                <td>
+                                    {{Form::text('exemption[0][tasks]',$exemption->tasks ?? '' , ['class' => 'form-control'])}}
+                                </td>
 
-                            <td>
-                                {{Form::text('exemption[0][notes]',$exemption->notes ?? '', ['class' => 'form-control'])}}
-                            </td>
-                        </tr>
-
+                                <td>
+                                    {{Form::text('exemption[0][notes]',$exemption->notes ?? '', ['class' => 'form-control'])}}
+                                </td>
+                            </tr>
+                        @endif
                         </tbody>
                     </table>
                 </div>
@@ -173,7 +174,7 @@
 
         </div>
 
-
+        @if(!request('edit'))
         <div class="row">
             <div class="btn-group">
                 <button id="formations" type="button" class="btn btn-sm btn-success"><i class="fa fa-plus"></i>
@@ -186,6 +187,7 @@
                 </button>
             </div>
         </div>
+        @endif
         <br><br>
         <div class="row">
             <div class="form-group">
@@ -195,6 +197,7 @@
 
     @section('scripts')
         <script>
+            var id = 1;
                     @if(isset($formation))
             var counter =
                     {{$formation->soldiers->count() ?? 1}}
@@ -202,12 +205,11 @@
                     {{$formation->soldiers->count() ?? 0}}
             var soldier_count = $("table#formations-table tbody tr").length
                     @else
-            var counter = 1
+            var counter = 0
             var count = 0
             @endif
             $('button#formations').click(function () {
                 counter++
-                count++
                 $('table#formations-table tr:last').after(`
            <tr>
            <td>
@@ -228,11 +230,11 @@
             </td>
 
            <td>
-                <input type="date" name="exemption[` + count + `][start_from]"  class="form-control">
+                <input type="text" name="exemption[` + count + `][start_from]" id="start_from`+id+`"   class="form-control" readonly>
             </td>
 
              <td>
-                <input type="date" name="exemption[` + count + `][end_at]"  class="form-control ">
+                <input type="text" name="exemption[` + count + `][end_at]" id="end_at`+id+`"  class="form-control " readonly>
             </td>
 
 
@@ -253,6 +255,20 @@
              <input type="text" name="exemption[` + count + `][notes]"  class="form-control">
              </td>
            </tr>`)
+                $('#start_from'+id).calendarsPicker({
+                    calendar: $.calendars.instance('islamic'),
+                    monthsToShow: [1,1],
+                    dateFormat: 'yyyy-mm-dd'
+                });
+
+                $('#end_at'+id).calendarsPicker({
+                    calendar: $.calendars.instance('islamic'),
+                    monthsToShow: [1,1],
+                    dateFormat: 'yyyy-mm-dd'
+                });
+
+                count++
+                id++
             });
 
             $('button#formations-remove').click(function () {
@@ -269,8 +285,8 @@
                 if (general_number.length > 0) {
                     $.ajax({
                         type: "GET",
-                        url: '/get-soldier-info?soldier-id=' + general_number,
-
+                        data: {general_number: general_number},
+                        url: '/get-soldier-info',
                     }).done((res) => {
                         if (res != 0) {
                             $(this).parent().parent().children().find('.rate').val(res.rank)

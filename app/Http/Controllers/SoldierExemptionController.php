@@ -67,7 +67,8 @@ class SoldierExemptionController extends Controller
                     'prev_balance' => $exemption['prev_balance'],
                     'period_of_vacation' => $exemption['period_of_vacation'],
                     'side_of_acceptance' => $exemption['side_of_acceptance'],
-                    'notes' => $exemption['notes']
+                    'notes' => $exemption['notes'],
+                    "tasks" => $request->exemption[0]['tasks'],
                 ]);
             }
         }

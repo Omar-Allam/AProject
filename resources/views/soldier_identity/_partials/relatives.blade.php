@@ -110,7 +110,6 @@
         var rela_count = 0;
         var id = 1;
         $('button#relatives').click(function () {
-            console.log('sfsdf')
             $('table#relatives-table tbody:last-child').append(`<tr>
                     <td>
                      <input type="text" name="relatives[` + rela_count + `][relative_name]" class="form-control">
