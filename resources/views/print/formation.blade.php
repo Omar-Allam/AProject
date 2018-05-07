@@ -47,31 +47,31 @@
                 </div>
                 <div class="form-group  col-xs-2 {{$errors->has('general_number')? 'has-error' : ''}}">
                     {{Form::label('is_a[]', 'شاغر', ['class' => 'control-label'])}}
-                    <p>@if($soldier['is_participate']) <i class="fa fa-check"></i> @else <i class="fa fa-times"></i> @endif</p>
+                    <p>@if($soldier['is_participate']==1) <i class="fa fa-check"></i> @else <i class="fa fa-times"></i> @endif</p>
 
                 </div>
 
                 <div class="form-group  col-xs-2 {{$errors->has('general_number')? 'has-error' : ''}}">
                     {{Form::label('is_a[]', 'مجمد', ['class' => 'control-label'])}}
-                    <p>@if($soldier['is_a'] == 1) <i class="fa fa-check"></i> @else <i class="fa fa-times"></i> @endif</p>
-
-                </div>
-
-                <div class="form-group  col-xs-2 {{$errors->has('general_number')? 'has-error' : ''}}">
-                    {{Form::label('is_a[]', 'مكتسب', ['class' => 'control-label'])}}
                     <p>@if($soldier['is_a'] == 2) <i class="fa fa-check"></i> @else <i class="fa fa-times"></i> @endif</p>
 
                 </div>
 
                 <div class="form-group  col-xs-2 {{$errors->has('general_number')? 'has-error' : ''}}">
-                    {{Form::label('is_a[]', 'مفرز', ['class' => 'control-label'])}}
+                    {{Form::label('is_a[]', 'مكتسب', ['class' => 'control-label'])}}
                     <p>@if($soldier['is_a'] == 3) <i class="fa fa-check"></i> @else <i class="fa fa-times"></i> @endif</p>
 
                 </div>
 
                 <div class="form-group  col-xs-2 {{$errors->has('general_number')? 'has-error' : ''}}">
-                    {{Form::label('tranformation', 'التنقلات والتعيين وإنهاء الخدمات', ['class' => 'control-label'])}}
+                    {{Form::label('is_a[]', 'مفرز', ['class' => 'control-label'])}}
                     <p>@if($soldier['is_a'] == 4) <i class="fa fa-check"></i> @else <i class="fa fa-times"></i> @endif</p>
+
+                </div>
+
+                <div class="form-group  col-xs-2 {{$errors->has('general_number')? 'has-error' : ''}}">
+                    {{Form::label('tranformation', 'التنقلات والتعيين وإنهاء الخدمات', ['class' => 'control-label'])}}
+                    <p>{{$soldier->soldier_status ? \App\FormationSoldiers::$status[$soldier->soldier_status] : ''}}</p>
 
                 </div>
 

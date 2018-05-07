@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class FormationSoldiers extends Model
 {
     protected $table = 'formation_soldiers';
-    protected $fillable = ['formation_id', 'soldier_id', 'job_description', 'current_rate', 'notes', 'private_number', 'is_participate', 'is_a','soldier_status'];
+    protected $fillable = ['formation_id', 'soldier_id', 'job_description', 'current_rate', 'notes', 'private_number', 'is_participate', 'is_a', 'soldier_status'];
 
+    static $status = [1 => 'منقول على الوحدة', 2 => 'معين على الوحدة', 3 => 'منهاه خدمته', 4 => 'معاد', 5 => 'منقول خارج الوحدة', 6 => 'مفرز منتدب', 7 => 'الملحق ( مكتب )'];
     function soldier()
     {
         return $this->belongsTo(SoldierIdentity::class, 'soldier_id', 'id');
@@ -21,55 +22,19 @@ class FormationSoldiers extends Model
     }
 
 
-    static function human_energy()
+    static function human_energy($rate,$type)
     {
-        $officer_total = FormationSoldiers::whereHas('soldier', function ($q) {
-            $q->whereNotIn('rank_id', [1, 2, 5, 6]);
-        })->count(); // All officers
+        return FormationSoldiers::whereHas('soldier', function ($q) use ($rate){
+            $q->whereIn('rank_id', $rate);
+        })->whereIn('is_a',$type)->count(); // All officers
 
-        $free_officers = FormationSoldiers::whereHas('soldier', function ($q) {
-            $q->whereNotIn('rank_id', [1, 2, 5, 6]);
-        })->where('is_a', 1)->count();
+    }
 
 
-        $freezed_officers = FormationSoldiers::whereHas('soldier', function ($q) {
-            $q->whereNotIn('rank_id', [1, 2, 5, 6]);
-        })->where('is_a', 2)->count();
-
-        $gained_officers = FormationSoldiers::whereHas('soldier', function ($q) {
-            $q->whereNotIn('rank_id', [1, 2, 5, 6]);
-        })->where('is_a', 3)->count();
-
-        $sortable_officers = FormationSoldiers::whereHas('soldier', function ($q) {
-            $q->whereNotIn('rank_id', [1, 2, 5, 6]);
-        })->where('is_a', 4)->count();
-
-
-        $soldier_total = FormationSoldiers::whereHas('soldier', function ($q) {
-            $q->whereIn('rank_id', [1, 2, 5, 6]);
-        })->count();
-
-        $free_soldiers = FormationSoldiers::whereHas('soldier', function ($q) {
-            $q->whereIn('rank_id', [1, 2, 5, 6]);
-        })->where('is_a', 1)->count();
-
-        $freezed_soldiers = FormationSoldiers::whereHas('soldier', function ($q) {
-            $q->whereIn('rank_id', [1, 2, 5, 6]);
-        })->where('is_a', 2)->count();
-
-        $gained_soldiers = FormationSoldiers::whereHas('soldier', function ($q) {
-            $q->whereIn('rank_id', [1, 2, 5, 6]);
-        })->where('is_a', 3)->count();
-
-        $sortable_soldiers = FormationSoldiers::whereHas('soldier', function ($q) {
-            $q->whereIn('rank_id', [1, 2, 5, 6]);
-        })->where('is_a', 4)->count();
-
-        $report = compact('officer_total', 'free_officers', 'freezed_officers', 'gained_officers', 'sortable_officers'
-            , 'soldier_total', 'free_soldiers', 'freezed_soldiers', 'gained_soldiers', 'sortable_soldiers');
-
-
-
-        return collect($report);
+    static function tranfer($type, $status)
+    {
+        return FormationSoldiers::whereHas('soldier', function ($q) use ($type) {
+            $q->whereIn('rank_id', $type);
+        })->where('soldier_status', $status)->count();
     }
 }
