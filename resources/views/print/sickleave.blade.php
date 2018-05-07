@@ -34,8 +34,8 @@
 
 
                 <div class="form-group  col-xs-3 {{$errors->has('general_number')? 'has-error' : ''}}">
-                    {{Form::label('leave_form', 'تاريخ بداية الإجازة', ['class' => 'control-label'])}}
-                    <p>{{$sickLeaf->leave_form ?? ''}}</p>
+                    {{Form::label('leave_from', 'تاريخ بداية الإجازة', ['class' => 'control-label'])}}
+                    <p>{{$sickLeaf->leave_from ?? ''}}</p>
                 </div>
 
                 <div class="form-group  col-xs-3 {{$errors->has('general_number')? 'has-error' : ''}}">

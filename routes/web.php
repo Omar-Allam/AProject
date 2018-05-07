@@ -32,5 +32,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/identity-print/{identity}', 'SoldierIdentityController@print')->name('identity.print');
     Route::get('/formation-print/{formation}', 'FormationController@print')->name('formation.print');
     Route::get('/sick-leave-print', 'SoldierSickLeaveController@print')->name('sickleave.print');
+    Route::get('/leave-print/{sickLeaf}', 'SoldierSickLeaveController@printSingle')->name('sleave.print');
     Route::get('/medical-exemption', 'SoldierExemptionController@print')->name('exemption.print');
+    Route::get('/medical-exemption/{exemption}', 'SoldierExemptionController@printSingle')->name('sexemption.print');
+    Route::get('/hazm-participation/print', 'ReportController@printHazm')->name('hazm.print');
+    Route::get('/human-energy/print', 'ReportController@printEnergy')->name('human-energy.print');
+    Route::get('/eng-weapon/print', 'ReportController@printWeapon')->name('eng-weapon.print');
 });

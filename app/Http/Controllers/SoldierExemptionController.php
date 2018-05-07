@@ -86,4 +86,8 @@ class SoldierExemptionController extends Controller
         $exemptions = SoldierExemption::all();
         return view('print.exemption',compact('exemptions'));
     }
+
+    function printSingle(SoldierExemption $exemption){
+        return view('print.singles.exemption',compact('exemption'));
+    }
 }

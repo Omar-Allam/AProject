@@ -89,4 +89,8 @@ class SoldierIdentity extends Model
         return $str;
     }
 
+    static function engineerWeapon($rate,$weapon){
+        return SoldierIdentity::whereIn('rank_id',$rate)->where('weapon',$weapon)->count();
+    }
+
 }

@@ -1,22 +1,10 @@
-@extends('layout.app')
-
-@section('header')
-
-@stop
+@extends('layout.print')
 
 @section('body')
-
     <section class="col-sm-12">
-        <div class="row">
+        <h4>املاك</h4>
 
-            <h4>املاك</h4>
-            <a type="button" href="{{route('eng-weapon.print')}}"
-               class="btn btn-sm btn-primary"><i class="fa fa-print"></i>
-            </a>
-
-        </div>
-        <br>
-        <table class="table table-bordered">
+        <table class="table table-hover table-striped table-bordered">
             <thead>
             <tr class="bg-warning text-center">
                 <td colspan="2"> حسب التشكيل</td>
@@ -46,42 +34,21 @@
             </thead>
             <tbody>
             <tr>
-                <td>
-                    {{\App\FormationSoldiers::human_energy()['officer_total']}}
-                </td>
+                <td></td>
                 <td></td>
 
-                <td>
-                    {{\App\FormationSoldiers::human_energy()['free_officers']}}
-                </td>
+                <td></td>
                 <td></td>
 
-                <td>
-                    {{\App\FormationSoldiers::human_energy()['freezed_officers']}}
-                </td>
+                <td></td>
                 <td></td>
 
-                <td>
-                    {{\App\FormationSoldiers::human_energy()['freezed_officers']
-                    + \App\FormationSoldiers::human_energy()['gained_officers']
-                    + \App\FormationSoldiers::human_energy()['sortable_officers']
-
-                    }}
-
-                </td>
+                <td></td>
                 <td></td>
 
-                <td>
-                    {{(\App\FormationSoldiers::human_energy()['freezed_officers']
-                    + \App\FormationSoldiers::human_energy()['gained_officers']
-                    + \App\FormationSoldiers::human_energy()['sortable_officers']) / \App\FormationSoldiers::human_energy()['officer_total']
-                    }}
-                    %
-                </td>
+                <td></td>
 
-                <td>
-                    <input type="text" class="form-control">
-                </td>
+                <td></td>
 
 
             </tr>
@@ -114,8 +81,8 @@
             </thead>
             <tbody>
             <tr>
-                <th>ضابط</th>
-                <th>{{\App\SoldierIdentity::engineerWeapon(range(8,12),10)}}</th>
+                <th>ظابط</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -130,7 +97,7 @@
             </tr>
             <tr>
                 <th>رئيس رقباء</th>
-                <th>{{\App\SoldierIdentity::engineerWeapon(range(8,12),10)}}</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -203,7 +170,21 @@
                 <th></th>
                 <th></th>
             </tr>
-
+            <tr>
+                <th>عريف</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
             <tr>
                 <th>جندي أول</th>
                 <th></th>

@@ -37,12 +37,24 @@
                 display: table-footer-group
             }
         }
+        @media print {
+            a{
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
 <body>
 @yield('header')
 <div class="container">
+    <br>
+    <div class="row">
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{{ URL::previous() }}"><i class="fa fa-arrow-circle-left"></i></a>
+        </div>
+    </div>
+
     <div id="app">
         <br>
         <div class="row">
@@ -52,8 +64,10 @@
                 <p style="font-weight: bold;font-size: larger">الإدارة</p>
             </div>
             <div class="col-xs-3" style="font-weight: bold;font-size: larger">بسم الله الرحمن الرحيم</div>
-            <div class="col-xs-6"></div>
+            <div class="col-xs-6">
+            </div>
         </div>
+
         <br>
 
         @yield('body')

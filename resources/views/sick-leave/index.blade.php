@@ -3,13 +3,18 @@
 @section('header')
 
     <h4>الإجازات المرضية</h4>
-    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(11))
-        <p>
+    <p>
+        @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(11))
             <a class="btn btn-sm btn-success" href="{{route('sick-leave.create')}}">
                 <i class="fa fa-plus"></i>
             </a>
-        </p>
-    @endif
+        @endif
+
+        <a type="button" href="{{route('sickleave.print')}}"
+           class="btn btn-sm btn-primary"><i class="fa fa-print"></i>
+        </a>
+    </p>
+
 @stop
 
 @section('body')
@@ -50,7 +55,7 @@
                                 </button>
                             @endif
 
-                            <a type="button" href="{{route('sickleave.print')}}"
+                            <a type="button" href="{{route('sleave.print',$sickLeaf)}}"
                                class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
                             </a>
                         </form>

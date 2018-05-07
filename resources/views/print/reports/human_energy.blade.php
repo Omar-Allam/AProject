@@ -1,20 +1,21 @@
-@extends('layout.app')
+@extends('layout.print')
 
 @section('header')
-    <h4>الطاقة البشرية</h4>
     <p>
         {{--<a class="btn btn-sm btn-success"  href="{{route('exemption.create')}}">--}}
         {{--<i class="fa fa-plus"></i>--}}
         {{--</a>--}}
-        <a type="button" href="{{route('human-energy.print')}}"
-           class="btn btn-sm btn-primary"><i class="fa fa-print"></i>
-        </a>
+
     </p>
 @stop
 
 @section('body')
+    <div class="row text-center">
+        <h4><b>الطاقة البشرية</b></h4>
+    </div>
+    <br>
     <section class="col-sm-12">
-        <table class="table table-hover table-striped">
+        <table class="table table-bordered">
             <thead class="bg-primary">
             <tr>
                 <th>الفعلي ( ضباط )</th>
@@ -31,13 +32,12 @@
                 <td>{{\App\FormationSoldiers::human_energy()['free_officers']}}</td>
                 <td>{{\App\FormationSoldiers::human_energy()['freezed_officers']}}</td>
                 <td>{{\App\FormationSoldiers::human_energy()['gained_officers']}}</td>
-                <td>{{\App\FormationSoldiers::human_energy()['sortable_officers']}}</td>
+                <td>{{\App\FormationSoldiers::human_energy()['gained_officers']}}</td>
             </tr>
             </tbody>
         </table>
 
-
-        <table class="table table-hover table-striped">
+        <table class="table table-bordered">
             <thead class="bg-primary">
 
             <tr>
@@ -64,5 +64,10 @@
 
 
     </section>
-    {{$soldiers->links()}}
 @stop
+
+@section('scripts')
+    <script>
+        window.print()
+    </script>
+@endsection

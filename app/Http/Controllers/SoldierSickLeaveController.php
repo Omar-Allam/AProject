@@ -83,4 +83,8 @@ class SoldierSickLeaveController extends Controller
         $sickLeaves = SoldierSickLeave::all();
         return view('print.sickleave',compact('sickLeaves'));
     }
+
+    function printSingle(SoldierSickLeave $sickLeaf){
+        return view('print.singles.sickleave',compact('sickLeaf'));
+    }
 }

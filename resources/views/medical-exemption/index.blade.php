@@ -3,13 +3,17 @@
 @section('header')
 
     <h4>الإعفاءات الطبية</h4>
-    @if (Auth::user()->hasRole(1) || Auth::user()->hasRole(14))
         <p>
+            @if (Auth::user()->hasRole(1) || Auth::user()->hasRole(14))
+
             <a class="btn btn-sm btn-success" href="{{route('exemption.create')}}">
                 <i class="fa fa-plus"></i>
             </a>
+            @endif
+
+            <a type="button" href="{{route('exemption.print')}}" class="btn btn-sm btn-primary"><i class="fa fa-print"></i>
+            </a>
         </p>
-    @endif
 @stop
 
 @section('body')
@@ -39,7 +43,13 @@
                         <td>{{$exemption->soldier->name ?? ''}}</td>
                         <td>{{$exemption->soldier->rank->name ?? ''}}</td>
                         <td>{{$exemption->reason ?? ''}}</td>
-                        <td>{{$exemption->end_at ? $exemption->end_at->diffInDays($exemption->start_from) : ''}}</td>
+                        <td>
+                            @if(!$exemption->exemption_period)
+                                <p>{{$exemption->end_at ? $exemption->end_at->diffInDays($exemption->start_from) : ''}}</p>
+                            @else
+                                <p>{{$exemption->exemption_period ?? ''}}</p>
+                            @endif
+                        </td>
                         <td>{{$exemption->tasks ?? ''}}</td>
                         <td>{{$exemption->prev_balance ?? ''}}</td>
 
@@ -51,8 +61,8 @@
                                     <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
                                     </button>
                                     @endif
-                                    <a type="button" href="{{route('exemption.print',$exemption)}}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
-                                    </a>
+                                    <a type="button" href="{{route('sexemption.print',$exemption)}}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
+
                                 </form>
                             </td>
                     </tr>

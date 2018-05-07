@@ -6,6 +6,9 @@
         {{--<a class="btn btn-sm btn-success"  href="{{route('exemption.create')}}">--}}
             {{--<i class="fa fa-plus"></i>--}}
         {{--</a>--}}
+        <a type="button" href="{{route('hazm.print')}}"
+           class="btn btn-sm btn-primary"><i class="fa fa-print"></i>
+        </a>
     </p>
 @stop
 
