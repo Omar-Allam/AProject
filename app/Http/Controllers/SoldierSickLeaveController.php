@@ -76,4 +76,9 @@ class SoldierSickLeaveController extends Controller
         $sickLeave->delete();
         return redirect()->route('sick-leave.index');
     }
+
+    function print(){
+        $sickLeaves = SoldierSickLeave::all();
+        return view('print.sickleave',compact('sickLeaves'));
+    }
 }

@@ -41,15 +41,22 @@
                     <td>{{$sickLeaf->leave_to ? $sickLeaf->leave_to->diffInDays($sickLeaf->leave_from) : ''}}</td>
                     <td>{{$sickLeaf->direct_date ? $sickLeaf->direct_date->toDateString() : ''}}</td>
                     <td>{{$sickLeaf->notes ?? ''}}</td>
-                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(13))
-                        <td>
-                            <form action="{{route('sick-leave.destroy',$sickLeaf)}}" method="POST">
-                                {{csrf_field()}} {{method_field('DELETE')}}
+                    <td>
+                        <form action="{{route('sick-leave.destroy',$sickLeaf)}}" method="POST">
+                            {{csrf_field()}} {{method_field('DELETE')}}
+                            @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(13))
+
                                 <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
                                 </button>
-                            </form>
-                        </td>
-                    @endif
+                            @endif
+
+                            <a type="button" href="{{route('sickleave.print')}}"
+                               class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
+                            </a>
+                        </form>
+
+                    </td>
+
                 </tr>
             @endforeach
             </tbody>
