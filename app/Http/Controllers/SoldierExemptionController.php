@@ -54,7 +54,6 @@ class SoldierExemptionController extends Controller
 
     function store(Request $request)
     {
-
         if(count($request->exemption)){
             foreach ($request->exemption as $exemption) {
                 $soldier = SoldierIdentity::where('general_number', $exemption['general_number'])->first();
@@ -69,7 +68,7 @@ class SoldierExemptionController extends Controller
                         'period_of_vacation' => $exemption['period_of_vacation'],
                         'side_of_acceptance' => $exemption['side_of_acceptance'],
                         'notes' => $exemption['notes'],
-                        "tasks" => $exemption['tasks'],
+                        'tasks' => $exemption['tasks'],
                     ]);
                 }
             }

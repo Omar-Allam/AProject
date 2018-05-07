@@ -252,6 +252,10 @@
             </td>
 
             <td>
+             <input type="text" name="exemption[` + count + `][tasks]"  class="form-control">
+             </td>
+
+             <td>
              <input type="text" name="exemption[` + count + `][notes]"  class="form-control">
              </td>
            </tr>`)
