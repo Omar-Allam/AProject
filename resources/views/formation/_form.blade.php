@@ -6,34 +6,34 @@
                 <input type="text" class="form-control" name="formation_name" value="{{$formation->name}}" required>
             </div>
             <div  class="table-responsive">
-            <table class="table table-striped" id="formations" style="overflow-x: scroll; width:2000px;">
+            <table class="table table-striped" id="formations">
                 <thead>
                 <tr class="text-center">
-                    <td class="col-md-1">
+                    <td style="width:10px">
                         {{Form::label('name', 'العدد', ['class' => 'control-label'])}}
                     </td>
-                    <td class="col-md-1">
+                    <td style="width:80px">
                         {{Form::label('private_number', 'الرقم الخاص', ['class' => 'control-label'])}}
                     </td>
-                    <td class="col-md-1">
+                    <td >
                         {{Form::label('general_number', 'الرقم العام', ['class' => 'control-label'])}}
                     </td>
-                    <td class="col-md-1">
+                    <td style="width:120px">
                         {{Form::label('rate', 'الرتبة', ['class' => 'control-label'])}}
                     </td>
 
-                    <td class="col-md-1">
+                    <td style="width:80px">
                         {{Form::label('job_description', 'مسمى الوظيفة', ['class' => 'control-label'])}}
                     </td>
-                    <td class="col-md-2">
+                    <td style="width:180px">
                         {{Form::label('soldier_name', 'الاسم', ['class' => 'control-label'])}}
                     </td>
-                    <td  class="col-md-1">
+                    <td style="width:100px" >
                         {{Form::label('current_rate', 'الرتبة الحالية', ['class' => 'control-label'])}}
                     </td>
 
 
-                    <td class="col-md-1">
+                    <td >
                         {{Form::label('is_participate', 'مشارك في عاصفة الحزم', ['class' => 'control-label'])}}
                     </td>
 
@@ -53,11 +53,11 @@
                         {{Form::label('is_a[]', 'مفرز', ['class' => 'control-label'])}}
                     </td>
 
-                    <td class="col-md-2">
+                    <td style="width:120px">
                         {{Form::label('tranformation', 'التنقلات والتعيين وإنهاء الخدمات', ['class' => 'control-label'])}}
                     </td>
 
-                    <td class="col-md-4">
+                    <td >
                         {{Form::label('notes', 'ملاحظات', ['class' => 'control-label'])}}
                     </td>
 
@@ -67,7 +67,7 @@
                 <tbody>
                 @foreach($formation->soldiers as $key=>$soldier)
                     <tr class="text-center">
-                        <td>
+                        <td >
                             {{$key+1}}
                         </td>
                         <td>
@@ -107,7 +107,7 @@
                             {{Form::radio('formation['.$key.'][is_a]',4,$soldier->is_a == 4)}}
                         </td>
                         <td>
-                            <select class="form-control" name="formation[{{$key}}][soldier_status]">
+                            <select  class="form-control" name="formation[{{$key}}][soldier_status]">
                                 <option value="0" @if($soldier->soldier_status == 0) selected @endif >اختر الحالة</option>
                                 <option value="1" @if($soldier->soldier_status == 1) selected @endif >منقول على الوحدة</option>
                                 <option value="2" @if($soldier->soldier_status == 2) selected @endif >معين على الوحدة </option>
