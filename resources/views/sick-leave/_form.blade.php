@@ -71,11 +71,11 @@
 
                         <td>
 
-                            {{Form::text('sickLeave[0][leave_from]', $sickLeave->leave_from->format('Y-m-d') ?? '',['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
+                            {{Form::text('sickLeave[0][leave_from]',$sickLeave->leave_from ? $sickLeave->leave_from->format('Y-m-d') : '',['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
                         </td>
 
                         <td>
-                            {{Form::text('sickLeave[0][leave_to]', $sickLeave->leave_to->format('Y-m-d') ?? '',['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
+                            {{Form::text('sickLeave[0][leave_to]', $sickLeave->leave_to ? $sickLeave->leave_to->format('Y-m-d') : '',['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
                         </td>
 
                         <td>
@@ -83,7 +83,7 @@
                         </td>
 
                         <td>
-                            {{Form::text('sickLeave[0][direct_date]',$sickLeave->direct_date->format('Y-m-d') ?? '', ['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
+                            {{Form::text('sickLeave[0][direct_date]',$sickLeave->direct_date ? $sickLeave->direct_date->format('Y-m-d') : '', ['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
                         </td>
 
                         <td>
