@@ -38,7 +38,7 @@
                     <td>{{$sickLeaf->soldier->name ?? ''}}</td>
                     <td>{{$sickLeaf->soldier->rank->name ?? ''}}</td>
                     <td></td>
-                    <td>{{$sickLeaf->leave_to->diffInDays($sickLeaf->leave_from) ?? ''}}</td>
+                    <td>{{$sickLeaf->leave_to ? $sickLeaf->leave_to->diffInDays($sickLeaf->leave_from) : ''}}</td>
                     <td>{{$sickLeaf->direct_date ? $sickLeaf->direct_date->toDateString() : ''}}</td>
                     <td>{{$sickLeaf->notes ?? ''}}</td>
                     @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(13))
