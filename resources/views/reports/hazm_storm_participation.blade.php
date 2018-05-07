@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('header')
-    <h4>المشاركين فعليا في عمليات عاصفة الحزم وإعادة الأملاك</h4>
+    <h4>المشاركين فعليا في عمليات عاصفة الحزم وإعادة الأمل</h4>
     <p>
         {{--<a class="btn btn-sm btn-success"  href="{{route('exemption.create')}}">--}}
             {{--<i class="fa fa-plus"></i>--}}
