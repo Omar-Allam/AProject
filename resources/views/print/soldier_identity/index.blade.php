@@ -310,7 +310,9 @@
                         </td>
 
                         <td>
-                            <p>{{\Carbon\Carbon::createFromTimeString($relative->relative_date_of_birth)->format('Y-m-d') ?? ''}}</p>
+                            @if($relative->relative_date_of_birth)
+                                <p>{{\Carbon\Carbon::createFromTimeString($relative->relative_date_of_birth)->format('Y-m-d') ?? ''}}</p>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
