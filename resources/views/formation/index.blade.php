@@ -27,7 +27,10 @@
                         <td class="col-md-9">
                             <a href="{{route('formation.show',$formation)}}">{{$formation->name}}</a>
                         </td>
-
+                        <td>
+                            <a type="button" href="{{route('formation.print',$formation)}}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

@@ -192,5 +192,8 @@ class FormationController extends Controller
     }
 
 
+    function print(Formation $formation){
+        return view('print.formation',compact('formation'));
+    }
 }
 

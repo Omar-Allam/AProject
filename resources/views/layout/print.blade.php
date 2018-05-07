@@ -13,12 +13,49 @@
     <link rel="stylesheet" href="{{asset('css/bootstrap-flipped.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('styles')
+    <style>
+        @media print {
+            table {
+                page-break-after: auto
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto
+            }
+
+            td {
+                page-break-inside: avoid;
+                page-break-after: auto
+            }
+
+            thead {
+                display: table-header-group
+            }
+
+            tfoot {
+                display: table-footer-group
+            }
+        }
+    </style>
 </head>
 
 <body>
 @yield('header')
 <div class="container">
     <div id="app">
+        <br>
+        <div class="row">
+            <div class="col-xs-5">
+                <p style="font-weight: bold;font-size: larger">القوات البرية الملكية السعودية</p>
+                <p style="font-weight: bold;font-size: larger">قيادة سلاح المهندسين</p>
+                <p style="font-weight: bold;font-size: larger">الإدارة</p>
+            </div>
+            <div class="col-xs-3" style="font-weight: bold;font-size: larger">بسم الله الرحمن الرحيم</div>
+            <div class="col-xs-6"></div>
+        </div>
+        <br>
+
         @yield('body')
     </div>
 </div>

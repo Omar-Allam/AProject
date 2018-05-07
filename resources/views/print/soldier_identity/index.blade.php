@@ -1,16 +1,6 @@
 @extends('layout.print')
 @section('body')
-    <br>
-    <div class="row">
-        <div class="col-xs-5">
-            <p style="font-weight: bold;font-size: larger">القوات البرية الملكية السعودية</p>
-            <p style="font-weight: bold;font-size: larger">قيادة سلاح المهندسين</p>
-            <p style="font-weight: bold;font-size: larger">الإدارة</p>
-        </div>
-        <div class="col-xs-3" style="font-weight: bold;font-size: larger">بسم الله الرحمن الرحيم</div>
-        <div class="col-xs-6"></div>
-    </div>
-    <br>
+
     {{--start-basic--}}
     <div class="row">
         {{csrf_field()}}
