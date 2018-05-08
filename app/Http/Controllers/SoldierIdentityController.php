@@ -421,18 +421,32 @@ class SoldierIdentityController extends Controller
     public function destroy($id)
     {
         $soldierIdentity = SoldierIdentity::find($id);
-        $soldierIdentity->sons()->delete();
-        $soldierIdentity->courses()->delete();
-        $soldierIdentity->jobs()->delete();
-        $soldierIdentity->relatives()->delete();
-        $soldierIdentity->qualifications()->delete();
-        $soldierIdentity->vacations()->delete();
+        if ($soldierIdentity->sons()) {
+            $soldierIdentity->sons()->delete();
+        }
+        if ($soldierIdentity->courses()) {
+            $soldierIdentity->courses()->delete();
+        }
+        if ($soldierIdentity->jobs()) {
+            $soldierIdentity->jobs()->delete();
+        }
+        if ($soldierIdentity->relatives()) {
+            $soldierIdentity->relatives()->delete();
+        }
+        if ($soldierIdentity->qualifications()) {
+            $soldierIdentity->qualifications()->delete();
+        }
+        if ($soldierIdentity->vacations()) {
+            $soldierIdentity->vacations()->delete();
+        }
+
         $soldierIdentity->delete();
 
         return redirect()->route('identity.index');
     }
 
-    function print(SoldierIdentity $identity){
-        return view('print.soldier_identity.index',compact('identity'));
+    function print(SoldierIdentity $identity)
+    {
+        return view('print.soldier_identity.index', compact('identity'));
     }
 }

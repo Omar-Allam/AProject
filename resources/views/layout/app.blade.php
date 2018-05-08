@@ -151,15 +151,15 @@
 <script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 
 @yield('scripts')
+<script src="{{asset('js/jquery1.11.1.js')}}"></script>
+<script src="{{asset('js/jquery.calendars.js')}}"></script>
+<script src="{{asset('js/jquery.calendars.plus.js')}}"></script>
+<script src="{{asset('js/jquery.plugin.min.js')}}"></script>
+<script src="{{asset('js/jquery.calendars.picker.js')}}"></script>
+<script src="{{asset('js/jquery.calendars.islamic.min.js')}}"></script>
+<link rel="stylesheet" href="{{asset('css/jquery.calendars.picker.css')}}">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.js"></script>
-<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.plus.min.js"></script>
-<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.plugin.min.js"></script>
-<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.picker.js"></script>
-<script src="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/js/jquery.calendars.islamic.min.js"></script>
 
-<link href="https://cdn.rawgit.com/kbwood/calendars/2.1.0/dist/css/jquery.calendars.picker.css" rel="stylesheet"/>
 <script>
     $('.datetimepicker2').calendarsPicker({
         calendar: $.calendars.instance('islamic'),

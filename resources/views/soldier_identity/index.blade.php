@@ -42,15 +42,15 @@
                         <td>{{$soldier->created_by ?? ''}}</td>
                         <td>{{$soldier->last_update_by ?? ''}}</td>
                         <td>
-                            @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
                                 <form action="{{route('identity.destroy',$soldier)}}" method="POST">
+                                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
                                     {{csrf_field()}} {{method_field('DELETE')}}
-                                    <a type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
-                                    </a>
+                                    <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
+                                    </button>
+                                    @endif
                                     <a type="button" href="{{route('identity.print',$soldier)}}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
                                     </a>
                                 </form>
-                            @endif
 
                         </td>
                     </tr>
