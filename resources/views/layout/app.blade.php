@@ -25,7 +25,7 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <a class="navbar-left" href="{{url('/')}}">
-                <img class="img-circle" src="{{asset('images/logo.png')}}"
+                <img class="img-circle" src="{{asset('images/main-logo.png')}}"
                      style="height: 30px;width: 30px;">
             </a>
         </div>
