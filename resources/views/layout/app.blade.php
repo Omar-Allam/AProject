@@ -83,7 +83,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="{{route('system.backup')}}">نسخة إحتياطية</a></li>
+{{--                    <li><a href="{{route('system.backup')}}">نسخة إحتياطية</a></li>--}}
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
