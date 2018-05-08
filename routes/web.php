@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/human-energy', 'ReportController@humanEnergy')->name('human.energy');
     Route::get('/eng-weapon', 'ReportController@engineer_weapon')->name('eng.weapon');
     Route::get('/identity-print/{identity}', 'SoldierIdentityController@print')->name('identity.print');
+    Route::get('/all_identity-print/', 'SoldierIdentityController@printAll')->name('identity-all.print');
     Route::get('/formation-print/{formation}', 'FormationController@print')->name('formation.print');
     Route::get('/sick-leave-print', 'SoldierSickLeaveController@print')->name('sickleave.print');
     Route::get('/leave-print/{sickLeaf}', 'SoldierSickLeaveController@printSingle')->name('sleave.print');

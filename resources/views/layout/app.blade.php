@@ -16,26 +16,22 @@
 </head>
 
 <body>
-<nav class="navbar navbar-default">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div style="background-color: white;height: 10px;display: flex"></div>
+
+
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-left" href="{{url('/')}}">
                 <img class="img-circle" src="{{asset('images/logo.png')}}"
-                     style="height: 50px;width: 50px;padding: 3px;">
+                     style="height: 30px;width: 30px;">
             </a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         @if(Auth::check())
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" style="padding-top: 2px" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(2))
                         <li><a href="{{route('identity.index')}}">هوية فرد <span class="sr-only">(current)</span></a>
@@ -83,7 +79,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-left">
-{{--                    <li><a href="{{route('system.backup')}}">نسخة إحتياطية</a></li>--}}
+                    {{--                    <li><a href="{{route('system.backup')}}">نسخة إحتياطية</a></li>--}}
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -105,26 +101,18 @@
                     </li>
                 </ul>
             </div>
-        @else
-            <ul class="nav navbar-nav">
-                <!-- Authentication Links -->
-                @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">تسجيل الدخول</a></li>
-                @else
-
-
-
-                @endguest
-            </ul>
+    @else
+        <p style="color: #f6cd98;padding-top: 2px;font-size: larger" class="text-center">قيادة سلاح المهندسين (( كتيبة المهندسين مج ل ١٠ ))</p>
     @endif
     <!-- /.navbar-collapse -->
     </div>
+
 
     <!-- /.container-fluid -->
 </nav>
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="padding-top: 50px">
     @yield('header')
 
     <div id="app">
@@ -132,18 +120,27 @@
     </div>
 
 
-    <div class="footer">
+    <div class="footer" style="display: flex;flex-direction: column">
+        <div style="display:flex;flex-direction: row;">
+            <div >
+                <img src="{{asset('images/defence.jpg')}}"
+                     style="height: 50px;width: 150px;padding: 10px; border-radius: 10px">
+            </div>
+            <div style="flex-grow:5"></div>
+            <div>
+                <img src="{{asset('images/ro2ya.jpg')}}"
+                     style="height: 50px;width: 150px;padding: 10px; border-radius: 10px">
+            </div>
+        </div>
 
-        <img class="img-rounded" src="{{asset('images/min-def.jpg')}}"
-             style="height: 80px;width: 200px;padding: 10px; float: right;">
-
-        <img class="img-rounded" src="{{asset('images/ro2ya.jpg')}}"
-             style="height: 80px;width: 200px;padding: 10px; float: left;">
-
+        <div style="background-color: white;height: 10px;"></div>
 
     </div>
 
+
+
 </div>
+
 
 <script src="{{asset('js/app.js')}}"></script>
 <script src="{{asset('js/sweet.js')}}"></script>

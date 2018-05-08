@@ -452,5 +452,10 @@ class SoldierIdentityController extends Controller
         return view('print.soldier_identity.index', compact('identity'));
     }
 
+    function printAll()
+    {
+        $soldiers = SoldierIdentity::all();
+        return view('print.soldier_identity.all_identities', compact('soldiers'));
+    }
 
 }

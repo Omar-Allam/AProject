@@ -3085,3 +3085,18 @@ body {
 ul.nav > li > a {
     color: white !important;
 }
+
+.navbar-nav > li > a {padding-top:3px !important; padding-bottom:3px !important;}
+.navbar {min-height:30px !important}
+.navbar-nav > li > a:hover {background-color: #2e6da4 !important;}
+.navbar-nav > li:hover {background-color: #2e6da4 !important;}
+
+.table > tbody > tr:hover {background-color: lightgoldenrodyellow !important;}
+
+
+@media print{
+    .breaker{
+        page-break-after: always;
+    }
+}
+

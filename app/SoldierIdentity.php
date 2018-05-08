@@ -11,6 +11,7 @@ class SoldierIdentity extends Model
         , 'annual_personal_adj', 'annual_performance', 'nofoos_save'];
 
 
+    protected $dates = ['hiring_date','decision_date','enroll_date','promotion_date','id_date','date_of_birth'];
     function morphToJson()
     {
         return [

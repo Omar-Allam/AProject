@@ -10,6 +10,7 @@ class FormationSoldiers extends Model
     protected $table = 'formation_soldiers';
     protected $fillable = ['formation_id', 'soldier_id', 'job_description', 'current_rate', 'notes', 'private_number', 'is_participate', 'is_a', 'soldier_status'];
 
+    protected $dates = [''];
     static $status = [1 => 'منقول على الوحدة', 2 => 'معين على الوحدة', 3 => 'منهاه خدمته', 4 => 'معاد', 5 => 'منقول خارج الوحدة', 6 => 'مفرز منتدب', 7 => 'الملحق ( مكتب )'];
     function soldier()
     {

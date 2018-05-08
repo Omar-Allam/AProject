@@ -7,13 +7,18 @@
 
 @section('body')
     <h4>هويات الأفراد</h4>
-    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(3))
-        <p>
+    <p>
+        @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(3))
+
             <a class="btn btn-sm btn-success" href="{{route('identity.create')}}">
                 <i class="fa fa-plus"></i>
             </a>
-        </p>
-    @endif
+        @endif
+
+        <a type="button" href="{{route('identity-all.print')}}" class="btn btn-sm btn-primary"><i
+                    class="fa fa-print"></i>
+        </a>
+    </p>
     <section class="col-sm-12">
         @if ($soldiers->total())
             <table class="table table-condensed table-bordered table-hover">
@@ -42,15 +47,16 @@
                         <td>{{$soldier->created_by ?? ''}}</td>
                         <td>{{$soldier->last_update_by ?? ''}}</td>
                         <td>
-                                <form action="{{route('identity.destroy',$soldier)}}" method="POST">
-                                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
+                            <form action="{{route('identity.destroy',$soldier)}}" method="POST">
+                                @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(5))
                                     {{csrf_field()}} {{method_field('DELETE')}}
                                     <button type="submit" class="btn btn-xs btn-warning"><i class="fa fa-trash-o"></i>
                                     </button>
-                                    @endif
-                                    <a type="button" href="{{route('identity.print',$soldier)}}" class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
-                                    </a>
-                                </form>
+                                @endif
+                                <a type="button" href="{{route('identity.print',$soldier)}}"
+                                   class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
+                                </a>
+                            </form>
 
                         </td>
                     </tr>
