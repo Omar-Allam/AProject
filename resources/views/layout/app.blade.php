@@ -18,16 +18,23 @@
 <body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div style="background-color: white;height: 10px;display: flex"></div>
+    <div style=" @if(!Route::is('login'))
+            background-color: white;
+            @else
+            background-image:url('/images/background.png');
+            @endif
+            height: 10px;display: flex"></div>
 
 
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-left" href="{{url('/')}}">
-                <img class="img-circle" src="{{asset('images/main-logo.png')}}"
-                     style="height: 30px;width: 30px;">
-            </a>
+            @if(!Route::is('login'))
+                <a class="navbar-left" href="{{url('/')}}">
+                    <img class="img-circle" src="{{asset('images/main-logo.png')}}"
+                         style="height: 30px;width: 30px;">
+                </a>
+            @endif
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         @if(Auth::check())
@@ -101,8 +108,9 @@
                     </li>
                 </ul>
             </div>
-    @else
-        <p style="color: #f6cd98;padding-top: 2px;font-size: larger" class="text-center">قيادة سلاح المهندسين (( كتيبة المهندسين مج ل ١٠ ))</p>
+        @else
+            <p style="color: #f6cd98;padding-top: 2px;font-size: larger" class="text-center">قيادة سلاح المهندسين ((
+                كتيبة المهندسين مج ل ١٠ ))</p>
     @endif
     <!-- /.navbar-collapse -->
     </div>
@@ -122,7 +130,7 @@
 
     <div class="footer" style="display: flex;flex-direction: column">
         <div style="display:flex;flex-direction: row;">
-            <div >
+            <div>
                 <img src="{{asset('images/defence.jpg')}}"
                      style="height: 50px;width: 150px;padding: 10px; border-radius: 10px">
             </div>
@@ -133,10 +141,15 @@
             </div>
         </div>
 
-        <div style="background-color: white;height: 10px;"></div>
+        <div style="
+        @if(!Route::is('login'))
+                background-color: white;
+        @else
+                background-image:url('/images/background.png');
+                @endif
+                height: 10px;"></div>
 
     </div>
-
 
 
 </div>

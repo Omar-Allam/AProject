@@ -12,10 +12,8 @@
 @section('body')
     <br><br><br><br>
     <div class="col-sm-6" style="margin-right: 330px">
-
         <img class="img-fluid " src="{{asset('images/main-logo.png')}}"
              style="height: 200px;width: 200px;margin-right: 180px;margin-bottom: 10px">
-
     </div>
     <br><br>
     <form class="col-sm-6 col-sm-offset-2 form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
