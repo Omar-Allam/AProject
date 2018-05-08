@@ -38,4 +38,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/hazm-participation/print', 'ReportController@printHazm')->name('hazm.print');
     Route::get('/human-energy/print', 'ReportController@printEnergy')->name('human-energy.print');
     Route::get('/eng-weapon/print', 'ReportController@printWeapon')->name('eng-weapon.print');
+    Route::get('/backup', 'HomeController@backup')->name('system.backup');
 });

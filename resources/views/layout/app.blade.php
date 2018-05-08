@@ -63,10 +63,6 @@
                         </li>
                     @endif
 
-
-                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(18))
-                        <li><a href="{{route('user.index')}}">إدارة المستخدمين</a></li>
-                    @endif
                     @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(22))
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -79,6 +75,15 @@
                             </ul>
                         </li>
                     @endif
+
+                    @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(18))
+                        <li><a href="{{route('user.index')}}">إدارة المستخدمين</a></li>
+                    @endif
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="{{route('system.backup')}}">أخذ نسخة إحتياطية</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -163,7 +168,7 @@
 <script>
     $('.datetimepicker2').calendarsPicker({
         calendar: $.calendars.instance('islamic'),
-        monthsToShow: [1,1],
+        monthsToShow: [1, 1],
         dateFormat: 'yyyy-mm-dd'
     });
 </script>

@@ -12,6 +12,7 @@ use App\SoldierRelatives;
 use App\SoldierSons;
 use App\SoldierVacations;
 use Carbon\Carbon;
+use Faker\Provider\DateTime;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -427,6 +428,7 @@ class SoldierIdentityController extends Controller
         if ($soldierIdentity->courses()) {
             $soldierIdentity->courses()->delete();
         }
+
         if ($soldierIdentity->jobs()) {
             $soldierIdentity->jobs()->delete();
         }
@@ -449,4 +451,6 @@ class SoldierIdentityController extends Controller
     {
         return view('print.soldier_identity.index', compact('identity'));
     }
+
+
 }
