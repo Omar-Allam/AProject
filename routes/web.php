@@ -40,4 +40,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/human-energy/print', 'ReportController@printEnergy')->name('human-energy.print');
     Route::get('/eng-weapon/print', 'ReportController@printWeapon')->name('eng-weapon.print');
     Route::get('/backup', 'HomeController@backup')->name('system.backup');
+
+    Route::get('hazm-soldiers/displayHazm','HazmSoldiersController@displayHazm')->name('hazm-soldiers.displayHazm');
+    Route::get('hazm-soldiers/index','HazmSoldiersController@displayAll')->name('hazm-soldiers.displayAll');
+    Route::get('hazm-soldiers/print','HazmSoldiersController@print')->name('hazm-soldiers.print');
+    Route::post('hazm-soldiers/updateHazm','HazmSoldiersController@updateHazm')->name('hazm-soldiers.updateHazm');
+
+    Route::get('martyrdom-soldiers/displayHazm','MartydomController@displayMartydom')->name('martyrdom-soldiers.displayMartydom');
+    Route::get('martyrdom-soldiers/index','MartydomController@displayAll')->name('martyrdom-soldiers.displayAll');
+    Route::get('martyrdom-soldiers/print','MartydomController@print')->name('martyrdom-soldiers.print');
+    Route::post('martyrdom-soldiers/updateMartydom','MartydomController@updateMartydom')->name('martyrdom-soldiers.updateMartydom');
+    Route::delete('martyrdom-soldiers/{soldier}','MartydomController@delete')->name('martyrdom-soldiers.delete');
+//    Route::resource('hazm-soldiers', 'HazmSoldiersController');
+
 });

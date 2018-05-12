@@ -11,13 +11,16 @@ class SoldierIdentity extends Model
         , 'annual_personal_adj', 'annual_performance', 'nofoos_save'];
 
 
-    protected $dates = ['hiring_date','decision_date','enroll_date','promotion_date','id_date','date_of_birth'];
+    protected $dates = ['hiring_date', 'decision_date', 'enroll_date', 'promotion_date', 'id_date', 'date_of_birth'];
+
     function morphToJson()
     {
         return [
             'name' => $this->first_name . ' ' . $this->father_name . ' ' . $this->grandfather_name . ' ' . $this->family_name,
-            'rank' => $this->rank->name,
-            'job_description' => $this->installed_job,
+            'rank' => $this->rank->name ?? '',
+            'job_description' => $this->installed_job ?? '',
+            'specialization' => $this->specialization
+
         ];
     }
 
@@ -81,19 +84,26 @@ class SoldierIdentity extends Model
         return $this->belongsTo(Specialization::class, 'weapon');
     }
 
-    static function getArabic($str){
-        $western_arabic = array('0','1','2','3','4','5','6','7','8','9');
-        $eastern_arabic = array('٠','١','٢','٣','٤','٥','٦','٧','٨','٩');
+    static function getArabic($str)
+    {
+        $western_arabic = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+        $eastern_arabic = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');
 
         $str = str_replace($western_arabic, $eastern_arabic, $str);
 
         return $str;
     }
 
-    static function engineerWeapon($rate,$weapon){
-        return SoldierIdentity::whereIn('rank_id',$rate)->whereIn('weapon',$weapon)->count();
+    static function engineerWeapon($rate, $weapon)
+    {
+        return SoldierIdentity::whereIn('rank_id', $rate)->whereIn('weapon', $weapon)->count();
     }
 
+
+    function hazm()
+    {
+        return $this->hasOne(HazmSoldiers::class, 'soldier_id');
+    }
 
 
 }

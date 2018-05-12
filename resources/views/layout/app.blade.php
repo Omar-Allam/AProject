@@ -66,6 +66,18 @@
                         </li>
                     @endif
 
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true"
+                               aria-expanded="false">إدارة الأفراد والضباط <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{route('hazm-soldiers.displayAll')}}"> إدارة عاصفة الحزم</a></li>
+                                <li><a href="{{route('martyrdom-soldiers.displayAll')}}">إدارة الشهداء</a></li>
+                                <li><a href="{{route('human.energy')}}">إدارة المصابين</a></li>
+                                <li><a href="{{route('human.energy')}}">إدارة الملحقين</a></li>
+                            </ul>
+                        </li>
+
                     @if(Auth::user()->hasRole(1) || Auth::user()->hasRole(22))
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -123,9 +135,9 @@
 <div class="container-fluid" style="padding-top: 50px">
     @yield('header')
 
-    <div id="app">
+    <div>
         @yield('body')
-    </div>
+
 
 
     <div class="footer" style="display: flex;flex-direction: column">
@@ -151,7 +163,7 @@
 
     </div>
 
-
+    </div>
 </div>
 
 

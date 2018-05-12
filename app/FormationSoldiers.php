@@ -38,4 +38,6 @@ class FormationSoldiers extends Model
             $q->whereIn('rank_id', $type);
         })->where('soldier_status', $status)->count();
     }
+
+
 }
