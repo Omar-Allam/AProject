@@ -41,16 +41,29 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/eng-weapon/print', 'ReportController@printWeapon')->name('eng-weapon.print');
     Route::get('/backup', 'HomeController@backup')->name('system.backup');
 
-    Route::get('hazm-soldiers/displayHazm','HazmSoldiersController@displayHazm')->name('hazm-soldiers.displayHazm');
-    Route::get('hazm-soldiers/index','HazmSoldiersController@displayAll')->name('hazm-soldiers.displayAll');
-    Route::get('hazm-soldiers/print','HazmSoldiersController@print')->name('hazm-soldiers.print');
-    Route::post('hazm-soldiers/updateHazm','HazmSoldiersController@updateHazm')->name('hazm-soldiers.updateHazm');
+    Route::get('hazm-soldiers/displayHazm', 'HazmSoldiersController@displayHazm')->name('hazm-soldiers.displayHazm');
+    Route::get('hazm-soldiers/index', 'HazmSoldiersController@displayAll')->name('hazm-soldiers.displayAll');
+    Route::get('hazm-soldiers/print', 'HazmSoldiersController@print')->name('hazm-soldiers.print');
+    Route::post('hazm-soldiers/updateHazm', 'HazmSoldiersController@updateHazm')->name('hazm-soldiers.updateHazm');
 
-    Route::get('martyrdom-soldiers/displayHazm','MartydomController@displayMartydom')->name('martyrdom-soldiers.displayMartydom');
-    Route::get('martyrdom-soldiers/index','MartydomController@displayAll')->name('martyrdom-soldiers.displayAll');
-    Route::get('martyrdom-soldiers/print','MartydomController@print')->name('martyrdom-soldiers.print');
-    Route::post('martyrdom-soldiers/updateMartydom','MartydomController@updateMartydom')->name('martyrdom-soldiers.updateMartydom');
-    Route::delete('martyrdom-soldiers/{soldier}','MartydomController@delete')->name('martyrdom-soldiers.delete');
-//    Route::resource('hazm-soldiers', 'HazmSoldiersController');
+    Route::get('martyrdom-soldiers/displayMart', 'MartydomController@displayMartydom')->name('martyrdom-soldiers.displayMartydom');
+    Route::get('martyrdom-soldiers/index', 'MartydomController@displayAll')->name('martyrdom-soldiers.displayAll');
+    Route::get('martyrdom-soldiers/print', 'MartydomController@print')->name('martyrdom-soldiers.print');
+    Route::post('martyrdom-soldiers/updateMartydom', 'MartydomController@updateMartydom')->name('martyrdom-soldiers.updateMartydom');
+    Route::delete('martyrdom-soldiers/{soldier}', 'MartydomController@delete')->name('martyrdom-soldiers.delete');
+
+
+    Route::get('injury-soldiers/displayInjury', 'InjurySoldierController@displayInjury')->name('injury-soldiers.displayInjury');
+    Route::get('injury-soldiers/index', 'InjurySoldierController@displayAll')->name('injury-soldiers.displayAll');
+    Route::get('injury-soldiers/print', 'InjurySoldierController@print')->name('injury-soldiers.print');
+    Route::post('injury-soldiers/updateInjury', 'InjurySoldierController@updateInjury')->name('injury-soldiers.updateInjury');
+    Route::delete('injury-soldiers/{soldier}', 'InjurySoldierController@delete')->name('injury-soldiers.delete');
+
+
+    Route::get('enroll-soldiers/displayEnroll', 'EnrolledSoldierController@displayEnroll')->name('enroll-soldiers.displayEnroll');
+    Route::get('enroll-soldiers/index', 'EnrolledSoldierController@displayAll')->name('enroll-soldiers.displayAll');
+    Route::get('enroll-soldiers/print', 'EnrolledSoldierController@print')->name('enroll-soldiers.print');
+    Route::post('enroll-soldiers/updateEnroll', 'EnrolledSoldierController@updateEnroll')->name('enroll-soldiers.updateEnroll');
+    Route::delete('enroll-soldiers/{soldier}', 'EnrolledSoldierController@delete')->name('enroll-soldiers.delete');
 
 });

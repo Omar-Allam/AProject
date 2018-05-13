@@ -73,8 +73,8 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{{route('hazm-soldiers.displayAll')}}"> إدارة عاصفة الحزم</a></li>
                                 <li><a href="{{route('martyrdom-soldiers.displayAll')}}">إدارة الشهداء</a></li>
-                                <li><a href="{{route('human.energy')}}">إدارة المصابين</a></li>
-                                <li><a href="{{route('human.energy')}}">إدارة الملحقين</a></li>
+                                <li><a href="{{route('injury-soldiers.displayAll')}}">إدارة المصابين</a></li>
+                                <li><a href="{{route('enroll-soldiers.displayAll')}}">إدارة الملحقين</a></li>
                             </ul>
                         </li>
 
