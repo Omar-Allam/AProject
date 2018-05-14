@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::get('identity/search','SoldierIdentityController@search')->name('identify.search');
     Route::resource('identity', 'SoldierIdentityController');
     Route::resource('formation', 'FormationController');
     Route::resource('sick-leave', 'SoldierSickLeaveController');
@@ -65,5 +66,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('enroll-soldiers/print', 'EnrolledSoldierController@print')->name('enroll-soldiers.print');
     Route::post('enroll-soldiers/updateEnroll', 'EnrolledSoldierController@updateEnroll')->name('enroll-soldiers.updateEnroll');
     Route::delete('enroll-soldiers/{soldier}', 'EnrolledSoldierController@delete')->name('enroll-soldiers.delete');
+
+
+    Route::get('suspend-soldiers/displaySuspend', 'SuspendSalarySoldierController@displaySuspend')->name('suspend-soldiers.displaySuspend');
+    Route::get('suspend-soldiers/index', 'SuspendSalarySoldierController@displayAll')->name('suspend-soldiers.displayAll');
+    Route::get('suspend-soldiers/print', 'SuspendSalarySoldierController@print')->name('suspend-soldiers.print');
+    Route::post('suspend-soldiers/updateSuspend', 'SuspendSalarySoldierController@updateSuspend')->name('suspend-soldiers.updateSuspend');
+    Route::delete('suspend-soldiers/{soldier}', 'SuspendSalarySoldierController@delete')->name('suspend-soldiers.delete');
 
 });

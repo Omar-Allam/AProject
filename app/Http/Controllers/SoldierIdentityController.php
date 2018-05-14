@@ -25,6 +25,19 @@ class SoldierIdentityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    function search(Request $request)
+    {
+        $soldiers = SoldierIdentity::where('general_number', 'LIKE', '%' . $request->general_number . '%')->paginate(15);
+        if ($soldiers->count()) {
+            return view('soldier_identity.index', compact('soldiers'));
+        }
+
+        alert()->error('هوية فرد', 'يرجى التأكد من الرقم العام المدخل ');
+        return redirect()->back();
+
+    }
+
     public function index()
     {
         $soldiers = SoldierIdentity::paginate(15);
