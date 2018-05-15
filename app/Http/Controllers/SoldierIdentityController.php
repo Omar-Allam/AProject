@@ -29,14 +29,14 @@ class SoldierIdentityController extends Controller
     function search(Request $request)
     {
         $soldiers = SoldierIdentity::where('general_number', 'LIKE', $request->general_number . '%');
-        dump($soldiers->get());
         if ($soldiers->count()) {
             $soldiers = $soldiers->paginate(15);
             return view('soldier_identity.index', compact('soldiers'));
+        }else{
+            alert()->error('هوية فرد', 'يرجى التأكد من الرقم العام المدخل ');
+            return redirect()->back();
         }
 
-        alert()->error('هوية فرد', 'يرجى التأكد من الرقم العام المدخل ');
-        return redirect()->back();
 
     }
 
