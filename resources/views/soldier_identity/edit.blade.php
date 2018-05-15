@@ -2,7 +2,12 @@
 
 @section('header')
     <h4 class="pull-left">تعديل هوية فرد</h4>
-    <a href="{{URL::previous()}}" class="btn btn-sm btn-default pull-right"><i class="fa fa-chevron-left"></i></a>
+    <div class="btn-group-vertical pull-right">
+    <a href="{{route('identity.index')}}" class="btn btn-sm btn-default pull-right"><i class="fa fa-chevron-left"></i></a>
+    <a type="button" href="{{route('identity.print',$soldier)}}"
+       class="btn btn-sm btn-primary pull-right"><i class="fa fa-print"></i>
+    </a>
+    </div>
 @stop
 
 

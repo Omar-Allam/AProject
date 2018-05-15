@@ -463,15 +463,14 @@ class SoldierIdentityController extends Controller
 
     function search(Request $request)
     {
-        $soldiers = SoldierIdentity::where('general_number', 'LIKE', "%{$request->general_number}%");
-        if ($soldiers->count()) {
+        $soldiers = SoldierIdentity::where($request->get('target'), $request->get($request->get('target')));
+        if ($soldiers) {
             $soldiers = $soldiers->paginate(15);
             return view('soldier_identity.index', compact('soldiers'));
         }else{
             alert()->error('هوية فرد', 'يرجى التأكد من الرقم العام المدخل ');
             return redirect()->route('identity.index');
         }
-
 
     }
 

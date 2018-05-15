@@ -25,14 +25,22 @@
 
         <div class="col-md-9">
             <h4></h4>
-            <form class="form-horizontal" action="{{route('identify.search')}}" method="get">
+            <form class="form-horizontal" action="{{route('identify.search')}}" method="post">
+                {{method_field('POST')}} {{csrf_field()}}
+
                 <div class="form-group">
-                    <label class="col-xs-1 control-label">الرقم العام</label>
+                    <div class="col-md-2" style="padding: 0 !important;margin: 0!important;">
+                        <select name="target" id="target" class="form-control">
+                            <option value="general_number">الرقم العام</option>
+                            <option value="id_number">رقم الهوية</option>
+                        </select>
+                    </div>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="general_number">
                     </div>
 
                     <button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button>
+                    <a class="btn btn-danger" type="button"  href="{{route('identity.index')}}"><i class="fa fa-remove"></i></a>
                 </div>
             </form>
         </div>
@@ -79,6 +87,7 @@
                                     <a type="button" href="{{route('identity.print',$soldier)}}"
                                        class="btn btn-xs btn-primary"><i class="fa fa-print"></i>
                                     </a>
+
                                 </form>
 
                             </td>

@@ -19,7 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('/home', 'HomeController@index')->name('home');
 
-    Route::get('identity/search','SoldierIdentityController@search')->name('identify.search');
+    Route::post('identity/search','SoldierIdentityController@search')->name('identify.search');
     Route::resource('identity', 'SoldierIdentityController');
     Route::resource('formation', 'FormationController');
     Route::resource('sick-leave', 'SoldierSickLeaveController');
