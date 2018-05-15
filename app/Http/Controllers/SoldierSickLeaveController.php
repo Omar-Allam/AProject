@@ -44,6 +44,10 @@ class SoldierSickLeaveController extends Controller
             "direct_date" => $request->sickLeave[0]['direct_date'],
             "prev_balance" => $request->sickLeave[0]['prev_balance'],
             "side_of_acceptance" => $request->sickLeave[0]['side_of_acceptance'],
+            'decision_number' => $request->sickLeave[0]['decision_number'],
+            'decision_date' => $request->sickLeave[0]['decision_date'],
+            'recommendation' => $request->sickLeave[0]['recommendation'],
+            'level' => $request->sickLeave[0]['level'],
             "notes" => $request->sickLeave[0]['notes']]);
 
         return redirect()->route('sick-leave.index');
@@ -64,6 +68,10 @@ class SoldierSickLeaveController extends Controller
                         'prev_balance' => $sick_leave['prev_balance'],
                         'period_of_vacation' => $sick_leave['period_of_vacation'],
                         'side_of_acceptance' => $sick_leave['side_of_acceptance'],
+                        'decision_number' => $sick_leave['decision_number'],
+                        'decision_date' => $sick_leave['decision_date'],
+                        'recommendation' => $sick_leave['recommendation'],
+                        'level' => $sick_leave['level'],
                         'notes' => $sick_leave['notes']
                     ]);
                 }

@@ -28,6 +28,24 @@
                     </td>
 
                     <td>
+                        {{Form::label('decision_number', 'رقم القرار', ['class' => 'control-label'])}}
+                    </td>
+
+                    <td>
+                        {{Form::label('decision_date', 'تاريخ القرار', ['class' => 'control-label'])}}
+                    </td>
+
+
+                    <td>
+                        {{Form::label('level', 'المرحلة', ['class' => 'control-label'])}}
+                    </td>
+
+                    <td>
+                        {{Form::label('recommendation', 'التوصية', ['class' => 'control-label'])}}
+                    </td>
+
+
+                    <td>
                         {{Form::label('period_of_vacation', 'مدة الإجازة الحالية', ['class' => 'control-label'])}}
                     </td>
 
@@ -79,12 +97,30 @@
                         </td>
 
                         <td>
+                            {{Form::text('sickLeave[0][decision_number]', $sickLeave->decision_number ? $sickLeave->decision_number : '',['class' => 'form-control '])}}
+                        </td>
+
+                        <td>
+                            {{Form::text('sickLeave[0][decision_date]', $sickLeave->decision_date->format('Y-m-d') ? $sickLeave->decision_date->format('Y-m-d') : '',['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
+                        </td>
+
+                        <td>
+                            {{Form::text('sickLeave[0][recommendation]',$sickLeave->recommendation ?? '', ['class' => 'form-control'])}}
+                        </td>
+
+
+                        <td>
+                            {{Form::text('sickLeave[0][level]',$sickLeave->level ?? '', ['class' => 'form-control'])}}
+                        </td>
+                        <td>
                             {{Form::text('sickLeave[0][period_of_vacation]',$sickLeave->period_of_vacation ?? '', ['class' => 'form-control'])}}
                         </td>
 
                         <td>
                             {{Form::text('sickLeave[0][direct_date]',$sickLeave->direct_date ? $sickLeave->direct_date->format('Y-m-d') : '', ['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
                         </td>
+
+
 
                         <td>
                             {{Form::text('sickLeave[0][prev_balance]',$sickLeave->prev_balance ?? '', ['class' => 'form-control'])}}
@@ -171,6 +207,23 @@
             </td>
 
 
+
+             <td>
+                <input type="text" name="sickLeave[` + count + `][decision_number]" value=""  class="form-control"   />
+            </td>
+
+             <td>
+                 <input type="text" name="sickLeave[` + count + `][decision_date]" value=""  class="form-control datetimepicker2" id='decision_date` + id + `' readonly />
+            </td>
+
+            <td>
+                 <input type="text" name="sickLeave[` + count + `][recommendation]" value=""  class="form-control datetimepicker2"  />
+            </td>
+
+             <td>
+                <input type="text" name="sickLeave[` + count + `][level]" value=""  class="form-control"   />
+            </td>
+
              <td>
                 <input type="text" name="sickLeave[` + count + `][period_of_vacation]"  class="form-control">
             </td>
@@ -206,6 +259,12 @@
                 });
 
                 $('#direct_date' + id).calendarsPicker({
+                    calendar: $.calendars.instance('islamic'),
+                    monthsToShow: [1, 1],
+                    dateFormat: 'yyyy-mm-dd'
+                });
+
+                $('#decision_date' + id).calendarsPicker({
                     calendar: $.calendars.instance('islamic'),
                     monthsToShow: [1, 1],
                     dateFormat: 'yyyy-mm-dd'
