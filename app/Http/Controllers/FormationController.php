@@ -8,14 +8,16 @@ use App\SoldierIdentity;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class FormationController extends Controller
 {
+
     function index()
     {
-        if(Auth::user()->hasRole(1) || Auth::user()->hasRole(6)){
-            $formations = Formation::all();
-            return view('formation.index', compact('formations'));
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(6)) {
+            $soldiers = Formation::first()->soldiers;
+            return view('formation.index', compact('soldiers'));
         }
         return view('not-authorize');
 
@@ -29,7 +31,7 @@ class FormationController extends Controller
     function store(Request $request)
     {
         $new_formation = Formation::create(['name' => $request->formation_name ?? '']);
-        if(count($request->formation)){
+        if (count($request->formation)) {
             foreach ($request->formation as $key => $formation) {
                 if ($formation['private_number']) {
                     $soldier_exists = FormationSoldiers::where('private_number', $formation['private_number'])->first();
@@ -40,7 +42,7 @@ class FormationController extends Controller
                             if ($soldier && !$soldier_found) {
                                 FormationSoldiers::create([
                                     'formation_id' => $new_formation->id,
-                                    'soldier_id' => $soldier->id ,
+                                    'soldier_id' => $soldier->id,
                                     'private_number' => $formation['private_number'],
                                     'job_description' => $formation['job_description'],
                                     'current_rate' => $formation['current_rate'],
@@ -75,7 +77,7 @@ class FormationController extends Controller
 
     function show(Formation $formation)
     {
-        if(Auth::user()->hasRole(1) || Auth::user()->hasRole(8)){
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(8)) {
             return view('formation.show', compact('formation'));
         }
         return view('not-authorize');
@@ -88,15 +90,15 @@ class FormationController extends Controller
         try {
             $formation->update(['name' => $request->formation_name]);
             $formation->soldiers()->delete();
-            if(count($request->formation)){
+            if (count($request->formation)) {
                 foreach ($request->formation as $key => $lFormation) {
                     if ($lFormation['private_number']) {
 
-                        if($private_numbers->has($lFormation['private_number'])){
-                            $private_numbers_prev->put('private',$lFormation['private_number']);
+                        if ($private_numbers->has($lFormation['private_number'])) {
+                            $private_numbers_prev->put('private', $lFormation['private_number']);
                         }
 
-                        $private_numbers->put($lFormation['private_number'],$lFormation['private_number']);
+                        $private_numbers->put($lFormation['private_number'], $lFormation['private_number']);
                         $soldier_exists = FormationSoldiers::where('private_number', $lFormation['private_number'])->first();
                         if (!$soldier_exists) {
                             if ($lFormation['general_number']) {
@@ -129,7 +131,7 @@ class FormationController extends Controller
                                             'soldier_status' => $lFormation['soldier_status'] ?? 0
                                         ]);
                                     }
-                                }else{
+                                } else {
                                     FormationSoldiers::create([
                                         'formation_id' => $formation->id,
                                         'soldier_id' => null,
@@ -162,16 +164,16 @@ class FormationController extends Controller
                     }
                 }
 
-                if($private_numbers_prev->count()){
+                if ($private_numbers_prev->count()) {
                     alert()->success('التشكيل', 'تم الحفظ بنجاح وتم حذف الأرقام المكررة');
-                }else{
+                } else {
                     alert()->success('التشكيل', 'تم الحفظ بنجاح');
 
                 }
             }
 
 
-        }catch (QueryException $e){
+        } catch (QueryException $e) {
             alert()->error('التشكيل', 'لم يتم الحفظ');
             return redirect()->route('formation.index');
         }
@@ -189,7 +191,8 @@ class FormationController extends Controller
     }
 
 
-    function destroy(Formation $formation){
+    function destroy(Formation $formation)
+    {
         $formation->soldiers()->delete();
         $formation->delete();
 
@@ -197,8 +200,31 @@ class FormationController extends Controller
     }
 
 
-    function print(Formation $formation){
-        return view('print.formation',compact('formation'));
+    function print(Formation $formation)
+    {
+        return view('print.formation', compact('formation'));
+    }
+
+
+    function search(Request $request)
+    {
+        if($request->get('target') == 'general_number'){
+            $soldier = SoldierIdentity::where('general_number',$request->get('search'))->first();
+            if($soldier){
+                $soldiers = FormationSoldiers::where('soldier_id', $soldier->id)->get();
+                return view('formation.index', compact('soldiers'));
+            }
+        }
+        else if ($request->get('target') == 'private_number'){
+            $soldiers = FormationSoldiers::where('private_number', $request->get('search'))->get();
+            if ($soldiers->count()) {
+                return view('formation.index', compact('soldiers'));
+            } else {
+                alert()->error('التشكيل', 'يرجى التأكد من الرقم المدخل ');
+                return redirect()->route('formation.index');
+            }
+        }
+
     }
 }
 

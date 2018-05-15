@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('identity/search','SoldierIdentityController@search')->name('identify.search');
     Route::resource('identity', 'SoldierIdentityController');
+    Route::post('formation/search','FormationController@search')->name('formation.search');
     Route::resource('formation', 'FormationController');
     Route::resource('sick-leave', 'SoldierSickLeaveController');
     Route::get('get-soldier-info', 'FormationController@getSoldierInfo');
