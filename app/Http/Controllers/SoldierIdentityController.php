@@ -28,7 +28,7 @@ class SoldierIdentityController extends Controller
 
     function search(Request $request)
     {
-        $soldiers = SoldierIdentity::where('general_number', 'LIKE', $request->general_number);
+        $soldiers = SoldierIdentity::where('general_number', 'LIKE', "%{$request->general_number}%");
         if ($soldiers->count()) {
             $soldiers = $soldiers->paginate(15);
             return view('soldier_identity.index', compact('soldiers'));
