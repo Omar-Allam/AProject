@@ -16,6 +16,7 @@ use Faker\Provider\DateTime;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
 
 class SoldierIdentityController extends Controller
@@ -26,24 +27,11 @@ class SoldierIdentityController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    function search(Request $request)
-    {
-        $soldiers = SoldierIdentity::where('general_number', 'LIKE', "%{$request->general_number}%");
-        if ($soldiers->count()) {
-            $soldiers = $soldiers->paginate(15);
-            return view('soldier_identity.index', compact('soldiers'));
-        }else{
-            alert()->error('هوية فرد', 'يرجى التأكد من الرقم العام المدخل ');
-            return redirect()->route('identity.index');
-        }
 
-
-    }
 
     public function index()
     {
         $soldiers = SoldierIdentity::paginate(15);
-
         return view('soldier_identity.index', compact('soldiers'));
     }
 
@@ -471,6 +459,20 @@ class SoldierIdentityController extends Controller
     {
         $soldiers = SoldierIdentity::all();
         return view('print.soldier_identity.all_identities', compact('soldiers'));
+    }
+
+    function search(Request $request)
+    {
+        $soldiers = SoldierIdentity::where('general_number', 'LIKE', "%{$request->general_number}%");
+        if ($soldiers->count()) {
+            $soldiers = $soldiers->paginate(15);
+            return view('soldier_identity.index', compact('soldiers'));
+        }else{
+            alert()->error('هوية فرد', 'يرجى التأكد من الرقم العام المدخل ');
+            return redirect()->route('identity.index');
+        }
+
+
     }
 
 }
