@@ -101,7 +101,7 @@
                         </td>
 
                         <td>
-                            {{Form::text('sickLeave[0][decision_date]', $sickLeave->decision_date->format('Y-m-d') ? $sickLeave->decision_date->format('Y-m-d') : '',['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
+                            {{Form::text('sickLeave[0][decision_date]', $sickLeave->decision_date ? $sickLeave->decision_date->format('Y-m-d') : '',['class' => 'form-control datetimepicker2','readonly'=>'readonly'])}}
                         </td>
 
                         <td>
