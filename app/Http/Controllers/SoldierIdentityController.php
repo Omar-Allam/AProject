@@ -463,7 +463,7 @@ class SoldierIdentityController extends Controller
 
     function search(Request $request)
     {
-        $soldiers = SoldierIdentity::where($request->get('target'), $request->get($request->get('target')));
+        $soldiers = SoldierIdentity::where($request->get('target'), $request->get('search'));
         if ($soldiers) {
             $soldiers = $soldiers->paginate(15);
             return view('soldier_identity.index', compact('soldiers'));

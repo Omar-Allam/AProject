@@ -36,7 +36,7 @@
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="general_number">
+                        <input type="text" class="form-control" name="search">
                     </div>
 
                     <button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button>
