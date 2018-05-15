@@ -34,7 +34,7 @@ class SoldierIdentityController extends Controller
             return view('soldier_identity.index', compact('soldiers'));
         }else{
             alert()->error('هوية فرد', 'يرجى التأكد من الرقم العام المدخل ');
-            return redirect()->back();
+            return redirect()->route('identity.index');
         }
 
 
