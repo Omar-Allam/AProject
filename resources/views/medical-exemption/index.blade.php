@@ -1,7 +1,35 @@
 @extends('layout.app')
 
 @section('header')
+    <section>
+        <div class="col-md-3">
+            <h4></h4>
 
+        </div>
+        <div class="col-md-9">
+            <h4></h4>
+            <form class="form-horizontal" action="{{route('exemption.search')}}" method="post">
+                {{method_field('POST')}} {{csrf_field()}}
+
+                <div class="form-group">
+                    <div class="col-md-2" style="padding: 0 !important;margin: 0!important;" id="search_criteria">
+                        <select name="target" id="target" class="form-control">
+                            <option value="1">الرقم العام</option>
+                            <option value="2">بداية ونهاية الإجازة</option>
+                        </select>
+                    </div>
+                    <div  id="search_area">
+                        <input type="text" class="form-control col-md-4" name="general_number">
+
+                    </div>
+
+                    <button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button>
+                    <a class="btn btn-danger" type="button" href="{{route('formation.index')}}"><i
+                                class="fa fa-remove"></i></a>
+                </div>
+            </form>
+        </div>
+    </section>
     <h4>الإعفاءات الطبية</h4>
         <p>
             @if (Auth::user()->hasRole(1) || Auth::user()->hasRole(14))
@@ -75,4 +103,35 @@
             </div>
         @endif
     </section>
-@stop
+@endsection
+
+
+@section('scripts')
+    <script>
+        $('#search_criteria').on('change',function(e){
+            if(e.target.value == 1){
+                $('#search_area').html(`
+                                        <input type="text" class="form-control col-md-4" placeholder="الرقم العام" name="general_number">
+                `)
+            }
+            else if(e.target.value == 2){
+                $('#search_area').html(`
+                                        <input type="text" placeholder="بداية الإعفاء" class="form-control col-md-4 datetimepicker2" id="start_from" name="start_from">
+                                        <input type="text" placeholder="نهاية الإعفاء" class="form-control col-md-4 datetimepicker2" id="end_at" name="end_at">
+                `)
+
+                $('#start_from').calendarsPicker({
+                    calendar: $.calendars.instance('islamic'),
+                    monthsToShow: [1,1],
+                    dateFormat: 'yyyy-mm-dd'
+                });
+
+                $('#end_at').calendarsPicker({
+                    calendar: $.calendars.instance('islamic'),
+                    monthsToShow: [1,1],
+                    dateFormat: 'yyyy-mm-dd'
+                });
+            }
+        })
+    </script>
+@endsection

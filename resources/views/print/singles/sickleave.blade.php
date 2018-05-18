@@ -37,9 +37,25 @@
                 </div>
 
                 <div class="form-group  col-xs-3 {{$errors->has('general_number')? 'has-error' : ''}}">
-                    {{Form::label('leave_to', 'تاريخ نهاية الإجازة', ['class' => 'control-label'])}}
-                    <p>{{$sickLeaf->leave_to ? $sickLeaf->leave_to->format('Y-m-d') : '' }}</p>
+                    {{Form::label('decision_number', 'رقم القرار', ['class' => 'control-label'])}}
+                    <p>{{$sickLeaf->decision_number ?? '' }}</p>
                 </div>
+
+                <div class="form-group  col-xs-3 {{$errors->has('general_number')? 'has-error' : ''}}">
+                    {{Form::label('leave_to', 'تاريخ القرار', ['class' => 'control-label'])}}
+                    <p>{{$sickLeaf->decision_date ? $sickLeaf->decision_date->format('Y-m-d') : '' }}</p>
+                </div>
+
+                <div class="form-group  col-xs-3 {{$errors->has('general_number')? 'has-error' : ''}}">
+                    {{Form::label('level', 'المرحلة', ['class' => 'control-label'])}}
+                    <p>{{$sickLeaf->level ?? '' }}</p>
+                </div>
+
+                <div class="form-group  col-xs-3 {{$errors->has('general_number')? 'has-error' : ''}}">
+                    {{Form::label('recommendation', 'النوصية', ['class' => 'control-label'])}}
+                    <p>{{$sickLeaf->recommendation ? $sickLeaf->recommendation : '' }}</p>
+                </div>
+
                 <div class="form-group  col-xs-3 {{$errors->has('general_number')? 'has-error' : ''}}">
                     {{Form::label('period_of_vacation', 'مدة الإجازة الحالية', ['class' => 'control-label'])}}
                     <p>{{$sickLeaf->period_of_vacation ?? ''}}</p>

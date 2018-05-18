@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\SoldierExemption;
 use App\SoldierIdentity;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -89,5 +90,25 @@ class SoldierExemptionController extends Controller
 
     function printSingle(SoldierExemption $exemption){
         return view('print.singles.exemption',compact('exemption'));
+    }
+
+    function search(Request $request)
+    {
+
+        if ($request->target == 1 && $request->general_number) {
+            $soldier = SoldierIdentity::where('general_number',$request->general_number)->first();
+            $exemptions = SoldierExemption::where('soldier_id',$soldier->id)->get();
+            return view('medical-exemption.index', compact('exemptions'));
+        }elseif ($request->target == 2){
+            $start_from = Carbon::parse($request->start_from);
+            $end_at = Carbon::parse($request->end_at);
+
+            $exemptions = SoldierExemption::whereBetween('start_from',[$start_from,$start_from])
+                ->orWhereBetween('end_at',[$end_at,$end_at])->get();
+            return view('medical-exemption.index', compact('exemptions'));
+        }
+
+        return redirect()->route('exemption.index');
+
     }
 }

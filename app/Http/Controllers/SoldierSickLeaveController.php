@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\SoldierIdentity;
 use App\SoldierSickLeave;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,7 @@ class SoldierSickLeaveController extends Controller
 
     function create()
     {
-        if(Auth::user()->hasRole(1) || Auth::user()->hasRole(11)){
+        if (Auth::user()->hasRole(1) || Auth::user()->hasRole(11)) {
             return view('sick-leave.create');
         }
         return view('not-authorize');
@@ -55,7 +56,7 @@ class SoldierSickLeaveController extends Controller
 
     function store(Request $request)
     {
-        if(count($request->sickLeave)){
+        if (count($request->sickLeave)) {
             foreach ($request->sickLeave as $sick_leave) {
                 $soldier = SoldierIdentity::where('general_number', $sick_leave)->first();
                 if ($soldier) {
@@ -87,12 +88,34 @@ class SoldierSickLeaveController extends Controller
         return redirect()->route('sick-leave.index');
     }
 
-    function print(){
+    function print()
+    {
         $sickLeaves = SoldierSickLeave::all();
-        return view('print.sickleave',compact('sickLeaves'));
+        return view('print.sickleave', compact('sickLeaves'));
     }
 
-    function printSingle(SoldierSickLeave $sickLeaf){
-        return view('print.singles.sickleave',compact('sickLeaf'));
+    function printSingle(SoldierSickLeave $sickLeaf)
+    {
+        return view('print.singles.sickleave', compact('sickLeaf'));
+    }
+
+    function search(Request $request)
+    {
+
+        if ($request->target == 1 && $request->general_number) {
+            $soldier = SoldierIdentity::where('general_number',$request->general_number)->first();
+            $sickLeaves = SoldierSickLeave::where('soldier_id',$soldier->id)->get();
+            return view('sick-leave.index', compact('sickLeaves'));
+        }elseif ($request->target == 2){
+            $leave_from = Carbon::parse($request->leave_from);
+            $leave_to = Carbon::parse($request->leave_to);
+
+            $sickLeaves = SoldierSickLeave::whereBetween('leave_from',[$leave_from,$leave_from])
+                ->orWhereBetween('leave_to',[$leave_to,$leave_to])->get();
+            return view('sick-leave.index', compact('sickLeaves'));
+        }
+
+        return redirect()->route('sick-leave.index');
+
     }
 }

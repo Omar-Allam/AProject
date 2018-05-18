@@ -67,15 +67,17 @@
                 </td>
 
                 <td>
-
-
+                    {{\App\FormationSoldiers::human_energy(range(8,12),range(3,4))}}
                 </td>
                 <td>
+                    {{\App\FormationSoldiers::human_energy(range(1,7),range(3,4))}}
 
                 </td>
 
                 <td>
+                    {{ \App\FormationSoldiers::human_energy(range(1,12),range(1,4)) > 0 ?
 
+                    number_format((\App\FormationSoldiers::human_energy(range(1,12),range(3,4)) / \App\FormationSoldiers::human_energy(range(1,12),range(1,4))),1) : 0 }} %
                 </td>
 
                 <td>

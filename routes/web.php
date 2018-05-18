@@ -24,8 +24,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('formation/search','FormationController@search')->name('formation.search');
     Route::resource('formation', 'FormationController');
     Route::resource('sick-leave', 'SoldierSickLeaveController');
+    Route::post('sick-leave/search','SoldierSickLeaveController@search')->name('sick-leave.search');
     Route::get('get-soldier-info', 'FormationController@getSoldierInfo');
     Route::resource('exemption', 'SoldierExemptionController');
+    Route::post('exemption/search','SoldierExemptionController@search')->name('exemption.search');
+
     Route::resource('user', 'UserController');
 
     Route::get('/hazm-participation', 'ReportController@hazmParticipation')->name('hazm.participate');
