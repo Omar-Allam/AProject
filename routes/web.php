@@ -78,4 +78,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('suspend-soldiers/updateSuspend', 'SuspendSalarySoldierController@updateSuspend')->name('suspend-soldiers.updateSuspend');
     Route::delete('suspend-soldiers/{soldier}', 'SuspendSalarySoldierController@delete')->name('suspend-soldiers.delete');
 
+
+    Route::get('proceed-soldiers/displaySuspend', 'ProceedWorkController@displayProceed')->name('proceed-soldiers.displayProceed');
+    Route::get('proceed-soldiers/index', 'ProceedWorkController@displayAll')->name('proceed-soldiers.displayAll');
+    Route::get('proceed-soldiers/print', 'ProceedWorkController@print')->name('proceed-soldiers.print');
+    Route::post('proceed-soldiers/updateProceeed', 'ProceedWorkController@updateProceed')->name('proceed-soldiers.updateProceed');
+    Route::delete('proceed-soldiers/{soldier}', 'ProceedWorkController@delete')->name('proceed-soldiers.delete');
+
 });

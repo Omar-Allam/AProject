@@ -208,14 +208,14 @@ class FormationController extends Controller
 
     function search(Request $request)
     {
-        if($request->get('target') == 'general_number'){
+        if($request->get('target') == 1){
             $soldier = SoldierIdentity::where('general_number',$request->get('search'))->first();
             if($soldier){
                 $soldiers = FormationSoldiers::where('soldier_id', $soldier->id)->get();
                 return view('formation.index', compact('soldiers'));
             }
         }
-        else if ($request->get('target') == 'private_number'){
+        else if ($request->get('target') == 2){
             $soldiers = FormationSoldiers::where('private_number', $request->get('search'))->get();
             if ($soldiers->count()) {
                 return view('formation.index', compact('soldiers'));
@@ -224,6 +224,38 @@ class FormationController extends Controller
                 return redirect()->route('formation.index');
             }
         }
+        else if ($request->get('target') == 3 && $request->get('search')['is_a']){
+            $soldiers = FormationSoldiers::where('is_a', $request->get('search')['is_a'])->get();
+            if ($soldiers->count()) {
+                return view('formation.index', compact('soldiers'));
+            } else {
+                alert()->error('التشكيل', 'لايوجد جنود تحت هذا التصنيف ');
+                return redirect()->route('formation.index');
+            }
+        }
+
+        else if ($request->get('target') == 4 && $request->get('search')['rate']){
+            $soldiers = FormationSoldiers::whereHas('soldier', function ($q) use ($request){
+                $q->where('rank_id',$request->get('search')['rate']);
+            })->get();
+            if ($soldiers->count()) {
+                return view('formation.index', compact('soldiers'));
+            } else {
+                alert()->error('التشكيل', 'لايوجد جنود تحت هذا التصنيف ');
+                return redirect()->route('formation.index');
+            }
+        }
+
+        else if ($request->get('target') == 5 && $request->get('search')['status'] !=0){
+            $soldiers = FormationSoldiers::where('soldier_status',$request->get('search')['status'])->get();
+            if ($soldiers->count()) {
+                return view('formation.index', compact('soldiers'));
+            } else {
+                alert()->error('التشكيل', 'لايوجد جنود تحت هذا التصنيف ');
+                return redirect()->route('formation.index');
+            }
+        }
+        return redirect()->route('formation.index');
 
     }
 }
