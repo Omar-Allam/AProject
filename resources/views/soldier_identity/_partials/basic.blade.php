@@ -97,7 +97,7 @@
     <div class="form-group  col-md-4 {{$errors->has('hiring_date')? 'has-error' : ''}}">
         {{Form::label('hiring_date', 'تاريخ التخرج / التعيين', ['class' => 'control-label'])}}
         <input type="text" name="hiring_date" class="form-control datetimepicker2" id='datetimepicker2'
-               value="{{$soldier->hiring_date ? $soldier->hiring_date->format('Y-m-d') : ''}}" readonly/>
+               value="{{isset($soldier) && $soldier->hiring_date ? $soldier->hiring_date->format('Y-m-d') : ''}}" readonly/>
         @if ($errors->has('hiring_date'))
             <div class="error-message">{{$errors->first('hiring_date')}}</div>
         @endif
@@ -114,7 +114,7 @@
     <div class="form-group  col-md-4 {{$errors->has('decision_date')? 'has-error' : ''}}">
         {{Form::label('decision_date', 'تاريخه', ['class' => 'control-label'])}}
         <input type="text" name="decision_date" class="form-control datetimepicker2" id='datetimepicker2'
-               value="{{$soldier->decision_date ? $soldier->decision_date->format('Y-m-d') : ''}}" readonly/>
+               value="{{isset($soldier) && $soldier->decision_date ? $soldier->decision_date->format('Y-m-d') : ''}}" readonly/>
         @if ($errors->has('decision_date'))
             <div class="error-message">{{$errors->first('decision_date')}}</div>
         @endif
@@ -150,7 +150,7 @@
     <div class="form-group  col-md-4 {{$errors->has('enroll_date')? 'has-error' : ''}}">
         {{Form::label('enroll_date', 'تاريخ الإلتحاق بالخدمة', ['class' => 'control-label'])}}
         <input type="text" name="enroll_date" class="form-control datetimepicker2" id='datetimepicker2'
-               value="{{$soldier->enroll_date ? $soldier->enroll_date->format('Y-m-d') : ''}}" readonly/>
+               value="{{isset($soldier) && $soldier->enroll_date ? $soldier->enroll_date->format('Y-m-d') : ''}}" readonly/>
         @if ($errors->has('enroll_date'))
             <div class="error-message">{{$errors->first('enroll_date')}}</div>
         @endif
@@ -159,7 +159,7 @@
     <div class="form-group  col-md-4 {{$errors->has('promotion_date')? 'has-error' : ''}}">
         {{Form::label('promotion_date', 'تاريخ الترقية', ['class' => 'control-label'])}}
         <input type="text" name="promotion_date" class="form-control datetimepicker2" id='datetimepicker2'
-               value="{{$soldier->promotion_date ? $soldier->promotion_date->format('Y-m-d') : ''}}" readonly />
+               value="{{isset($soldier) && $soldier->promotion_date ? $soldier->promotion_date->format('Y-m-d') : ''}}" readonly />
         @if ($errors->has('promotion_date'))
             <div class="error-message">{{$errors->first('promotion_date')}}</div>
         @endif
@@ -214,7 +214,7 @@
     <div class="form-group  col-md-3 {{$errors->has('id_date')? 'has-error' : ''}}">
         {{Form::label('id_date', 'تاريخها', ['class' => 'control-label'])}}
         <input type="text" name="id_date" class="form-control datetimepicker2" id='datetimepicker2'
-               value="{{$soldier->id_date ? $soldier->id_date->format('Y-m-d') : ''}}" readonly/>
+               value="{{ isset($soldier) &&  $soldier->id_date ? $soldier->id_date->format('Y-m-d') : ''}}" readonly/>
         @if ($errors->has('id_date'))
             <div class="error-message">{{$errors->first('id_date')}}</div>
         @endif
@@ -250,7 +250,7 @@
     <div class="form-group  col-md-3 {{$errors->has('date_of_birth')? 'has-error' : ''}}">
         {{Form::label('date_of_birth', 'تاريخ الميلاد', ['class' => 'control-label'])}}
         <input type="text" name="date_of_birth" class="form-control datetimepicker2" id='datetimepicker2'
-               value="{{$soldier->date_of_birth ? $soldier->date_of_birth->format('Y-m-d') : ''}}" readonly/>
+               value="{{isset($soldier) && $soldier->date_of_birth ? $soldier->date_of_birth->format('Y-m-d') : ''}}" readonly/>
         @if ($errors->has('date_of_birth'))
             <div class="error-message">{{$errors->first('date_of_birth')}}</div>
         @endif

@@ -28,11 +28,11 @@
             </thead>
             <tbody>
             <tr>
-                <td>{{\App\FormationSoldiers::human_energy()['officer_total']}}</td>
-                <td>{{\App\FormationSoldiers::human_energy()['free_officers']}}</td>
-                <td>{{\App\FormationSoldiers::human_energy()['freezed_officers']}}</td>
-                <td>{{\App\FormationSoldiers::human_energy()['gained_officers']}}</td>
-                <td>{{\App\FormationSoldiers::human_energy()['gained_officers']}}</td>
+                <td>{{\App\FormationSoldiers::human_energy(range(8,12),range(1,4))}}</td>
+                <td>{{\App\FormationSoldiers::human_energy(range(8,12),range(1,1))}}</td>
+                <td>{{\App\FormationSoldiers::human_energy(range(8,12),range(2,2))}}</td>
+                <td>{{\App\FormationSoldiers::human_energy(range(8,12),range(3,3))}}</td>
+                <td>{{\App\FormationSoldiers::human_energy(range(8,12),range(4,4))}}</td>
             </tr>
             </tbody>
         </table>
@@ -51,11 +51,11 @@
             <tbody>
 
             <tr>
-                <td>{{\App\FormationSoldiers::human_energy()['soldier_total']}}</td>
-                <td>{{\App\FormationSoldiers::human_energy()['free_soldiers']}}</td>
-                <td>{{\App\FormationSoldiers::human_energy()['freezed_soldiers']}}</td>
-                <td>{{\App\FormationSoldiers::human_energy()['gained_soldiers']}}</td>
-                <td>{{\App\FormationSoldiers::human_energy()['sortable_soldiers']}}</td>
+                <td>{{\App\FormationSoldiers::human_energy(range(1,7),range(1,4))}}</td>
+                <td>{{\App\FormationSoldiers::human_energy(range(1,7),range(1,1))}}</td>
+                <td>{{\App\FormationSoldiers::human_energy(range(1,7),range(2,2))}}</td>
+                <td>{{\App\FormationSoldiers::human_energy(range(1,7),range(3,3))}}</td>
+                <td>{{\App\FormationSoldiers::human_energy(range(1,7),range(4,4))}}</td>
             </tr>
 
             </tbody>

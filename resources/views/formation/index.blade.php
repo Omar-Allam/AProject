@@ -27,6 +27,9 @@
                         <select name="target" id="target" class="form-control">
                             <option value="private_number">الرقم الخاص</option>
                             <option value="general_number">الرقم العام</option>
+                            <option value="is_a">طبيعة وجود الجندي</option>
+                            <option value="rate">الرتبة</option>
+                            <option value="soldier_status">حالة الجندي</option>
                         </select>
                     </div>
                     <div class="col-md-6">

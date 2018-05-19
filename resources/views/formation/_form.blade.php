@@ -12,10 +12,10 @@
                     <td style="width:10px">
                         {{Form::label('name', 'العدد', ['class' => 'control-label'])}}
                     </td>
-                    <td style="width:80px">
+                    <td style="width:100px">
                         {{Form::label('private_number', 'الرقم الخاص', ['class' => 'control-label'])}}
                     </td>
-                    <td >
+                    <td style="width:130px">
                         {{Form::label('general_number', 'الرقم العام', ['class' => 'control-label'])}}
                     </td>
                     <td style="width:120px">
@@ -139,10 +139,10 @@
                             <td>
                                 {{Form::label('name', 'العدد', ['class' => 'control-label'])}}
                             </td>
-                            <td>
+                            <td style="width:100px">
                                 {{Form::label('formation[0][private_number]', 'الرقم الخاص', ['class' => 'control-label'])}}
                             </td>
-                            <td>
+                            <td style="width:130px">
                                 {{Form::label('formation[0][general_number]', 'الرقم العام', ['class' => 'control-label'])}}
                             </td>
                             <td>
