@@ -53,6 +53,10 @@
                         {{Form::label('is_a[]', 'مفرز', ['class' => 'control-label'])}}
                     </td>
 
+                    <td>
+                        {{Form::label('is_a[]', 'مثبت', ['class' => 'control-label'])}}
+                    </td>
+
                     <td style="width:130px">
                         {{Form::label('tranformation', 'التنقلات والتعيين وإنهاء الخدمات', ['class' => 'control-label'])}}
                     </td>
@@ -105,6 +109,9 @@
                         </td>
                         <td>
                             {{Form::radio('formation['.$key.'][is_a]',4,$soldier->is_a == 4)}}
+                        </td>
+                        <td>
+                            {{Form::radio('formation['.$key.'][is_a]',5,$soldier->is_a == 5)}}
                         </td>
                         <td>
                             <select  class="form-control" name="formation[{{$key}}][soldier_status]">
@@ -179,6 +186,10 @@
                             </td>
 
                             <td>
+                                {{Form::label('formation[0][is_a]', 'مثبت', ['class' => 'control-label'])}}
+                            </td>
+
+                            <td>
                                 {{Form::label('formation[0][notes]', 'ملاحظات', ['class' => 'control-label'])}}
                             </td>
                         </tr>
@@ -223,6 +234,10 @@
                             </td>
                             <td>
                                 {{Form::radio('formation[0][is_a]',4, false)}}
+                            </td>
+
+                            <td>
+                                {{Form::radio('formation[0][is_a]',5, false)}}
                             </td>
                             <td>
                                 {{Form::text('formation[0][notes]',$soldier->notes ?? '', ['class' => 'form-control'])}}
@@ -320,6 +335,10 @@
 </td>
 <td>
 <input type="radio"  name="formation[` + count + `][is_a]" value="4">
+</td>
+
+<td>
+<input type="radio"  name="formation[` + count + `][is_a]" value="5">
 </td>
 
 <td>

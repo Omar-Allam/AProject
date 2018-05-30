@@ -75,6 +75,7 @@
                                 <li><a href="{{route('martyrdom-soldiers.displayAll')}}">إدارة الشهداء</a></li>
                                 <li><a href="{{route('injury-soldiers.displayAll')}}">إدارة المصابين</a></li>
                                 <li><a href="{{route('enroll-soldiers.displayAll')}}">إدارة الملحقين</a></li>
+                                <li><a href="{{route('assigned-soldiers.displayAll')}}">إدارة المكلفين</a></li>
                                 <li><a href="{{route('suspend-soldiers.displayAll')}}">إدارة الرواتب</a></li>
                                 <li><a href="{{route('proceed-soldiers.displayAll')}}">إدارة مباشرة العمل</a></li>
                             </ul>

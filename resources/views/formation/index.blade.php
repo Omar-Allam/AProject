@@ -145,6 +145,7 @@
                                 <option value="2">مجمد</option>
                                 <option value="3">مكتسب </option>
                                 <option value="4">مفرز</option>
+                                <option value="5">مثبت</option>
                             </select>
                 `)
             }
